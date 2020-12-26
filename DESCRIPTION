@@ -1,14 +1,13 @@
 Package: mt5R
 Title: R and MT5 integration by socket connection
 Version: 0.1.0
-Authors@R: 
-    person(given = "Guilherme",
+Authors@R: person(given = "Guilherme",
            family = "Kinzel",
            role = c("aut", "cre"),
            email = "guikinzel@gmail.com")
 Description: Easy integration between R and MT5 using socket connection, tailored to Machine Learning users and traders.
 Depends: R (>= 3.5.3)
-Imports: xts, zoo
+Imports: xts
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
