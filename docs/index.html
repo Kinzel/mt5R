@@ -116,6 +116,7 @@
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">quantmod</span>)
 <span class="no">Table</span> <span class="kw">=</span> <span class="fu"><a href="reference/MT5.GetSymbol.html">MT5.GetSymbol</a></span>(<span class="st">"EURUSD"</span>, <span class="kw">iTF</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">xts</span> <span class="kw">=</span> <span class="no">T</span>)
 <span class="kw pkg">quantmod</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/chartSeries.html">chartSeries</a></span>(<span class="no">Table</span>, <span class="kw">theme</span> <span class="kw">=</span> <span class="st">"white"</span>)</pre></div>
+<!-- For some reason, the plot created in the chunk appears in .md but not in the site. Now using an image previously created -->
 <center>
 <p><img src="reference/figures/chartseries.png" align="center" height="300"></p>
 </center>
@@ -131,7 +132,7 @@
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
-<p>Assuming that you’re have installed MT5 and successful connected to one broker server. If you don’t have it yet, don’t panic: <strong>MT5 is free</strong> for most of brokers.</p>
+<p>Assuming that you’re have installed MT5 and successful connected to one broker server. If you don’t have it yet, don’t panic: <strong>MT5 is free</strong> for most of brokers!</p>
 <p>Installation is divided into two parts:</p>
 <ol>
 <li>mt5R in R</li>
@@ -141,8 +142,8 @@
 <h4 class="hasAnchor">
 <a href="#instructions-installing-mt5r-in-r" class="anchor"></a>Instructions: Installing mt5R in R</h4>
 <p>Install the development version from GitHub with:</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="co">#install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"Kinzel/mt5R"</span>)</pre></div>
+<div class="sourceCode" id="cb5"><pre class="r">#install.packages("devtools")
+#devtools::install_github("Kinzel/mt5R") #Im trying to solve this one. My first GitHub project</pre></div>
 </div>
 <div id="instructions-installing-mt5r-in-mt5" class="section level4">
 <h4 class="hasAnchor">
@@ -199,7 +200,7 @@
 <div id="creating-your-own-functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#creating-your-own-functions" class="anchor"></a>Creating your own functions</h3>
-<p>The most awesome part of MT5 is make reliable to create your owns solutions and functions. This part is still under construction, but you can start checking functions <code>MT5.zExample</code> in mt5R package and <code>Z1</code> order in <code>mt5R v0_1_0.mq5</code>. Its pretty easy!</p>
+<p>The most awesome part of MT5 is make reliable to create your owns solutions and functions. The cookbook is still under construction, but you can start checking functions <code>MT5.zExample</code> in mt5R package and <code>Z1</code> order in <code>mt5R v0_1_0.mq5</code>. Its pretty easy!</p>
 <div class="sourceCode" id="cb7"><pre class="r"><span class="co">## Execute the function without () to see its code</span>
 <span class="kw pkg">mt5R</span><span class="kw ns">::</span><span class="no"><a href="reference/MT5.zExample.html">MT5.zExample</a></span></pre></div>
 </div>
