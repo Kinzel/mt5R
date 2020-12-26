@@ -1,0 +1,19 @@
+---
+title: "Options_3D"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Options_3D}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(mt5R)
+```
