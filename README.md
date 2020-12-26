@@ -11,10 +11,11 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 ## Overview
 
-mt5R is a [R](https://www.r-project.org) package that provides a
-framework for MT5 users that want to achieve Machine Learning analysis
-and trading. It provides easy integration with socket connection to
-reach maximum performance.
+[mt5R](https://kinzel.github.io/mt5R/) is an
+[R](https://www.r-project.org) package that provides a framework for MT5
+users that want to achieve Machine Learning analysis and trading. It
+provides easy integration with socket connection to reach maximum
+performance.
 
 ## Example
 
@@ -44,15 +45,20 @@ Plot `MT5.GetSymbol` output using
 [quantmod](https://CRAN.R-project.org/package=quantmod):
 
 ``` r
-#library(quantmod)
-
+library(quantmod)
 Table = MT5.GetSymbol("EURUSD", iTF = 1, xts = T) 
 quantmod::chartSeries(Table, theme = "white")
 ```
 
-<img src="README_files/figure-gfm/plot-1.png" width="50%" height="20%" style="display: block; margin: auto;" />
+<!-- For some reason, the plot created in the chunk appears in .md but not in the site. Now using an image previously created -->
 
-Send a buy order:
+<center>
+
+<img src='man/figures/chartseries.png' align="center" height="300" />
+
+</center>
+
+Send buy order `EURUSD` with `0.001` lot:
 
 ``` r
 MT5.SingleOrder("EURUSD", iCmd = 0, fVol = 0.001)
@@ -69,13 +75,13 @@ MT5.ShowPositions()
 ```
 
 Looking for more examples? Good\! Check **Articles** tab for even more
-(great\!) examples. <UNDER CONSTRUCTION>
+(great\!) examples. (UNDER CONSTRUCTION)
 
 ### Installation
 
 Assuming that you’re have installed MT5 and successful connected to one
 broker server. If you don’t have it yet, don’t panic: **MT5 is free**
-for most of brokers.
+for most of brokers\!
 
 Installation is divided into two parts:
 
@@ -104,9 +110,10 @@ There are two installation options for mt5R in MT5:
 
 For *“Plug and play”* version `.ex5` (`mt5R v0_1_0.ex5`)
 
-1.  \[DOWNLAOD UNDER CONSTRUCTION\]
+1.  Download [`mt5R
+    v0_1_0.ex5`](https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_0.ex5).
 2.  Move `mt5R v0_1_0.ex5` to `...\MQL5\experts\` folder. To check where
-    MT5 is installed: Open MT5 \> Tools \> Options \> Storage.
+    MT5’s folders, open MT5 and `Tools > Options > Storage`.
 
 And you’re ready to go\!
 
@@ -126,7 +133,7 @@ who want to tailor their own solutions and functions.
         or ([Direct
         Link](https://c.mql5.com/6/865/socket-library-mt4-mt5.mqh))
       - Move *socket library* to `...\MQL5\include\` folder
-      - Download `.mq5` code
+      - Download `.mq5` code (UNDER CONSTRUCTION: VERIFYING LICENCES)
       - Move `.mq5` code to `...\MQL5\experts\` folder
       - Open MetaEditor (press F4)
       - Compile `mt5R v0_1_0.mq5`
@@ -157,6 +164,18 @@ MT5.Ping()
 
 If it returns `TRUE` everything has been successfully installed and
 you’re ready to use mt5R\! Yay\!
+
+### Creating your own functions
+
+The most awesome part of MT5 is make reliable to create your owns
+solutions and functions. The cookbook is still under construction, but
+you can start checking functions `MT5.zExample` in mt5R package and `Z1`
+order in `mt5R v0_1_0.mq5`. Its pretty easy\!
+
+``` r
+## Execute the function without () to see its code
+mt5R::MT5.zExample
+```
 
 ### Contributing
 

@@ -90,7 +90,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>mt5R is a <a href="https://www.r-project.org">R</a> package that provides a framework for MT5 users that want to achieve Machine Learning analysis and trading. It provides easy integration with socket connection to reach maximum performance.</p>
+<p><a href="https://kinzel.github.io/mt5R/">mt5R</a> is an <a href="https://www.r-project.org">R</a> package that provides a framework for MT5 users that want to achieve Machine Learning analysis and trading. It provides easy integration with socket connection to reach maximum performance.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -113,12 +113,13 @@
 <span class="co">#&gt; 2020-12-24 23:55:00 1.21825 1.21844 1.21825 1.21835     27</span>
 <span class="co">#&gt; 2020-12-25 00:00:00 1.21846 1.21848 1.21846 1.21846      6</span></pre></div>
 <p>Plot <code>MT5.GetSymbol</code> output using <a href="https://CRAN.R-project.org/package=quantmod">quantmod</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co">#library(quantmod)</span>
-
+<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">quantmod</span>)
 <span class="no">Table</span> <span class="kw">=</span> <span class="fu"><a href="reference/MT5.GetSymbol.html">MT5.GetSymbol</a></span>(<span class="st">"EURUSD"</span>, <span class="kw">iTF</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">xts</span> <span class="kw">=</span> <span class="no">T</span>)
 <span class="kw pkg">quantmod</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/chartSeries.html">chartSeries</a></span>(<span class="no">Table</span>, <span class="kw">theme</span> <span class="kw">=</span> <span class="st">"white"</span>)</pre></div>
-<p><img src="README_files/figure-gfm/plot-1.png" width="50%" height="20%" style="display: block; margin: auto;"></p>
-<p>Send a buy order:</p>
+<center>
+<p><img src="reference/figures/chartseries.png" align="center" height="300"></p>
+</center>
+<p>Send buy order <code>EURUSD</code> with <code>0.001</code> lot:</p>
 <div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="reference/MT5.SingleOrder.html">MT5.SingleOrder</a></span>(<span class="st">"EURUSD"</span>, <span class="kw">iCmd</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">fVol</span> <span class="kw">=</span> <span class="fl">0.001</span>)</pre></div>
 <p>Check open positions:</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/MT5.ShowPositions.html">MT5.ShowPositions</a></span>()
@@ -126,7 +127,7 @@
 <span class="co">#&gt; 1  GBPUSD    0      15     1.35289     0     0  4230.0  772647</span>
 <span class="co">#&gt; 2  EURUSD    1      30     1.22054     0     0  4800.0  772645</span>
 <span class="co">#&gt; 3 Bitcoin    0       2 23718.90000     0     0  -645.2  772643</span></pre></div>
-<p>Looking for more examples? Good! Check <strong>Articles</strong> tab for even more (great!) examples. <under construction></under></p>
+<p>Looking for more examples? Good! Check <strong>Articles</strong> tab for even more (great!) examples. (UNDER CONSTRUCTION)</p>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
@@ -156,10 +157,8 @@
 </ul>
 <p>For <em>“Plug and play”</em> version <code>.ex5</code> (<code>mt5R v0_1_0.ex5</code>)</p>
 <ol>
-<li>
-<br><span class="math display"><em>D</em><em>O</em><em>W</em><em>N</em><em>L</em><em>A</em><em>O</em><em>D</em><em>U</em><em>N</em><em>D</em><em>E</em><em>R</em><em>C</em><em>O</em><em>N</em><em>S</em><em>T</em><em>R</em><em>U</em><em>C</em><em>T</em><em>I</em><em>O</em><em>N</em></span><br>
-</li>
-<li>Move <code>mt5R v0_1_0.ex5</code> to <code>...\MQL5\experts\</code> folder. To check where MT5 is installed: Open MT5 &gt; Tools &gt; Options &gt; Storage.</li>
+<li>Download <a href="https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_0.ex5"><code>mt5R v0_1_0.ex5</code></a>.</li>
+<li>Move <code>mt5R v0_1_0.ex5</code> to <code>...\MQL5\experts\</code> folder. To check where MT5’s folders, open MT5 and <code>Tools &gt; Options &gt; Storage</code>.</li>
 </ol>
 <p>And you’re ready to go!</p>
 <hr>
@@ -171,7 +170,7 @@
 <li>
 <a href="https://www.mql5.com/en/blogs/post/706665">Download socket library: socket-library-mt4-mt5.mqh</a> or (<a href="https://c.mql5.com/6/865/socket-library-mt4-mt5.mqh">Direct Link</a>)</li>
 <li>Move <em>socket library</em> to <code>...\MQL5\include\</code> folder</li>
-<li>Download <code>.mq5</code> code</li>
+<li>Download <code>.mq5</code> code (UNDER CONSTRUCTION: VERIFYING LICENCES)</li>
 <li>Move <code>.mq5</code> code to <code>...\MQL5\experts\</code> folder</li>
 <li>Open MetaEditor (press F4)</li>
 <li>Compile <code>mt5R v0_1_0.mq5</code>
@@ -196,6 +195,13 @@
 <span class="fu"><a href="reference/MT5.Ping.html">MT5.Ping</a></span>()
 <span class="co">#&gt; [1] TRUE</span></pre></div>
 <p>If it returns <code>TRUE</code> everything has been successfully installed and you’re ready to use mt5R! Yay!</p>
+</div>
+<div id="creating-your-own-functions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#creating-your-own-functions" class="anchor"></a>Creating your own functions</h3>
+<p>The most awesome part of MT5 is make reliable to create your owns solutions and functions. This part is still under construction, but you can start checking functions <code>MT5.zExample</code> in mt5R package and <code>Z1</code> order in <code>mt5R v0_1_0.mq5</code>. Its pretty easy!</p>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="co">## Execute the function without () to see its code</span>
+<span class="kw pkg">mt5R</span><span class="kw ns">::</span><span class="no"><a href="reference/MT5.zExample.html">MT5.zExample</a></span></pre></div>
 </div>
 <div id="contributing" class="section level3">
 <h3 class="hasAnchor">
