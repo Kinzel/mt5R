@@ -1,6 +1,35 @@
-.Rproj.user
+# History and data files
 .Rhistory
+.Rapp.history
 .RData
-.Ruserdata
-inst/doc
-logo
+
+# RStudio files
+.Rproj.user/
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+
+# knitr and R markdown
+/*_cache/
+/cache/
+*.utf8.md
+*.knit.md
+
+# object and shared objects
+*.o
+*.so
+
+# vim
+*.swp
+*.swo
+*~
+
+# R package build/check
+*.tar.gz
+*.Rcheck/
+
+# miscellaneous
+0*.patch
+*.bak
+*.orig

@@ -42,3 +42,6 @@ pkgdown::build_site()
 # git branch -M main
 # git remote add origin https://github.com/Kinzel/mt5R.git
 # git push -u origin main
+
+
+devtools::install_github("Kinzel/mt5R")
