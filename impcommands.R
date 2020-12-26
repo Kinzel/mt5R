@@ -40,5 +40,5 @@ pkgdown::build_site()
 # git add .
 # git commit -m "first commit"
 # git branch -M main
-# git remote add origin https://github.co/Kinzel/mt5.R
+# git remote add origin https://github.com/Kinzel/mt5R.git
 # git push -u origin main
