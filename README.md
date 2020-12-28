@@ -94,7 +94,7 @@ Install the development version from GitHub with:
 
 ``` r
 #install.packages("devtools")
-#devtools::install_github("Kinzel/mt5R") #Im trying to solve this one. My first GitHub project
+devtools::install_github("Kinzel/mt5R@main")
 ```
 
 #### Instructions: Installing mt5R in MT5
