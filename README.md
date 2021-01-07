@@ -17,6 +17,11 @@ users that want to achieve Machine Learning analysis and trading. It
 provides easy integration with socket connection to reach maximum
 performance.
 
+  - Total of **29 functions**:
+      - 15 Trading
+      - 5 Machine Learning/Data
+      - 9 Others
+
 ## Example
 
 This is a basic example to load `EURUSD` data, using time frame of 5
@@ -24,21 +29,13 @@ minutes `iTF = 5`:
 
 ``` r
 MT5.GetSymbol("EURUSD", iTF = 5)
-#>   Year Month Day Hour Minute    Open    High     Low   Close Volume
-#> 1 2020    12  24   23     40 1.21839 1.21846 1.21831 1.21835     78
-#> 2 2020    12  24   23     45 1.21844 1.21852 1.21836 1.21852     15
-#> 3 2020    12  24   23     50 1.21841 1.21851 1.21832 1.21832     36
-#> 4 2020    12  24   23     55 1.21825 1.21844 1.21825 1.21835     27
-#> 5 2020    12  25    0      0 1.21846 1.21848 1.21846 1.21846      6
+#> Warning in MT5.GetSymbol("EURUSD", iTF = 5): Symbol was not found?
+#> data frame with 0 columns and 0 rows
 
 ## Using xts package
 MT5.GetSymbol("EURUSD", iTF = 5, xts = TRUE)
-#>                        Open    High     Low   Close Volume
-#> 2020-12-24 23:40:00 1.21839 1.21846 1.21831 1.21835     78
-#> 2020-12-24 23:45:00 1.21844 1.21852 1.21836 1.21852     15
-#> 2020-12-24 23:50:00 1.21841 1.21851 1.21832 1.21832     36
-#> 2020-12-24 23:55:00 1.21825 1.21844 1.21825 1.21835     27
-#> 2020-12-25 00:00:00 1.21846 1.21848 1.21846 1.21846      6
+#> Warning in MT5.GetSymbol("EURUSD", iTF = 5, xts = TRUE): Symbol was not found?
+#> data frame with 0 columns and 0 rows
 ```
 
 Plot `MT5.GetSymbol` output using
@@ -68,10 +65,8 @@ Check open positions:
 
 ``` r
 MT5.ShowPositions()
-#>   sSymbol iCmd fVolume      fPrice fStop fGain fProfit iTicket
-#> 1  GBPUSD    0      15     1.35289     0     0  4230.0  772647
-#> 2  EURUSD    1      30     1.22054     0     0  4800.0  772645
-#> 3 Bitcoin    0       2 23718.90000     0     0  -645.2  772643
+#> [1] sSymbol iCmd    fVolume fPrice  fStop   fGain   fProfit iTicket
+#> <0 rows> (or 0-length row.names)
 ```
 
 Looking for more examples? Good\! Check **Articles** tab for even more
@@ -94,7 +89,7 @@ Install the development version from GitHub with:
 
 ``` r
 #install.packages("devtools")
-devtools::install_github("Kinzel/mt5R@main")
+#devtools::install_github("Kinzel/mt5R") #Im trying to solve this one. My first GitHub project
 ```
 
 #### Instructions: Installing mt5R in MT5

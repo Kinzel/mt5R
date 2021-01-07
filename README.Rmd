@@ -24,6 +24,11 @@ library(quantmod)
 
 [mt5R](https://kinzel.github.io/mt5R/) is an [R](https://www.r-project.org) package that provides a framework for MT5 users that want to achieve Machine Learning analysis and trading. It provides easy integration with socket connection to reach maximum performance.
 
+* Package has 29 functions:
+  + 15 Trading
+  + 5 Machine Learning
+  + 9 Others
+
 ## Example
 
 This is a basic example to load `EURUSD` data, using time frame of 5 minutes `iTF = 5`:

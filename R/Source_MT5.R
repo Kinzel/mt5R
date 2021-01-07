@@ -1678,6 +1678,29 @@ MT5.SymbolType <- function(sSymbol)
   return(df_temp$Type)
 }
 
+#' Fetch all symbols
+#'
+#' @description
+#' Fetch all symbols, even those not on Marketwatch.
+#'
+#' This function may take time.
+#'
+#' @return
+#' Returns \code{character()} vector
+#'
+#' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
+#' @export
+#' @examples
+#' \dontrun{
+#'
+#' MT5.AllSymbols()
+#'
+#' }
+MT5.AllSymbols <- function()
+{
+  return(as.character(read.table(text = do.call(paste, c(as.list(MT5.Connect("P4")), sep = "")), sep ="!")))
+}
+
 #' Exemple function
 #'
 #' @description
