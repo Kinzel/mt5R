@@ -12,10 +12,10 @@ MT5.BidAskSpread(sSymbol)
 \value{
 \emph{Data.frame} \eqn{[1x4]} is returned, with follow informations:
 \itemize{
-  \item sSymbol \code{{character}}: symbol used.
-  \item fBid \code{{numeric}}: higher bid.
-  \item fAsk \code{{numeric}}: lower ask.
-  \item Spread \code{{numeric}}: difference between lower ask and higher bid.
+\item sSymbol \code{{character}}: symbol used.
+\item fBid \code{{numeric}}: higher bid.
+\item fAsk \code{{numeric}}: lower ask.
+\item Spread \code{{numeric}}: difference between lower ask and higher bid.
 }
 }
 \description{
@@ -30,7 +30,7 @@ For Forex brokers this function will return an empty \code{data.frame}.
 \url{https://www.investopedia.com/terms/o/order-book.asp}
 }
 \seealso{
-\link{\code{MT5.BidAskBook()}}
+\code{\link{MT5.BidAskBook()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

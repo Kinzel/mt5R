@@ -36,7 +36,7 @@ MT5.DeleteOrder(832136429)
 }
 }
 \seealso{
-\link{\code{MT5.SingleOrder()}}, \link{\code{MT5.MultipleOrders()}}, \link{\code{MT5.ShowPositions()}}, \link{\code{MT5.ShowOrders()}}, \link{\code{MT5.ModifyOrder()}}, \link{\code{MT5.ClosePosition()}}, \link{\code{MT5.ModifyPosition()}}
+\code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.ModifyPosition()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

@@ -12,13 +12,13 @@ MT5.SymbolType(sSymbol)
 \value{
 Returns \code{int} vector, with follow information:
 \itemize{
-  \item{-1: not found}
-  \item{0: stock}
-  \item{1: options}
-  \item{2: future contracts}
-  \item{3: Forex}
-  \item{4: CFD}
-  }
+\item{-1: not found}
+\item{0: stock}
+\item{1: options}
+\item{2: future contracts}
+\item{3: Forex}
+\item{4: CFD}
+}
 }
 \description{
 This function is useful to know what kind of asset target symbol is.

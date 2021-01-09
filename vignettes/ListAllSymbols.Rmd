@@ -37,7 +37,7 @@ Create a data.frame to summary all the data.
 df_symbols <- data.frame(Symbol = AllSymbols, Type = NA)
 ```
 
-Use `MT5.SymbolType` to obtain the type of every symbol using loop.
+Use `MT5.SymbolType()` to obtain the type of every symbol using loop.
 
 ```{r}
 for(i in seq_len(dim(df_symbols)[1]))
@@ -46,7 +46,7 @@ for(i in seq_len(dim(df_symbols)[1]))
 }
 ```
 
-* Types (check **Reference** tab for more details of `MT5.SymbolType`)
+* Types (check **Reference** tab for more details of `MT5.SymbolType()`)
   + `-1` not found.
   + `0` is stock.
   + `1` is option.

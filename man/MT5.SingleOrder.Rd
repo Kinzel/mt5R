@@ -32,10 +32,10 @@ MT5.SingleOrder(
 
 \item{iFillType}{int; order type filling:
 \itemize{
-  \item{0: \code{ORDER_TYPE_BUY_LIMIT} (default)}
-  \item{1: \code{ORDER_TYPE_SELL_LIMIT} (Market Order)}
-  \item{2: \code{ORDER_FILLING_IOC}}
-  }}
+\item{0: \code{ORDER_TYPE_BUY_LIMIT} (default)}
+\item{1: \code{ORDER_TYPE_SELL_LIMIT} (Market Order)}
+\item{2: \code{ORDER_FILLING_IOC}}
+}}
 }
 \value{
 Returns \code{TRUE} if the order was successfully sent, \code{FALSE} otherwise.

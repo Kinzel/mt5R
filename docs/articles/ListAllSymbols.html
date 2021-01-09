@@ -109,13 +109,13 @@
 <span class="co">#&gt;  [9] "UK Oil"        "GBPUSD"</span></pre></body></html></div>
 <p>Create a data.frame to summary all the data.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">df_symbols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">Symbol</span> <span class="kw">=</span> <span class="no">AllSymbols</span>, <span class="kw">Type</span> <span class="kw">=</span> <span class="fl">NA</span>)</pre></body></html></div>
-<p>Use <code>MT5.SymbolType</code> to obtain the type of every symbol using loop.</p>
+<p>Use <code><a href="../reference/MT5.SymbolType.html">MT5.SymbolType()</a></code> to obtain the type of every symbol using loop.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="kw">for</span>(<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">df_symbols</span>)[<span class="fl">1</span>]))
 {
   <span class="no">df_symbols</span>[<span class="no">i</span>,<span class="fl">2</span>] <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/MT5.SymbolType.html">MT5.SymbolType</a></span>(<span class="no">df_symbols</span>[<span class="no">i</span>,<span class="fl">1</span>])
 }</pre></body></html></div>
 <ul>
-<li>Types (check <strong>Reference</strong> tab for more details of <code>MT5.SymbolType</code>)
+<li>Types (check <strong>Reference</strong> tab for more details of <code><a href="../reference/MT5.SymbolType.html">MT5.SymbolType()</a></code>)
 <ul>
 <li>
 <code>-1</code> not found.</li>

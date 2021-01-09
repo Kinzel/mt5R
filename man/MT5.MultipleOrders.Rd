@@ -22,25 +22,25 @@ Take note that buy orders are rejected when order's stop loss are higher than or
 
 \code{df_orders {data.frame}} \eqn{[nx7]} columns should be on the same order and type of \code{\link{MT5.SingleOrder}} arguments.
 \itemize{
-  \item sSymbol \code{{character}}: symbol to send the order.
-  \item {iCmd \code{{int}}:
-         \itemize{
-                 \item{0: ORDER_TYPE_BUY_LIMIT}
-                 \item{1: ORDER_TYPE_SELL_LIMIT}
-                 }
-         }
-  \item fVol \code{{numeric}}: volume order.
-  \item fPrice \code{{numeric}}: where the order will be positioned. Use \code{fPrice = 0} for market order.
-  \item fStop \code{{numeric}}: if applicable use any value > 0.
-  \item fGain \code{{numeric}}: if applicable use any value > 0.
-  \item {iFillType \code{{int}}:
-         \itemize{
-                 \item{0: ORDER_FILLING_RETURN (default)}
-                 \item{1: ORDER_FILLING_FOK (market order)}
-                 \item{2: ORDER_FILLING_IOC}
-                 }
-         }
-   }
+\item sSymbol \code{{character}}: symbol to send the order.
+\item {iCmd \code{{int}}:
+\itemize{
+\item{0: ORDER_TYPE_BUY_LIMIT}
+\item{1: ORDER_TYPE_SELL_LIMIT}
+}
+}
+\item fVol \code{{numeric}}: volume order.
+\item fPrice \code{{numeric}}: where the order will be positioned. Use \code{fPrice = 0} for market order.
+\item fStop \code{{numeric}}: if applicable use any value > 0.
+\item fGain \code{{numeric}}: if applicable use any value > 0.
+\item {iFillType \code{{int}}:
+\itemize{
+\item{0: ORDER_FILLING_RETURN (default)}
+\item{1: ORDER_FILLING_FOK (market order)}
+\item{2: ORDER_FILLING_IOC}
+}
+}
+}
 
 Using \code{fPrice = 0} for Market Order, automatically \code{iFillType} will be set to \code{1}.
 }

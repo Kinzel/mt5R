@@ -60,7 +60,6 @@ Supported colors (\code{iColor}). See url below for even more details.
 }
 \url{https://www.mql5.com/en/docs/constants/objectconstants/webcolors}
 
-
 Supported time frames (\code{iTF}). See url below for even more details.
 \itemize{
 \item{0: all	(it will be draw on all time frames)}
@@ -87,7 +86,7 @@ MT5.DrawHorizontalLine("EURUSD", 1.1772, iColor = 3)
 }
 }
 \seealso{
-\link{\code{MT5.RemoveAllChartsObjects()}},
+\code{\link{MT5.RemoveAllChartsObjects()}},
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

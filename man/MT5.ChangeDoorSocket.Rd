@@ -19,7 +19,7 @@ This function is for change the socket door used in mt5R plataform in MT5. Need 
 The default door is \code{2345}.
 }
 \seealso{
-\link{\code{MT5.Connect()}}
+\code{\link{MT5.Connect()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

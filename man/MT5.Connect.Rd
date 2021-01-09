@@ -32,7 +32,7 @@ This function still has some experiments concepts, especially with delayed funct
 \url{https://www.mql5.com/en/blogs/post/706665}
 }
 \seealso{
-\link{\code{MT5.ChangeDoorSocket()}}
+\code{\link{MT5.ChangeDoorSocket()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

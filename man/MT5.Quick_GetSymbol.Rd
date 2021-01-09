@@ -19,8 +19,8 @@ MT5.Quick_GetSymbol(sSymbol, iTF, iRows = 5, xts = FALSE)
 Always returns \code{OHCLV} format. Date will be exhibited as it \code{xts} parameter is defined.
 
 \describe{
-  \item{\code{xts = FALSE} (default)}{Returns \eqn{[nx10]} \code{{data.frame} {Year, Month, Day, Hour, Minute, Open, High, Low, Close, Volume}}}
-  \item{\code{xts = TRUE}}{Returns \eqn{[nx5]}  \code{{xts} {Open, High, Low, Close, Volume}}}
+\item{\code{xts = FALSE} (default)}{Returns \eqn{[nx10]} \code{{data.frame} {Year, Month, Day, Hour, Minute, Open, High, Low, Close, Volume}}}
+\item{\code{xts = TRUE}}{Returns \eqn{[nx5]}  \code{{xts} {Open, High, Low, Close, Volume}}}
 }
 }
 \description{

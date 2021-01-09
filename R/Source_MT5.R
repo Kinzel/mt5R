@@ -32,7 +32,7 @@
 #' }
 #'
 #' @seealso
-#' \link{\code{MT5.ShowPositions()}}, \link{\code{MT5.ShowOrders()}}
+#' \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ShowOrders()}}
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @references
@@ -71,7 +71,7 @@ MT5.AccountInfo <- function()
 #' }
 #'
 #' @seealso
-#' \link{\code{MT5.BidAskSpread()}}
+#' \code{\link{MT5.BidAskSpread()}}
 #'
 #' @details
 #' (Stocks) For open and closing auctions this function cannot reflect the book properly.
@@ -137,7 +137,7 @@ MT5.BidAskBook <- function(sSymbol, iBidAsk = 0, iBookDepth = 5)
 #' For Forex brokers this function will return an empty \code{data.frame}.
 #'
 #' @seealso
-#' \link{\code{MT5.BidAskBook()}}
+#' \code{\link{MT5.BidAskBook()}}
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @references
@@ -185,7 +185,7 @@ MT5.BidAskSpread <- function(sSymbol)
 #' Always returns \code{TRUE}.
 #'
 #' @seealso
-#' \link{\code{MT5.Connect()}}
+#' \code{\link{MT5.Connect()}}
 #'
 #' @details
 #' The default door is \code{2345}.
@@ -223,7 +223,7 @@ MT5.ChangeDoorSocket <- function(iDoor = NULL)
 #' Returns \code{TRUE} if position was successful closed.
 #'
 #' @seealso
-#' \link{\code{MT5.SingleOrder()}}, \link{\code{MT5.MultipleOrders()}}, \link{\code{MT5.ShowPositions()}}, \link{\code{MT5.ShowOrders()}}, \link{\code{MT5.ModifyOrder()}}, \link{\code{MT5.DeleteOrder()}}, \link{\code{MT5.ModifyPosition()}}
+#' \code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyPosition()}}
 #'
 #'
 #' @details
@@ -267,7 +267,7 @@ MT5.ClosePosition <- function(iTickers)
 #' This function still has some experiments concepts, especially with delayed functions that MT5 requires time to run.
 #'
 #' @seealso
-#' \link{\code{MT5.ChangeDoorSocket()}}
+#' \code{\link{MT5.ChangeDoorSocket()}}
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @references
@@ -338,7 +338,7 @@ MT5.Connect <- function(sReq, iPort = 23456, bMsg = FALSE, timeout = getOption("
 #' Poor fix: the trader can use \code{MT5.ModifyOrder()} to change fPrice to unviable levels and waits to order expire.
 #'
 #' @seealso
-#' \link{\code{MT5.SingleOrder()}}, \link{\code{MT5.MultipleOrders()}}, \link{\code{MT5.ShowPositions()}}, \link{\code{MT5.ShowOrders()}}, \link{\code{MT5.ModifyOrder()}}, \link{\code{MT5.ClosePosition()}}, \link{\code{MT5.ModifyPosition()}}
+#' \code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.ModifyPosition()}}
 #'
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
@@ -418,7 +418,7 @@ MT5.DeleteOrder <- function(iTickets)
 #' \url{https://www.mql5.com/en/docs/constants/chartconstants/enum_timeframes}
 #'
 #' @seealso
-#' \link{\code{MT5.RemoveAllChartsObjects()}},
+#' \code{\link{MT5.RemoveAllChartsObjects()}},
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @export

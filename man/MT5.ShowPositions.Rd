@@ -9,19 +9,19 @@ MT5.ShowPositions()
 \value{
 Returns \emph{Data.frame} \eqn{[nx8]}, with follow informations:
 \itemize{
-  \item sSymbol \code{{character}}: position's symbol.
-  \item {iCmd \code{{int}} position's type, for more see references:
-         \itemize{
-                 \item{0: POSITION_TYPE_BUY}
-                 \item{1: POSITION_TYPE_SELL}
-                 }
-         }
-  \item fVolume \code{{numeric}}: position's volume.
-  \item fPrice \code{{numeric}}: position's price.
-  \item fStop \code{{numeric}}: position's stop loss. For stop loss not set is returned \code{0}.
-  \item fGain \code{{numeric}}: position's stop gain. For stop gain not set is returned \code{0}.
-  \item fProfit \code{{numeric}}: position's profit/loss. Same displayed on the "Trade" tab.
-  \item iTicket \code{{int}}: position's ticket. Same displayed on the MT5's "Trade" tab. Used in other functions in \emph{mt5R} package.
+\item sSymbol \code{{character}}: position's symbol.
+\item {iCmd \code{{int}} position's type, for more see references:
+\itemize{
+\item{0: POSITION_TYPE_BUY}
+\item{1: POSITION_TYPE_SELL}
+}
+}
+\item fVolume \code{{numeric}}: position's volume.
+\item fPrice \code{{numeric}}: position's price.
+\item fStop \code{{numeric}}: position's stop loss. For stop loss not set is returned \code{0}.
+\item fGain \code{{numeric}}: position's stop gain. For stop gain not set is returned \code{0}.
+\item fProfit \code{{numeric}}: position's profit/loss. Same displayed on the "Trade" tab.
+\item iTicket \code{{int}}: position's ticket. Same displayed on the MT5's "Trade" tab. Used in other functions in \emph{mt5R} package.
 }
 }
 \description{

@@ -16,8 +16,8 @@ MT5.BidAskBook(sSymbol, iBidAsk = 0, iBookDepth = 5)
 \value{
 \emph{Data.frame} \eqn{[nx2]} is returned, with follow informations:
 \itemize{
-  \item fPrice \code{{numeric}}: price
-  \item Volume \code{{int}}: bid/ask grouped by price
+\item fPrice \code{{numeric}}: price
+\item Volume \code{{int}}: bid/ask grouped by price
 }
 }
 \description{
@@ -30,7 +30,7 @@ This function is for obtaining Bid or Ask order book with specified book depth.
 \url{https://www.investopedia.com/terms/o/order-book.asp}
 }
 \seealso{
-\link{\code{MT5.BidAskSpread()}}
+\code{\link{MT5.BidAskSpread()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

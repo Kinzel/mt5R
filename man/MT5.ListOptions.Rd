@@ -20,13 +20,13 @@ MT5.ListOptions(
 \value{
 Returns \emph{Data.frame} \eqn{[nx6]}, with follow informations:
 \itemize{
-  \item sOpt \code{{character}}: options symbol.
-  \item PN_ON \code{{int}}: 0 for preferential stocks, 1 otherwise.
-  \item Type \code{{factor}}: options type. "CALL" for call options, "PUT" for put options.
-  \item Mod \code{{factor}}: option style. "AMERICAN" or "EUROPEAN". See references.
-  \item Strike \code{{numeric}}: options strike.
-  \item Expiration \code{{Date}}: options expiration.
-  }
+\item sOpt \code{{character}}: options symbol.
+\item PN_ON \code{{int}}: 0 for preferential stocks, 1 otherwise.
+\item Type \code{{factor}}: options type. "CALL" for call options, "PUT" for put options.
+\item Mod \code{{factor}}: option style. "AMERICAN" or "EUROPEAN". See references.
+\item Strike \code{{numeric}}: options strike.
+\item Expiration \code{{Date}}: options expiration.
+}
 }
 \description{
 Function to load all available options in MT5 of an underlying asset.

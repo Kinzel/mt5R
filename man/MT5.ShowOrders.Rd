@@ -9,18 +9,18 @@ MT5.ShowOrders()
 \value{
 Returns \emph{Data.frame} \eqn{[nx7]}, with follow informations:
 \itemize{
-  \item sSymbol \code{{character}}: order's symbol.
-  \item {iType \code{{int}} order's type, for more see references:
-         \itemize{
-                 \item{2: ORDER_TYPE_BUY_LIMIT}
-                 \item{3: ORDER_TYPE_SELL_LIMIT}
-                 }
-         }
-  \item fVolume \code{{numeric}}: order's volume.
-  \item fPrice \code{{numeric}}: order's price.
-  \item fStop \code{{numeric}}: order's stop loss. For stop loss not set is returned \code{0}.
-  \item fGain \code{{numeric}}: order's stop gain. For stop gain not set is returned \code{0}.
-  \item iTicket \code{{int}}: order's ticket. Same displayed on the "Trade" tab. Used in other functions in \emph{mt5R} package.
+\item sSymbol \code{{character}}: order's symbol.
+\item {iType \code{{int}} order's type, for more see references:
+\itemize{
+\item{2: ORDER_TYPE_BUY_LIMIT}
+\item{3: ORDER_TYPE_SELL_LIMIT}
+}
+}
+\item fVolume \code{{numeric}}: order's volume.
+\item fPrice \code{{numeric}}: order's price.
+\item fStop \code{{numeric}}: order's stop loss. For stop loss not set is returned \code{0}.
+\item fGain \code{{numeric}}: order's stop gain. For stop gain not set is returned \code{0}.
+\item iTicket \code{{int}}: order's ticket. Same displayed on the "Trade" tab. Used in other functions in \emph{mt5R} package.
 }
 }
 \description{
