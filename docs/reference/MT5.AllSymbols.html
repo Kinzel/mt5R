@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Order book Spread — MT5.BidAskSpread • mt5R</title>
+<title>Fetch all symbols — MT5.AllSymbols • mt5R</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Order book Spread — MT5.BidAskSpread" />
-<meta property="og:description" content="This function is for obtaining the higher bid, the lower ask and the spread between them." />
+<meta property="og:title" content="Fetch all symbols — MT5.AllSymbols" />
+<meta property="og:description" content="Fetch all symbols, even those not on Marketwatch.
+This function may take time." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -129,46 +130,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Order book Spread</h1>
+    <h1>Fetch all symbols</h1>
     
-    <div class="hidden name"><code>MT5.BidAskSpread.Rd</code></div>
+    <div class="hidden name"><code>MT5.AllSymbols.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function is for obtaining the higher bid, the lower ask and the spread between them.</p>
+    <p>Fetch all symbols, even those not on Marketwatch.</p>
+<p>This function may take time.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>MT5.BidAskSpread</span>(<span class='no'>sSymbol</span>)</pre>
+    <pre class="usage"><span class='fu'>MT5.AllSymbols</span>()</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>sSymbol</th>
-      <td><p>character; target symbol.</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><em>Data.frame</em> \([1x4]\) is returned, with follow informations:</p><ul>
-<li><p>sSymbol <code>{character}</code>: symbol used.</p></li>
-<li><p>fBid <code>{numeric}</code>: higher bid.</p></li>
-<li><p>fAsk <code>{numeric}</code>: lower ask.</p></li>
-<li><p>Spread <code>{numeric}</code>: difference between lower ask and higher bid.</p></li>
-</ul>
+    <p>Returns <code><a href='https://rdrr.io/r/base/character.html'>character()</a></code> of all symbols available in MT5.</p>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 
-    <p>For same result, use <code><a href='MT5.BidAskBook.html'>MT5.BidAskBook()</a></code> and calculate the difference between the best bid and ask.</p>
-<p>For Forex brokers this function will return an empty <code>data.frame</code>.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+<span class='fu'>MT5.AllSymbols</span>()
 
-    <p><a href='https://www.investopedia.com/terms/o/order-book.asp'>https://www.investopedia.com/terms/o/order-book.asp</a></p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='MT5.BidAskBook.html'>MT5.BidAskBook()</a></code></p></div>
-
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

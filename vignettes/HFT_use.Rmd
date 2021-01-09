@@ -1,0 +1,76 @@
+---
+title: "HFT_use"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{HFT_use}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# High-Frequency Trading with mt5R
+
+It's an pretty **naive** example to check the viability of high-frequency trading.
+
+# How we will test it
+
+We will run `100` times the function `MT5.Quick_GetSymbol()` too check how long will take every loop, and will calculate how many times this function will be used in **1 second** interval.
+
+`Sending order > MT5 fetching data > Receiving data`, for every loop.
+
+First let's load `mt5R`.
+
+```{r setup}
+library(mt5R)
+```
+
+Run the loop.
+
+```{r}
+iCnt <- 0; dtVec <- as.integer()
+
+while(iCnt < 100)
+{
+  TableEx <- MT5.Quick_GetSymbol("EURUSD", iTF = 1, iRows = 10)
+  dtVec[iCnt <<- iCnt + 1] <- Sys.time()
+}
+```
+
+What is inside of `TableEx`?
+
+```{r}
+print(TableEx)
+```
+
+Now we will check the results.
+
+```{r}
+Dates <- as.POSIXct(dtVec, origin = "1970-01-01")
+Secs <- as.integer(strftime(Dates, format = "%S")) ##Interested only on seconds
+table(Secs)
+```
+
+Only one second interval was fully used - the middle one.
+
+Answering the first question, how many times inside of 1 second the function `MT5.Quick_GetSymbol()` was used?
+
+```{r}
+InterestedNumber <- table(Secs)[2]
+print(InterestedNumber[[1]]) ##only the number
+```
+
+How long, in average, `MT5.Quick_GetSymbol()` takes in **milliseconds** every run?
+
+```{r, message=T}
+1000/InterestedNumber[[1]]
+```
+
+The result is relative for every spec and parameters.
+
+This was a naive example, focused in fetch data. Expert Advisors use a lot of computation, functions and every kind of models. The result demonstrate how powerful its the socket connection, try yourself.

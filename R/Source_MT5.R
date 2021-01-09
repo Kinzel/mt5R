@@ -1598,6 +1598,9 @@ MT5.ShowPositions <- function()
 #' ## Buy market order, using stop. fStop need to be lower than symbol's ask price, otherwise the order will be rejected.
 #' MT5.SingleOrder("EURUSD", 0, 0.01, fStop = 1.200) ## Last price: 1.2242 18-12-20. 1.200 < 1.2242 = OK
 #'
+#' ## Sell pending order
+#' MT5.SingleOrder("EURUSD", iCmd = 1, fVol =  0.01, fPrice = 1.2334)
+#'
 #' ## Pending Order
 #' MT5.SingleOrder("EURUSD", iCmd = 1, fVol =  0.01, fPrice = 1.18320) ## Sell Pending Order
 #' MT5.SingleOrder("EURUSD", iCmd = 0, fVol =  0.01, fPrice = 1.18320, fStop = 1.18200) ## Buy Pending Order with stop
@@ -1686,7 +1689,7 @@ MT5.SymbolType <- function(sSymbol)
 #' This function may take time.
 #'
 #' @return
-#' Returns \code{character()} vector
+#' Returns \code{character()} of all symbols available in MT5.
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @export

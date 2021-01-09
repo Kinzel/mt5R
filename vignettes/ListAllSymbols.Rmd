@@ -1,0 +1,61 @@
+---
+title: "ListAllSymbols"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ListAllSymbols}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# List all symbols and types
+
+Simple example to obtain all available symbols in MT5 marketwatch and theirs types (CFD, Forex, etc).
+
+Load `mt5R` package.
+
+```{r setup}
+library(mt5R)
+```
+
+Use `MT5.Marketwatch()` to obtain all marketwatch symbols.
+
+```{r}
+AllSymbols <- MT5.Marketwatch()
+print(AllSymbols)
+```
+
+Create a data.frame to summary all the data.
+
+```{r}
+df_symbols <- data.frame(Symbol = AllSymbols, Type = NA)
+```
+
+Use `MT5.SymbolType` to obtain the type of every symbol using loop.
+
+```{r}
+for(i in seq_len(dim(df_symbols)[1]))
+{
+  df_symbols[i,2] <- MT5.SymbolType(df_symbols[i,1])
+}
+```
+
+* Types (check **Reference** tab for more details of `MT5.SymbolType`)
+  + `-1` not found.
+  + `0` is stock.
+  + `1` is option.
+  + `2` is future contract.
+  + `3` is Forex.
+  + `4` is CFD.
+
+```{r}
+print(df_symbols)
+```
+
+

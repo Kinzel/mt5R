@@ -82,7 +82,7 @@ Some Forex brokers take 200ms to accept orders into market, so take this time on
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mt5R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -105,7 +105,10 @@ Some Forex brokers take 200ms to accept orders into market, so take this time on
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Options_3D.html">Options_3D</a>
+      <a href="../articles/HFT_use.html">HFT_use</a>
+    </li>
+    <li>
+      <a href="../articles/ListAllSymbols.html">ListAllSymbols</a>
     </li>
   </ul>
 </li>
@@ -216,6 +219,9 @@ Some Forex brokers take 200ms to accept orders into market, so take this time on
 
 <span class='co'>## Buy market order, using stop. fStop need to be lower than symbol's ask price, otherwise the order will be rejected.</span>
 <span class='fu'>MT5.SingleOrder</span>(<span class='st'>"EURUSD"</span>, <span class='fl'>0</span>, <span class='fl'>0.01</span>, <span class='kw'>fStop</span> <span class='kw'>=</span> <span class='fl'>1.200</span>) <span class='co'>## Last price: 1.2242 18-12-20. 1.200 &lt; 1.2242 = OK</span>
+
+<span class='co'>## Sell pending order</span>
+<span class='fu'>MT5.SingleOrder</span>(<span class='st'>"EURUSD"</span>, <span class='kw'>iCmd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>fVol</span> <span class='kw'>=</span>  <span class='fl'>0.01</span>, <span class='kw'>fPrice</span> <span class='kw'>=</span> <span class='fl'>1.2334</span>)
 
 <span class='co'>## Pending Order</span>
 <span class='fu'>MT5.SingleOrder</span>(<span class='st'>"EURUSD"</span>, <span class='kw'>iCmd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>fVol</span> <span class='kw'>=</span>  <span class='fl'>0.01</span>, <span class='kw'>fPrice</span> <span class='kw'>=</span> <span class='fl'>1.18320</span>) <span class='co'>## Sell Pending Order</span>

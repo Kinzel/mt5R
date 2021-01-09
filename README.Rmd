@@ -24,27 +24,30 @@ library(quantmod)
 
 [mt5R](https://kinzel.github.io/mt5R/) is an [R](https://www.r-project.org) package that provides a framework for MT5 users that want to achieve Machine Learning analysis and trading. It provides easy integration with socket connection to reach maximum performance.
 
-* Package has 29 functions:
-  + 15 Trading
-  + 5 Machine Learning
-  + 9 Others
+Package has 29 functions (check **Reference** tab):
+
+Purpose | # functions
+------------- | -------------
+Trading          | 15
+Machine Learning | 5
+Others           | 9
 
 ## Example
 
 This is a basic example to load `EURUSD` data, using time frame of 5 minutes `iTF = 5`:
 
 ```{r getsymbol}
-MT5.GetSymbol("EURUSD", iTF = 5)
+MT5.GetSymbol("EURUSD", iTF = 5, iRows = 5)
 
 ## Using xts package
-MT5.GetSymbol("EURUSD", iTF = 5, xts = TRUE)
+MT5.GetSymbol("EURUSD", iTF = 5, iRows = 5, xts = TRUE)
 ```
 
-Plot `MT5.GetSymbol` output using [quantmod](https://CRAN.R-project.org/package=quantmod):
+Plot `MT5.GetSymbol` output using [quantmod](https://CRAN.R-project.org/package=quantmod) package:
 
-```{r plot, fig.align= "center", eval = F}
+```{r plot, fig.align= "center", eval=F}
 library(quantmod)
-Table = MT5.GetSymbol("EURUSD", iTF = 1, xts = T) 
+Table = MT5.GetSymbol("EURUSD", iTF = 5, xts = T) 
 quantmod::chartSeries(Table, theme = "white")
 ```
 
@@ -52,10 +55,12 @@ quantmod::chartSeries(Table, theme = "white")
 
 <center><img src='man/figures/chartseries.png' align="center" height="300" /></center>
 
-Send buy order `EURUSD` with `0.001` lot:
 
-```{r openorder, eval=F, message=FALSE}
-MT5.SingleOrder("EURUSD", iCmd = 0, fVol = 0.001)
+
+Buy `0.001` `EURUSD` at `1.2206`:
+
+```{r openorder2, eval=F, message=FALSE}
+MT5.SingleOrder("EURUSD", iCmd = 0, fVol = 0.001, fPrice = 1.2206) 
 ```
 
 Check open positions:
@@ -66,7 +71,7 @@ MT5.ShowPositions()
 
 
 
-Looking for more examples? Good! Check **Articles** tab for even more (great!) examples. (UNDER CONSTRUCTION)
+Looking for more examples? Good! Check **Articles** tab for more simple examples.
 
 ### Installation
 
@@ -83,7 +88,7 @@ Install the development version from GitHub with:
 
 ```{r, eval = FALSE}
 #install.packages("devtools")
-#devtools::install_github("Kinzel/mt5R") #Im trying to solve this one. My first GitHub project
+devtools::install_github("Kinzel/mt5R@main") 
 ```
 
 #### Instructions: Installing mt5R in MT5
@@ -95,10 +100,10 @@ There are two installation options for mt5R in MT5:
 * `.ex5`: _"Plug and play"_ version. The most suitable version for most.
 * `.mq5`: for developers.
 
-For _"Plug and play"_ version `.ex5` (`mt5R v0_1_0.ex5`)
+For _"Plug and play"_ version `.ex5` (`mt5R v0_1_1.ex5`)
 
-1. Download [`mt5R v0_1_0.ex5`](https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_0.ex5).
-2. Move `mt5R v0_1_0.ex5` to `...\MQL5\experts\` folder. To check where MT5's folders, open MT5 and `Tools > Options > Storage`.
+1. [Download `mt5R v0_1_1.ex5`](https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_1.ex5).
+2. Move `mt5R v0_1_1.ex5` to `...\MQL5\experts\` folder. To check where MT5's folders, open MT5 and `Tools > Options > Storage`.
   
 And you're ready to go!
 
@@ -106,22 +111,22 @@ And you're ready to go!
 
 (If you're not a developer, go ahed to **Getting Started**)
 
-**Alternatively**, for MQL developers you can also download the `.mq5` code used to generate `mt5R v0_1_0.ex5`. Both are exactly the same code, it's the no compiled version. This is the choice that I recommend for who want to tailor their own solutions and functions.
+**Alternatively**, for MQL developers you can also download the `.mq5` code used to generate `mt5R v0_1_1.ex5`. Both are exactly the same code, it's the no compiled version. This is the choice recommend for who want to tailor their own solutions and functions.
 
-* For non compiled version `.mq5` (`mt5R v0_1_0.mq5`) - The most suitable for developers.
-  + [Download socket library: socket-library-mt4-mt5.mqh](https://www.mql5.com/en/blogs/post/706665) or ([Direct Link](https://c.mql5.com/6/865/socket-library-mt4-mt5.mqh))
-  + Move *socket library* to `...\MQL5\include\` folder
-  + Download `.mq5` code (UNDER CONSTRUCTION: VERIFYING LICENCES)
-  + Move `.mq5` code to `...\MQL5\experts\` folder
-  + Open MetaEditor (press F4)
-  + Compile `mt5R v0_1_0.mq5`
-  + If everything run smooth an `mt5R v0_1_0.ex5` (or the name you chose) will be generated
+* For non compiled version `.mq5` (`mt5R v0_1_1.mq5`) - The most suitable for developers.
+  + [Download socket library: socket-library-mt4-mt5.mqh](https://www.mql5.com/en/blogs/post/706665) or ([Direct Link](https://c.mql5.com/6/865/socket-library-mt4-mt5.mqh)).
+  + Move `socket-library-mt4-mt5.mqh` to `...\MQL5\include\` folder.
+  + [Download `mt5R v0_1_1.mq5`](https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_1.mq5).
+  + Move `mt5R v0_1_1.mq5` code to `...\MQL5\experts\` folder.
+  + Open MetaEditor (F4).
+  + Compile `mt5R v0_1_1.mq5`.
+  + If everything run smooth an executable program file `mt5R v0_1_1.ex5` (or the name you chose) will be generated.
   
 ***
   
 ### Getting Started
 
-Attach `mt5R v0_1_0.ex5` to any chart opened in your MT5, like any other Expert Advisor.
+Attach `mt5R v0_1_1.ex5` to any chart opened in your MT5, like any other Expert Advisor.
 
 <img src='man/figures/attach.png'/>
 
@@ -141,7 +146,7 @@ If it returns ``TRUE`` everything has been successfully installed and you're rea
 
 ### Creating your own functions
 
-The most awesome part of MT5 is make reliable to create your owns solutions and functions. The cookbook is still under construction, but you can start checking functions `MT5.zExample` in mt5R package and `Z1` order in `mt5R v0_1_0.mq5`. Its pretty easy!
+The most awesome part of MT5 is make reliable to create your owns solutions and functions. The cookbook is still under construction, but you can start checking functions `MT5.zExample` in mt5R package and `Z1` order in `mt5R v0_1_1.mq5`. Its pretty easy!
 
 ```{r z1example, eval = F}
 ## Execute the function without () to see its code
@@ -165,4 +170,4 @@ Guilherme Kinzel
 
 ### Credits
 
-- [JC](https://www.mql5.com/en/users/jjc): without his awesome socket library mt5R would not be possible!
+- [JC](https://www.mql5.com/en/users/jjc)  without his awesome socket library mt5R would not be possible!

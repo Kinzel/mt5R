@@ -33,3 +33,4 @@ vignettes/*.pdf
 0*.patch
 *.bak
 *.orig
+inst/doc

@@ -1,3 +1,11 @@
-# mt5R 0.1.0
+mt5R v0.1.1 (Release date: 2021-01-08)
+==============
 
-* Added a `NEWS.md` file to track changes to the package.
+Changes:
+
+* Added MT5.AllSymbols().
+
+mt5R v0.1.0 (Release date: 2020-12-24)
+==============
+
+Uploaded to GitHub. Experimental use only.
