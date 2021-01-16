@@ -48,7 +48,7 @@ MT5.ListOptions("USIM")
 \url{https://en.wikipedia.org/wiki/Option_style}
 }
 \seealso{
-\code{\link{MT5.SymbolType()}}
+\code{\link[=MT5.SymbolType]{MT5.SymbolType()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

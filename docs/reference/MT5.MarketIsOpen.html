@@ -49,7 +49,7 @@
 <meta property="og:title" content="Check if market is open — MT5.MarketIsOpen" />
 <meta property="og:description" content="Warning! This function is not entirely reliable. It uses the last hour of trading of all marketwatch's symbols to check if the market is open. To actually know when the market is really open, the trader must know the market and rely on his/her knowledge.
 If trader's computer lost connection and all symbols turns outdated this function will return FALSE by its construction. It's strongly recommended to use support function, as check if internet is working and check for weekends/holidays, to not stuck with False Negatives.
-Detecting this type of status is quite challenging in MQL." />
+Detecting this type of status is quite challenging in MQL. This function takes 1 second to return the result." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -82,7 +82,7 @@ Detecting this type of status is quite challenging in MQL." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mt5R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -139,7 +139,7 @@ Detecting this type of status is quite challenging in MQL." />
     <div class="ref-description">
     <p><strong>Warning!</strong> This function is not entirely reliable. It uses the last hour of trading of all marketwatch's symbols to check if the market is open. To actually know when the market is really open, the trader must know the market and rely on his/her knowledge.</p>
 <p>If trader's computer <em>lost connection</em> and all symbols turns outdated this function will return <code>FALSE</code> by its construction. It's strongly recommended to use support function, as check if internet is working and check for weekends/holidays, to not stuck with False Negatives.</p>
-<p>Detecting this type of status is quite challenging in MQL.</p>
+<p>Detecting this type of status is quite challenging in MQL. <strong>This function takes <code>1</code> second to return the result.</strong></p>
     </div>
 
     <pre class="usage"><span class='fu'>MT5.MarketIsOpen</span>()</pre>

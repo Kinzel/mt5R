@@ -16,7 +16,7 @@ Returns \code{TRUE} if position was successful closed.
 Send a request to close positions in MT5.
 }
 \details{
-For iTickers users can use \code{MT5.ShowPositions()} to obtain it.
+For iTickers users can use \code{\link[=MT5.ShowPositions]{MT5.ShowPositions()}} to obtain it.
 }
 \examples{
 \dontrun{
@@ -26,7 +26,7 @@ MT5.ClosePosition(732176419)
 }
 }
 \seealso{
-\code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyPosition()}}
+\code{\link[=MT5.SingleOrder]{MT5.SingleOrder()}}, \code{\link[=MT5.MultipleOrders]{MT5.MultipleOrders()}}, \code{\link[=MT5.ShowPositions]{MT5.ShowPositions()}}, \code{\link[=MT5.ShowOrders]{MT5.ShowOrders()}}, \code{\link[=MT5.ModifyOrder]{MT5.ModifyOrder()}}, \code{\link[=MT5.DeleteOrder]{MT5.DeleteOrder()}}, \code{\link[=MT5.ModifyPosition]{MT5.ModifyPosition()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

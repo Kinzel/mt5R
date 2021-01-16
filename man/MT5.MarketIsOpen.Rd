@@ -14,7 +14,7 @@ Returns \code{TRUE} if market is open, \code{FALSE} otherwise.
 
 If trader's computer \emph{lost connection} and all symbols turns outdated this function will return \code{FALSE} by its construction. It's strongly recommended to use support function, as check if internet is working and check for weekends/holidays, to not stuck with False Negatives.
 
-Detecting this type of status is quite challenging in MQL.
+Detecting this type of status is quite challenging in MQL. \strong{This function takes \code{1} second to return the result.}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

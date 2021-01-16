@@ -43,7 +43,7 @@ This function is useful for obtaining MT5's account information.
 \url{https://hercules.finance/faq/what-is-balance-equity-margin-and-free-margin-and-margin-call/}
 }
 \seealso{
-\code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ShowOrders()}}
+\code{\link[=MT5.ShowPositions]{MT5.ShowPositions()}}, \code{\link[=MT5.ShowOrders]{MT5.ShowOrders()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

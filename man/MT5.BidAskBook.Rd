@@ -30,7 +30,7 @@ This function is for obtaining Bid or Ask order book with specified book depth.
 \url{https://www.investopedia.com/terms/o/order-book.asp}
 }
 \seealso{
-\code{\link{MT5.BidAskSpread()}}
+\code{\link[=MT5.BidAskSpread]{MT5.BidAskSpread()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

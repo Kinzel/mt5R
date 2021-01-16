@@ -41,7 +41,7 @@ MT5.SingleOrder(
 Returns \code{TRUE} if the order was successfully sent, \code{FALSE} otherwise.
 }
 \description{
-Function used to open market or place a pending order. Only accept only order at time, for multiple orders consider to use \code{MT5.MultipleOrders()} instead.
+Function used to open market or place a pending order. Only accept only order at time, for multiple orders consider to use \code{\link[=MT5.MultipleOrders]{MT5.MultipleOrders()}} instead.
 
 The switch for pending order and market order is using \code{fPrice}. Any value higher than \code{0} is considered a pending order.
 
@@ -83,7 +83,7 @@ MT5.SingleOrder("EURUSD", iCmd = 1, fVol =  0.01, fPrice = 1.18720, fStop = 1.18
 \url{https://www.investopedia.com/terms/m/marketorder.asp}
 }
 \seealso{
-\code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.ModifyPosition()}}, \code{\link{MT5.ShowPositions()}}
+\code{\link[=MT5.DeleteOrder]{MT5.DeleteOrder()}}, \code{\link[=MT5.ModifyOrder]{MT5.ModifyOrder()}}, \code{\link[=MT5.MultipleOrders]{MT5.MultipleOrders()}}, \code{\link[=MT5.ShowOrders]{MT5.ShowOrders()}}, \code{\link[=MT5.ClosePosition]{MT5.ClosePosition()}}, \code{\link[=MT5.ModifyPosition]{MT5.ModifyPosition()}}, \code{\link[=MT5.ShowPositions]{MT5.ShowPositions()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

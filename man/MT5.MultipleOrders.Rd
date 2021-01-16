@@ -20,7 +20,7 @@ Some Forex brokers take \code{200ms} to accept orders into market, so take this 
 \details{
 Take note that buy orders are rejected when order's stop loss are higher than order's price, and vice-versa for sell orders. This is a sanity check made by MT5, not by mt5R. Always check MT5's "Experts" tab for more details when an order is rejected.
 
-\code{df_orders {data.frame}} \eqn{[nx7]} columns should be on the same order and type of \code{\link{MT5.SingleOrder}} arguments.
+\code{df_orders {data.frame}} \eqn{[nx7]} columns should be on the same order and type of \link{MT5.SingleOrder} arguments.
 \itemize{
 \item sSymbol \code{{character}}: symbol to send the order.
 \item {iCmd \code{{int}}:
@@ -64,7 +64,7 @@ MT5.MultipleOrders(Orders)
 \url{https://www.investopedia.com/terms/m/marketorder.asp}
 }
 \seealso{
-\code{\link{MT5.SingleOrder()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.ModifyPosition()}}
+\code{\link[=MT5.SingleOrder]{MT5.SingleOrder()}}, \code{\link[=MT5.ShowOrders]{MT5.ShowOrders()}}, \code{\link[=MT5.ShowPositions]{MT5.ShowPositions()}}, \code{\link[=MT5.ClosePosition]{MT5.ClosePosition()}}, \code{\link[=MT5.DeleteOrder]{MT5.DeleteOrder()}}, \code{\link[=MT5.ModifyOrder]{MT5.ModifyOrder()}}, \code{\link[=MT5.ModifyPosition]{MT5.ModifyPosition()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

@@ -52,7 +52,7 @@ MT5.ModifyOrder(... = df_modify) ## Modify two orders at same time
 }
 }
 \seealso{
-\code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyPosition()}}
+\code{\link[=MT5.SingleOrder]{MT5.SingleOrder()}}, \code{\link[=MT5.MultipleOrders]{MT5.MultipleOrders()}}, \code{\link[=MT5.ShowOrders]{MT5.ShowOrders()}}, \code{\link[=MT5.ShowPositions]{MT5.ShowPositions()}}, \code{\link[=MT5.ClosePosition]{MT5.ClosePosition()}}, \code{\link[=MT5.DeleteOrder]{MT5.DeleteOrder()}}, \code{\link[=MT5.ModifyPosition]{MT5.ModifyPosition()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

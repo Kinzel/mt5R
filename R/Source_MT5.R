@@ -32,7 +32,7 @@
 #' }
 #'
 #' @seealso
-#' \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ShowOrders()}}
+#' [mt5R::MT5.ShowPositions()], [mt5R::MT5.ShowOrders()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @references
@@ -71,7 +71,7 @@ MT5.AccountInfo <- function()
 #' }
 #'
 #' @seealso
-#' \code{\link{MT5.BidAskSpread()}}
+#' [mt5R::MT5.BidAskSpread()]
 #'
 #' @details
 #' (Stocks) For open and closing auctions this function cannot reflect the book properly.
@@ -137,7 +137,7 @@ MT5.BidAskBook <- function(sSymbol, iBidAsk = 0, iBookDepth = 5)
 #' For Forex brokers this function will return an empty \code{data.frame}.
 #'
 #' @seealso
-#' \code{\link{MT5.BidAskBook()}}
+#' [mt5R::MT5.BidAskBook()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @references
@@ -185,7 +185,7 @@ MT5.BidAskSpread <- function(sSymbol)
 #' Always returns \code{TRUE}.
 #'
 #' @seealso
-#' \code{\link{MT5.Connect()}}
+#' [mt5R::MT5.Connect()]
 #'
 #' @details
 #' The default door is \code{2345}.
@@ -223,11 +223,10 @@ MT5.ChangeDoorSocket <- function(iDoor = NULL)
 #' Returns \code{TRUE} if position was successful closed.
 #'
 #' @seealso
-#' \code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyPosition()}}
-#'
+#' [mt5R::MT5.SingleOrder()], [mt5R::MT5.MultipleOrders()], [mt5R::MT5.ShowPositions()], [mt5R::MT5.ShowOrders()], [mt5R::MT5.ModifyOrder()], [mt5R::MT5.DeleteOrder()], [mt5R::MT5.ModifyPosition()]
 #'
 #' @details
-#' For iTickers users can use \code{MT5.ShowPositions()} to obtain it.
+#' For iTickers users can use [mt5R::MT5.ShowPositions()] to obtain it.
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @export
@@ -243,7 +242,7 @@ MT5.ClosePosition <- function(iTickers)
   sTextToSend <- mt5R::SUP_MT5_StackRequests(iTickers, "O9")
   sRequest <- utils::read.table(text = MT5.Connect(sTextToSend), sep = ";", colClasses = c("character"))
 
-  return(unlist(sRequest) == "O9OK")
+  return(as.logical(unlist(sRequest) == "O9OK"))
 }
 
 #' Socket connection with MT5
@@ -267,7 +266,7 @@ MT5.ClosePosition <- function(iTickers)
 #' This function still has some experiments concepts, especially with delayed functions that MT5 requires time to run.
 #'
 #' @seealso
-#' \code{\link{MT5.ChangeDoorSocket()}}
+#' [mt5R::MT5.ChangeDoorSocket()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @references
@@ -325,7 +324,7 @@ MT5.Connect <- function(sReq, iPort = 23456, bMsg = FALSE, timeout = getOption("
 #' Returns \code{TRUE} if order was successful deleted, \code{FALSE} otherwise.
 #'
 #' @details
-#' For iTickers users can use \code{MT5.ShowOrders()} to obtain it.
+#' For iTickers users can use [mt5R::MT5.ShowOrders()] to obtain it.
 #'
 #' (STOCKS ONLY) WARNING - Poor written MT5's servers
 #'
@@ -335,10 +334,10 @@ MT5.Connect <- function(sReq, iPort = 23456, bMsg = FALSE, timeout = getOption("
 #' Use this function very carefully if you notice that the MT5's server broker was poor written.
 #' I already tried to fix into MQL code in every way. All forms to remove the order result in the same outcome.
 #' For who is experiencing this problem, take note that the mt5R plataform takes approximately 3 minutes to recover itself.
-#' Poor fix: the trader can use \code{MT5.ModifyOrder()} to change fPrice to unviable levels and waits to order expire.
+#' Poor fix: the trader can use [mt5R::MT5.ModifyOrder()] to change fPrice to unviable levels and waits to order expire.
 #'
 #' @seealso
-#' \code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.ModifyPosition()}}
+#' [mt5R::MT5.SingleOrder()], [mt5R::MT5.MultipleOrders()], [mt5R::MT5.ShowPositions()], [mt5R::MT5.ShowOrders()], [mt5R::MT5.ModifyOrder()], [mt5R::MT5.ClosePosition()], [mt5R::MT5.ModifyPosition()]
 #'
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
@@ -352,7 +351,7 @@ MT5.Connect <- function(sReq, iPort = 23456, bMsg = FALSE, timeout = getOption("
 MT5.DeleteOrder <- function(iTickets)
 {
   sTextToSent <- mt5R::SUP_MT5_StackRequests(iTickets, "O7")
-  return(unlist(MT5.Connect(sTextToSent)) == "O7OK")
+  return(as.logical(unlist(MT5.Connect(sTextToSent)) == "O7OK"))
 }
 
 #' Draw horizontal line
@@ -418,7 +417,7 @@ MT5.DeleteOrder <- function(iTickets)
 #' \url{https://www.mql5.com/en/docs/constants/chartconstants/enum_timeframes}
 #'
 #' @seealso
-#' \code{\link{MT5.RemoveAllChartsObjects()}},
+#' [mt5R::MT5.RemoveAllChartsObjects()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @export
@@ -447,7 +446,7 @@ MT5.DrawHorizontalLine <- function(sSymbol, fPrice, iWidth = 1, iColor = 1, sNam
     sSymbol, sName, fPrice, iWidth, iColor, iTF,
     sep = "!"))), sep = ";")
 
-  return(unlist(sRequest) == "C1OK")
+  return(as.logical(unlist(sRequest) == "C1OK"))
 }
 
 #' MT5 File folder
@@ -493,7 +492,7 @@ MT5.FileWorkingFolder <- function()
 #'
 #' Even after stop this function on running or \code{iWait} ran out, mt5R running into MT5 will keep running to create the table. To a complete stop, proceed to kill both process. For very big sizes (\code{iDepth}) the user should be patient.
 #'
-#' \code{MT5.Quick_GetSymbol()} can be used instead for smaller tables, it not uses \code{csv}. Preliminary tests indicate to up 80x speed gain.
+#' [mt5R::MT5.Quick_GetSymbol()] can be used instead for smaller tables, it not uses \code{csv}. Preliminary tests indicate to up 80x speed gain.
 #'
 #' Supported time frames (\code{iTF}). See references for even more details.
 #' \itemize{
@@ -512,7 +511,7 @@ MT5.FileWorkingFolder <- function()
 #' }
 #'
 #' @seealso
-#' \code{\link{MT5.Quick_GetSymbol()}}, \code{\link{MT5.QuickLastRow_GetSymbol()}}
+#' [mt5R::MT5.Quick_GetSymbol()], [mt5R::MT5.QuickLastRow_GetSymbol()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #'
@@ -617,7 +616,7 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
 #' }
 #'
 #' @details
-#' It should be used only for tiny table sizes. For big size tables consider to use \code{MT5.GetSymbol()} instead.
+#' It should be used only for tiny table sizes. For big size tables consider to use [mt5R::MT5.GetSymbol()] instead.
 #'
 #' Supported time frames (\code{iTF}). See references for even more details.
 #' \itemize{
@@ -636,7 +635,7 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
 #' }
 #'
 #' @seealso
-#' \code{\link{MT5.GetSymbol()}}, \code{\link{MT5.QuickLastRow_GetSymbol()}}
+#' [mt5R::MT5.GetSymbol()], [mt5R::MT5.QuickLastRow_GetSymbol()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #'
@@ -737,7 +736,7 @@ MT5.Quick_GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE)
 #' }
 #'
 #' @seealso
-#' \code{\link{MT5.GetSymbol()}}, \code{\link{MT5.Quick_GetSymbol()}}
+#' [mt5R::MT5.GetSymbol()], [mt5R::MT5.Quick_GetSymbol()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #'
@@ -800,7 +799,7 @@ MT5.QuickLastRow_GetSymbol <- function(sSymbols, iTF)
 #'   }
 #'
 #' @seealso
-#' \code{\link{MT5.SymbolType()}}
+#' [mt5R::MT5.SymbolType()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #'
@@ -892,7 +891,7 @@ MT5.ListOptions <- function(sUnderlyingAsset, bUseDescriptionStrike = F, bAutoma
 #'
 #' If trader's computer \emph{lost connection} and all symbols turns outdated this function will return \code{FALSE} by its construction. It's strongly recommended to use support function, as check if internet is working and check for weekends/holidays, to not stuck with False Negatives.
 #'
-#' Detecting this type of status is quite challenging in MQL.
+#' Detecting this type of status is quite challenging in MQL. **This function takes \code{1} second to return the result.**
 #'
 #' @return Returns \code{TRUE} if market is open, \code{FALSE} otherwise.
 #'
@@ -900,7 +899,7 @@ MT5.ListOptions <- function(sUnderlyingAsset, bUseDescriptionStrike = F, bAutoma
 MT5.MarketIsOpen <- function()
 {
   sRequest <- utils::read.table(text = MT5.Connect("P0"), sep = ";")
-  return(unlist(sRequest) == "P0OK")
+  return(as.logical(unlist(sRequest) == "P0OK"))
 }
 
 #' Symbols in MT5's marketwatch
@@ -912,7 +911,7 @@ MT5.MarketIsOpen <- function()
 #' @return Returns \emph{character()} of all symbols in MT5's marketwatch.
 #'
 #' @seealso
-#' \code{\link{MT5.MarketwatchAdd()}}, \code{\link{MT5.MarketwatchRemove()}}
+#' [mt5R::MT5.MarketwatchAdd()], [mt5R::MT5.MarketwatchRemove()], [mt5R::MT5.SymbolInMarketwatch()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 MT5.Marketwatch <- function()
@@ -932,7 +931,7 @@ MT5.Marketwatch <- function()
 #' @return Returns \emph{logical()}. \code{TRUE} if symbol was successfully added, \code{FALSE} otherwise.
 #'
 #' @seealso
-#' \code{\link{MT5.Marketwatch()}}, \code{\link{MT5.MarketwatchRemove()}}
+#' [mt5R::MT5.Marketwatch()], [mt5R::MT5.MarketwatchRemove()], [mt5R::MT5.SymbolInMarketwatch()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @export
@@ -956,12 +955,14 @@ MT5.MarketwatchAdd <- function(sSymbols)
 #'
 #' Remove symbols in MT5's marketwatch.
 #'
+#' Any attempt to remove \code{sSymbol} that has any chart opened will fracass automatically by MT5.
+#'
 #' @param sSymbol character(); vector of target symbols to remove.
 #'
 #' @return Returns \emph{logical()}. \code{TRUE} if symbol was successfully removed, \code{FALSE} otherwise.
 #'
 #' @seealso
-#' \code{\link{MT5.Marketwatch()}}, \code{\link{MT5.MarketwatchAdd()}}
+#' [mt5R::MT5.Marketwatch()], [mt5R::MT5.MarketwatchAdd()], [mt5R::MT5.SymbolInMarketwatch()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @export
@@ -977,6 +978,28 @@ MT5.MarketwatchRemove <- function(sSymbols)
   sTextToSent <- mt5R::SUP_MT5_StackRequests(sSymbols, "P2")
   sRequest <- utils::read.table(text = MT5.Connect(sTextToSent), sep = "!", colClasses = c("character"))
   return(as.logical(unlist(sRequest) == "P2OK"))
+}
+
+#' Check if symbol is in MT5's marketwatch
+#'
+#' @description
+#'
+#' Function to check if \code{sSymbol} is in MT5's marketwatch.
+#'
+#' @param sSymbol character; target symbol.
+#'
+#' @return Returns \code{TRUE} if symbol is in MT5's marketwatch, \code{FALSE} otherwise.
+#'
+#' @seealso
+#' [mt5R::MT5.MarketwatchAdd()], [mt5R::MT5.MarketwatchRemove()], [mt5R::MT5.Marketwatch()]
+#'
+#' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
+MT5.SymbolInMarketwatch <- function(sSymbol)
+{
+  stopifnot(is.character(sSymbol))
+  if(length(sSymbol)>1)warning("This function is only for one symbol. Using the first one!");
+  sRequest <- utils::read.table(text = MT5.Connect(base::paste0("P5 ", sSymbol[1])), sep = "!", colClasses = c("character"))
+  return(as.logical(as.character(sRequest)=="P5OK1"))
 }
 
 #' Modify order
@@ -1004,7 +1027,7 @@ MT5.MarketwatchRemove <- function(sSymbols)
 #' It need to choose a \code{data.frame} or just one order at time to modify. Not both. An attempt using both a warning will pop up and \code{data.frame} will be used.
 #'
 #' @seealso
-#' \code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyPosition()}}
+#' [mt5R::MT5.SingleOrder()], [mt5R::MT5.MultipleOrders()], [mt5R::MT5.ShowOrders()], [mt5R::MT5.ShowPositions()], [mt5R::MT5.ClosePosition()], [mt5R::MT5.DeleteOrder()], [mt5R::MT5.ModifyPosition()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @export
@@ -1064,7 +1087,7 @@ MT5.ModifyOrder <- function(iTicket = 0, fPrice = 0, fStop = 0, fGain = 0, ...)
     sRequest <- MT5.Connect(base::paste0("O6 ", paste(
       iTicket, fPrice, fStop, fGain,
       sep = "!")))
-    return(unlist(sRequest) == "O6OK")
+    return(as.logical(unlist(sRequest) == "O6OK"))
   }
 
   sTextToSend <- as.character()
@@ -1086,7 +1109,7 @@ MT5.ModifyOrder <- function(iTicket = 0, fPrice = 0, fStop = 0, fGain = 0, ...)
 
   sRequest <- utils::read.table(text = MT5.Connect(sTextToSend), sep = ";")
 
-  return(unlist(sRequest) == "O6OK")
+  return(as.logical(unlist(sRequest) == "O6OK"))
 }
 
 #' Modify position
@@ -1113,7 +1136,7 @@ MT5.ModifyOrder <- function(iTicket = 0, fPrice = 0, fStop = 0, fGain = 0, ...)
 #' It need to choose a \code{data.frame} or just one position at time to modify. Not both. An attempt using both a warning will pop up and \code{data.frame} will be used.
 #'
 #' @seealso
-#' \code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyOrder()}}
+#' [mt5R::MT5.SingleOrder()], [mt5R::MT5.MultipleOrders()], [mt5R::MT5.ShowOrders()], [mt5R::MT5.ShowPositions()], [mt5R::MT5.ClosePosition()], [mt5R::MT5.DeleteOrder()], [mt5R::MT5.ModifyOrder()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @export
@@ -1162,7 +1185,7 @@ MT5.ModifyPosition <- function(iTicket = 0, fStop = 0, fGain = 0, ...)
     sRequest <- MT5.Connect(base::paste0("O8 ", paste(
       iTicket, fStop, fGain,
       sep = "!")))
-    return(unlist(sRequest) == "O8OK")
+    return(as.logical(unlist(sRequest) == "O8OK"))
   }
 
   sTextToSend <- as.character()
@@ -1182,7 +1205,7 @@ MT5.ModifyPosition <- function(iTicket = 0, fStop = 0, fGain = 0, ...)
 
   sRequest <- utils::read.table(text = MT5.Connect(sTextToSend), sep = ";")
 
-  return(unlist(sRequest) == "O8OK")
+  return(as.logical(unlist(sRequest) == "O8OK"))
 }
 
 
@@ -1203,7 +1226,7 @@ MT5.ModifyPosition <- function(iTicket = 0, fStop = 0, fGain = 0, ...)
 #'
 #' Take note that buy orders are rejected when order's stop loss are higher than order's price, and vice-versa for sell orders. This is a sanity check made by MT5, not by mt5R. Always check MT5's "Experts" tab for more details when an order is rejected.
 #'
-#' \code{df_orders {data.frame}} \eqn{[nx7]} columns should be on the same order and type of \code{\link{MT5.SingleOrder}} arguments.
+#' \code{df_orders {data.frame}} \eqn{[nx7]} columns should be on the same order and type of [mt5R::MT5.SingleOrder] arguments.
 #' \itemize{
 #'   \item sSymbol \code{{character}}: symbol to send the order.
 #'   \item {iCmd \code{{int}}:
@@ -1228,7 +1251,7 @@ MT5.ModifyPosition <- function(iTicket = 0, fStop = 0, fGain = 0, ...)
 #' Using \code{fPrice = 0} for Market Order, automatically \code{iFillType} will be set to \code{1}.
 #'
 #' @seealso
-#' \code{\link{MT5.SingleOrder()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.ModifyPosition()}}
+#' [mt5R::MT5.SingleOrder()], [mt5R::MT5.ShowOrders()], [mt5R::MT5.ShowPositions()], [mt5R::MT5.ClosePosition()], [mt5R::MT5.DeleteOrder()], [mt5R::MT5.ModifyOrder()], [mt5R::MT5.ModifyPosition()]
 #'
 #' @references
 #' \url{https://www.mql5.com/en/docs/constants/tradingconstants/orderproperties}
@@ -1303,7 +1326,7 @@ MT5.MultipleOrders <- function(df_orders)
 #' Returns \code{TRUE} if mt5R is available in MT5, \code{FALSE} otherwise.
 #'
 #' @seealso
-#' \code{\link{MT5.ChangeDoorSocket()}}, \code{\link{MT5.Connect()}}
+#' [mt5R::MT5.ChangeDoorSocket()], [mt5R::MT5.Connect()]
 #'
 #' @details
 #' For \code{bShowTime = TRUE}, is pretty common zero results. Check also ?proc.time
@@ -1353,7 +1376,7 @@ MT5.Ping <- function(bShowTimeElapsed = F)
 #' Returns \code{TRUE} if succeed, \code{FALSE} otherwise.
 #'
 #' @seealso
-#' \code{\link{MT5.DrawHorizontalLine()}}
+#' [mt5R::MT5.DrawHorizontalLine()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #'
@@ -1377,20 +1400,20 @@ MT5.RemoveAllChartsObjects <- function(sSymbol = "0", iTF = 0)
   if(sSymbol == "" & iTF == 0)
   {
     sRequest <- utils::read.table(text = MT5.Connect("C3"), sep = ";")
-    return(unlist(sRequest) == "C3OK")
+    return(as.logical(unlist(sRequest) == "C3OK"))
   }
 
   sRequest <- utils::read.table(text = MT5.Connect(base::paste0("C2 ", paste(
     sSymbol, iTF,
     sep = "!"))), sep = ";")
-  return(unlist(sRequest) == "C2OK")
+  return(as.logical(unlist(sRequest) == "C2OK"))
 }
 
 #' Show orders
 #'
 #' @description
 #'
-#' Show all active orders displayed on the "Trade" tab. For active positions use \code{MT5.ShowPositions()} instead.
+#' Show all active orders displayed on the "Trade" tab. For active positions use [mt5R::MT5.ShowPositions()] instead.
 #'
 #' @return
 #' Returns \emph{Data.frame} \eqn{[nx7]}, with follow informations:
@@ -1412,7 +1435,7 @@ MT5.RemoveAllChartsObjects <- function(sSymbol = "0", iTF = 0)
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #'
 #' @seealso
-#' \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.SingleOrder()}}
+#' [mt5R::MT5.ShowPositions()], [mt5R::MT5.DeleteOrder()], [mt5R::MT5.ModifyOrder()], [mt5R::MT5.MultipleOrders()], [mt5R::MT5.SingleOrder()]
 #'
 #' @references
 #' \url{https://www.mql5.com/en/articles/2513}
@@ -1486,7 +1509,7 @@ MT5.ShowOrders <- function()
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #'
 #' @seealso
-#' \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.ModifyPosition()}}
+#' [mt5R::MT5.ShowOrders()], [mt5R::MT5.ClosePosition()], [mt5R::MT5.ModifyPosition()]
 #'
 #' @references
 #' \url{https://www.mql5.com/en/docs/constants/tradingconstants/positionproperties}
@@ -1543,7 +1566,7 @@ MT5.ShowPositions <- function()
 #'
 #' @description
 #'
-#' Function used to open market or place a pending order. Only accept only order at time, for multiple orders consider to use \code{MT5.MultipleOrders()} instead.
+#' Function used to open market or place a pending order. Only accept only order at time, for multiple orders consider to use [mt5R::MT5.MultipleOrders()] instead.
 #'
 #' The switch for pending order and market order is using \code{fPrice}. Any value higher than \code{0} is considered a pending order.
 #'
@@ -1579,7 +1602,7 @@ MT5.ShowPositions <- function()
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #'
 #' @seealso
-#' \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.ModifyPosition()}}, \code{\link{MT5.ShowPositions()}}
+#' [mt5R::MT5.DeleteOrder()], [mt5R::MT5.ModifyOrder()], [mt5R::MT5.MultipleOrders()], [mt5R::MT5.ShowOrders()], [mt5R::MT5.ClosePosition()], [mt5R::MT5.ModifyPosition()], [mt5R::MT5.ShowPositions()]
 #'
 #' @references
 #' \url{https://www.mql5.com/en/docs/constants/tradingconstants/orderproperties}
@@ -1637,6 +1660,8 @@ MT5.SingleOrder <- function(sSymbol, iCmd, fVol, fPrice = 0, fStop = 0, fGain = 
 #'
 #' It can be used for several symbols at once using a character vector.
 #'
+#' This function will automatically manage if the \code{sSymbol} is in marketwatch. Not advisable for huge vectorized uses, use a loop instead for safer handling.
+#'
 #' @param sSymbol character(); target symbols.
 #'
 #' @return
@@ -1672,13 +1697,57 @@ MT5.SymbolType <- function(sSymbol)
   {
     stop("Empty vector")
   }
+  stopifnot(is.character(sSymbol))
+
+  sSymbolsNotInMW <- as.character()
+  for(i in seq_along(sSymbol))
+  {
+    if(!MT5.SymbolInMarketwatch(sSymbol[i]))
+    {
+      MT5.MarketwatchAdd(sSymbol[i])
+      sSymbolsNotInMW <- append(sSymbolsNotInMW, sSymbol)
+    }
+  }
+  if(length(sSymbolsNotInMW)>0)Sys.sleep(0.1); ##unfortunately need to MT5 process the changes
 
   sTextToSent <- SUP_MT5_StackRequests(sSymbol, "M3")
-  Resposta <- utils::read.table(text = MT5.Connect(sTextToSent), sep = ";", colClasses = c("character"))
-  df_temp <- as.data.frame(lapply(Resposta, function(x) utils::read.table(text = x, sep = "!")), stringsAsFactors = F)
+  sRecived <- utils::read.table(text = MT5.Connect(sTextToSent), sep = ";", colClasses = c("character"))
+  df_temp <- as.data.frame(lapply(sRecived, function(x) utils::read.table(text = x, sep = "!")), stringsAsFactors = F)
   names(df_temp) <- c("Name", "Type")
 
+  if(length(sSymbolsNotInMW)>0)MT5.MarketwatchRemove(sSymbolsNotInMW);
+
   return(df_temp$Type)
+}
+
+#' Check mt5R version in R and MT5
+#'
+#' @description
+#' This function is useful to verify both versions of mt5R. It is advisable to use the same version in R and MT5.
+#'
+#' In case of \code{FALSE} return consider to update your mt5R package or mt5R EA, check for warning messages in this case.
+#'
+#' @return
+#' Returns \code{TRUE} if MT5 and R have the same version of mt5R, \code{FALSE} otherwise.
+#'
+#' A warning message will be displayed in case of \code{FALSE} return.
+#'
+#' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
+MT5.CheckVersion <- function()
+{
+  sRecived <- utils::read.table(text = MT5.Connect("S3"), sep = ";", colClasses = c("character"))
+  sVersion_MT5 <- as.character(sRecived)
+  sVersion_R <- packageVersion("mt5R")
+
+  if(sVersion_MT5 == sVersion_R)
+  {
+    print(paste0("Everything OK! MT5 version: '", sVersion_MT5, "' R version: '",sVersion_R,"'"))
+    return(TRUE)
+  }else
+  {
+    warning(paste0("! Different versions of mt5R! MT5 version: '", sVersion_MT5, "' R version: '",sVersion_R,"'"))
+    return(FALSE)
+  }
 }
 
 #' Fetch all symbols

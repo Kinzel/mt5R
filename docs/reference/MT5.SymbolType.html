@@ -48,7 +48,8 @@
 
 <meta property="og:title" content="Symbol type — MT5.SymbolType" />
 <meta property="og:description" content="This function is useful to know what kind of asset target symbol is.
-It can be used for several symbols at once using a character vector." />
+It can be used for several symbols at once using a character vector.
+This function will automatically manage if the sSymbol is in marketwatch. Not advisable for huge vectorized uses, use a loop instead for safer handling." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -81,7 +82,7 @@ It can be used for several symbols at once using a character vector." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mt5R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -138,6 +139,7 @@ It can be used for several symbols at once using a character vector." />
     <div class="ref-description">
     <p>This function is useful to know what kind of asset target symbol is.</p>
 <p>It can be used for several symbols at once using a character vector.</p>
+<p>This function will automatically manage if the <code>sSymbol</code> is in marketwatch. Not advisable for huge vectorized uses, use a loop instead for safer handling.</p>
     </div>
 
     <pre class="usage"><span class='fu'>MT5.SymbolType</span>(<span class='no'>sSymbol</span>)</pre>

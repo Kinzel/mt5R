@@ -43,7 +43,7 @@ MT5.ModifyPosition(... = df_modify)
 }
 }
 \seealso{
-\code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyOrder()}}
+\code{\link[=MT5.SingleOrder]{MT5.SingleOrder()}}, \code{\link[=MT5.MultipleOrders]{MT5.MultipleOrders()}}, \code{\link[=MT5.ShowOrders]{MT5.ShowOrders()}}, \code{\link[=MT5.ShowPositions]{MT5.ShowPositions()}}, \code{\link[=MT5.ClosePosition]{MT5.ClosePosition()}}, \code{\link[=MT5.DeleteOrder]{MT5.DeleteOrder()}}, \code{\link[=MT5.ModifyOrder]{MT5.ModifyOrder()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

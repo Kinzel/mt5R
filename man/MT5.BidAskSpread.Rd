@@ -30,7 +30,7 @@ For Forex brokers this function will return an empty \code{data.frame}.
 \url{https://www.investopedia.com/terms/o/order-book.asp}
 }
 \seealso{
-\code{\link{MT5.BidAskBook()}}
+\code{\link[=MT5.BidAskBook]{MT5.BidAskBook()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

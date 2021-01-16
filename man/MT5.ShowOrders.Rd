@@ -24,7 +24,7 @@ Returns \emph{Data.frame} \eqn{[nx7]}, with follow informations:
 }
 }
 \description{
-Show all active orders displayed on the "Trade" tab. For active positions use \code{MT5.ShowPositions()} instead.
+Show all active orders displayed on the "Trade" tab. For active positions use \code{\link[=MT5.ShowPositions]{MT5.ShowPositions()}} instead.
 }
 \examples{
 \dontrun{
@@ -43,7 +43,7 @@ MT5.ShowOrders()
 \url{https://www.mql5.com/en/articles/2513}
 }
 \seealso{
-\code{\link{MT5.ShowPositions()}}, \code{\link{MT5.DeleteOrder()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.SingleOrder()}}
+\code{\link[=MT5.ShowPositions]{MT5.ShowPositions()}}, \code{\link[=MT5.DeleteOrder]{MT5.DeleteOrder()}}, \code{\link[=MT5.ModifyOrder]{MT5.ModifyOrder()}}, \code{\link[=MT5.MultipleOrders]{MT5.MultipleOrders()}}, \code{\link[=MT5.SingleOrder]{MT5.SingleOrder()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

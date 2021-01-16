@@ -24,6 +24,8 @@ Returns \code{int} vector, with follow information:
 This function is useful to know what kind of asset target symbol is.
 
 It can be used for several symbols at once using a character vector.
+
+This function will automatically manage if the \code{sSymbol} is in marketwatch. Not advisable for huge vectorized uses, use a loop instead for safer handling.
 }
 \examples{
 \dontrun{

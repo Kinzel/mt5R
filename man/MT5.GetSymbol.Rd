@@ -46,7 +46,7 @@ It should be used only for reasonable table sizes.
 
 Even after stop this function on running or \code{iWait} ran out, mt5R running into MT5 will keep running to create the table. To a complete stop, proceed to kill both process. For very big sizes (\code{iDepth}) the user should be patient.
 
-\code{MT5.Quick_GetSymbol()} can be used instead for smaller tables, it not uses \code{csv}. Preliminary tests indicate to up 80x speed gain.
+\code{\link[=MT5.Quick_GetSymbol]{MT5.Quick_GetSymbol()}} can be used instead for smaller tables, it not uses \code{csv}. Preliminary tests indicate to up 80x speed gain.
 
 Supported time frames (\code{iTF}). See references for even more details.
 \itemize{
@@ -91,7 +91,7 @@ MT5.GetSymbol("EURUSD", 5, 3, xts = T)
 \url{https://www.mql5.com/en/docs/constants/chartconstants/enum_timeframes}
 }
 \seealso{
-\code{\link{MT5.Quick_GetSymbol()}}, \code{\link{MT5.QuickLastRow_GetSymbol()}}
+\code{\link[=MT5.Quick_GetSymbol]{MT5.Quick_GetSymbol()}}, \code{\link[=MT5.QuickLastRow_GetSymbol]{MT5.QuickLastRow_GetSymbol()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

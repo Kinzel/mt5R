@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Remove symbols in MT5's marketwatch — MT5.MarketwatchRemove" />
-<meta property="og:description" content="Remove symbols in MT5's marketwatch." />
+<meta property="og:description" content="Remove symbols in MT5's marketwatch.
+Any attempt to remove sSymbol that has any chart opened will fracass automatically by MT5." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mt5R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -136,6 +137,7 @@
 
     <div class="ref-description">
     <p>Remove symbols in MT5's marketwatch.</p>
+<p>Any attempt to remove <code>sSymbol</code> that has any chart opened will fracass automatically by MT5.</p>
     </div>
 
     <pre class="usage"><span class='fu'>MT5.MarketwatchRemove</span>(<span class='no'>sSymbols</span>)</pre>
@@ -154,7 +156,7 @@
     <p>Returns <em>logical()</em>. <code>TRUE</code> if symbol was successfully removed, <code>FALSE</code> otherwise.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='MT5.Marketwatch.html'>MT5.Marketwatch()</a></code>, <code><a href='MT5.MarketwatchAdd.html'>MT5.MarketwatchAdd()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='MT5.Marketwatch.html'>MT5.Marketwatch()</a></code>, <code><a href='MT5.MarketwatchAdd.html'>MT5.MarketwatchAdd()</a></code>, <code><a href='MT5.SymbolInMarketwatch.html'>MT5.SymbolInMarketwatch()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

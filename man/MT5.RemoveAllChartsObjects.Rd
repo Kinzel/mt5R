@@ -50,7 +50,7 @@ MT5.RemoveAllChartsObjects(iTF = 60)
 \url{https://www.mql5.com/en/docs/constants/chartconstants/enum_timeframes}
 }
 \seealso{
-\code{\link{MT5.DrawHorizontalLine()}}
+\code{\link[=MT5.DrawHorizontalLine]{MT5.DrawHorizontalLine()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

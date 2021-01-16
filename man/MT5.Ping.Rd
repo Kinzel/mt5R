@@ -21,7 +21,7 @@ It can be used to measure how long the response takes.
 For \code{bShowTime = TRUE}, is pretty common zero results. Check also ?proc.time
 }
 \seealso{
-\code{\link{MT5.ChangeDoorSocket()}}, \code{\link{MT5.Connect()}}
+\code{\link[=MT5.ChangeDoorSocket]{MT5.ChangeDoorSocket()}}, \code{\link[=MT5.Connect]{MT5.Connect()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

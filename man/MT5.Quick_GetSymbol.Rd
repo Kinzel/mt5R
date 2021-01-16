@@ -29,7 +29,7 @@ Function to load \code{sSymbol} in \code{Data.frame} or \code{xts} if specified.
 Data is loaded silently and will take longer as defined depth is.
 }
 \details{
-It should be used only for tiny table sizes. For big size tables consider to use \code{MT5.GetSymbol()} instead.
+It should be used only for tiny table sizes. For big size tables consider to use \code{\link[=MT5.GetSymbol]{MT5.GetSymbol()}} instead.
 
 Supported time frames (\code{iTF}). See references for even more details.
 \itemize{
@@ -74,7 +74,7 @@ MT5.Quick_GetSymbol("EURUSD", 5, 3, xts = T)
 \url{https://www.mql5.com/en/docs/constants/chartconstants/enum_timeframes}
 }
 \seealso{
-\code{\link{MT5.GetSymbol()}}, \code{\link{MT5.QuickLastRow_GetSymbol()}}
+\code{\link[=MT5.GetSymbol]{MT5.GetSymbol()}}, \code{\link[=MT5.QuickLastRow_GetSymbol]{MT5.QuickLastRow_GetSymbol()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

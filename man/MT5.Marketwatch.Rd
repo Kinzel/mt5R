@@ -13,7 +13,7 @@ Returns \emph{character()} of all symbols in MT5's marketwatch.
 List all symbols in MT5's marketwatch.
 }
 \seealso{
-\code{\link{MT5.MarketwatchAdd()}}, \code{\link{MT5.MarketwatchRemove()}}
+\code{\link[=MT5.MarketwatchAdd]{MT5.MarketwatchAdd()}}, \code{\link[=MT5.MarketwatchRemove]{MT5.MarketwatchRemove()}}, \code{\link[=MT5.SymbolInMarketwatch]{MT5.SymbolInMarketwatch()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

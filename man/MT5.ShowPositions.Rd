@@ -45,7 +45,7 @@ MT5.ShowPositions()
 \url{https://www.mql5.com/en/docs/constants/tradingconstants/positionproperties}
 }
 \seealso{
-\code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.ModifyPosition()}}
+\code{\link[=MT5.ShowOrders]{MT5.ShowOrders()}}, \code{\link[=MT5.ClosePosition]{MT5.ClosePosition()}}, \code{\link[=MT5.ModifyPosition]{MT5.ModifyPosition()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

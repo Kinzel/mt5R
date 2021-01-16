@@ -16,7 +16,7 @@ Returns \code{TRUE} if order was successful deleted, \code{FALSE} otherwise.
 Send a request to delete orders in MT5.
 }
 \details{
-For iTickers users can use \code{MT5.ShowOrders()} to obtain it.
+For iTickers users can use \code{\link[=MT5.ShowOrders]{MT5.ShowOrders()}} to obtain it.
 
 (STOCKS ONLY) WARNING - Poor written MT5's servers
 
@@ -26,7 +26,7 @@ The same error don't occurs in Modal (BR broker) server. In all cases, the order
 Use this function very carefully if you notice that the MT5's server broker was poor written.
 I already tried to fix into MQL code in every way. All forms to remove the order result in the same outcome.
 For who is experiencing this problem, take note that the mt5R plataform takes approximately 3 minutes to recover itself.
-Poor fix: the trader can use \code{MT5.ModifyOrder()} to change fPrice to unviable levels and waits to order expire.
+Poor fix: the trader can use \code{\link[=MT5.ModifyOrder]{MT5.ModifyOrder()}} to change fPrice to unviable levels and waits to order expire.
 }
 \examples{
 \dontrun{
@@ -36,7 +36,7 @@ MT5.DeleteOrder(832136429)
 }
 }
 \seealso{
-\code{\link{MT5.SingleOrder()}}, \code{\link{MT5.MultipleOrders()}}, \code{\link{MT5.ShowPositions()}}, \code{\link{MT5.ShowOrders()}}, \code{\link{MT5.ModifyOrder()}}, \code{\link{MT5.ClosePosition()}}, \code{\link{MT5.ModifyPosition()}}
+\code{\link[=MT5.SingleOrder]{MT5.SingleOrder()}}, \code{\link[=MT5.MultipleOrders]{MT5.MultipleOrders()}}, \code{\link[=MT5.ShowPositions]{MT5.ShowPositions()}}, \code{\link[=MT5.ShowOrders]{MT5.ShowOrders()}}, \code{\link[=MT5.ModifyOrder]{MT5.ModifyOrder()}}, \code{\link[=MT5.ClosePosition]{MT5.ClosePosition()}}, \code{\link[=MT5.ModifyPosition]{MT5.ModifyPosition()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

@@ -14,6 +14,8 @@ Returns \emph{logical()}. \code{TRUE} if symbol was successfully removed, \code{
 }
 \description{
 Remove symbols in MT5's marketwatch.
+
+Any attempt to remove \code{sSymbol} that has any chart opened will fracass automatically by MT5.
 }
 \examples{
 \dontrun{
@@ -23,7 +25,7 @@ MT5.MarketwatchAdd(c("XAUUSD","XAGUSD"))
 }
 }
 \seealso{
-\code{\link{MT5.Marketwatch()}}, \code{\link{MT5.MarketwatchAdd()}}
+\code{\link[=MT5.Marketwatch]{MT5.Marketwatch()}}, \code{\link[=MT5.MarketwatchAdd]{MT5.MarketwatchAdd()}}, \code{\link[=MT5.SymbolInMarketwatch]{MT5.SymbolInMarketwatch()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

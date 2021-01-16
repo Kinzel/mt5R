@@ -54,7 +54,7 @@ MT5.QuickLastRow_GetSymbol(c("EURUSD", "GBPUSD"), 30)
 \url{https://www.mql5.com/en/docs/constants/chartconstants/enum_timeframes}
 }
 \seealso{
-\code{\link{MT5.GetSymbol()}}, \code{\link{MT5.Quick_GetSymbol()}}
+\code{\link[=MT5.GetSymbol]{MT5.GetSymbol()}}, \code{\link[=MT5.Quick_GetSymbol]{MT5.Quick_GetSymbol()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

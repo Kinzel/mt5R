@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Account information — MT5.AccountInfo • mt5R</title>
+<title>Check mt5R version in R and MT5 — MT5.CheckVersion • mt5R</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Account information — MT5.AccountInfo" />
-<meta property="og:description" content="This function is useful for obtaining MT5's account information." />
+<meta property="og:title" content="Check mt5R version in R and MT5 — MT5.CheckVersion" />
+<meta property="og:description" content="This function is useful to verify both versions of mt5R. It is advisable to use the same version in R and MT5.
+In case of FALSE return consider to update your mt5R package or mt5R EA, check for warning messages in this case." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -129,51 +130,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Account information</h1>
+    <h1>Check mt5R version in R and MT5</h1>
     
-    <div class="hidden name"><code>MT5.AccountInfo.Rd</code></div>
+    <div class="hidden name"><code>MT5.CheckVersion.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function is useful for obtaining MT5's account information.</p>
+    <p>This function is useful to verify both versions of mt5R. It is advisable to use the same version in R and MT5.</p>
+<p>In case of <code>FALSE</code> return consider to update your mt5R package or mt5R EA, check for warning messages in this case.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>MT5.AccountInfo</span>()</pre>
+    <pre class="usage"><span class='fu'>MT5.CheckVersion</span>()</pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><em>Data.frame</em> \([1x11]\) is returned, with follow informations:</p><ul>
-<li><p>Company <code>{character}</code>: company name.</p></li>
-<li><p>Acc_server <code>{character}</code>: server name that your MT5 is connected to.</p></li>
-<li><p>Acc_number <code>{int}</code>: is the account login as well.</p></li>
-<li><p>Balance <code>{numeric}</code>: same used in MT5 Trade tab.</p></li>
-<li><p>Equity  <code>{numeric}</code>: is the sum of Balance and current Profit.</p></li>
-<li><p>Profit <code>{numeric}</code>: sum of all open profit/loss positions.</p></li>
-<li><p>Credit <code>{numeric}</code>: same used in MT5 Trade tab.</p></li>
-<li><p>Margin <code>{numeric}</code>: is the amount of money necessary to cover your possible losses during margin trading.</p></li>
-<li><p>Margin_Free <code>{numeric}</code>: is the amount availabe to open next trades. Free margin equals equity minus margin.</p></li>
-<li><p>Account_type <code>{int}</code>:
-<ul>
-<li><p>0: ACCOUNT_TRADE_MODE_REAL (real account)</p></li>
-<li><p>1: ACCOUNT_TRADE_MODE_DEMO (demo account)</p></li>
-<li><p>2: ACCOUNT_TRADE_MODE_CONTEST</p></li>
-</ul></p></li>
-<li><p>Margin_type <code>{int}</code>:
-<ul>
-<li><p>0: ACCOUNT_MARGIN_MODE_RETAIL_NETTING (Netting)</p></li>
-<li><p>1: ACCOUNT_MARGIN_MODE_EXCHANGE (Exchange)</p></li>
-<li><p>2: ACCOUNT_MARGIN_MODE_RETAIL_HEDGING (Hedging)</p></li>
-</ul></p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p><a href='https://www.mql5.com/en/docs/constants/environment_state/accountinformation'>https://www.mql5.com/en/docs/constants/environment_state/accountinformation</a></p>
-<p><a href='https://hercules.finance/faq/what-is-balance-equity-margin-and-free-margin-and-margin-call/'>https://hercules.finance/faq/what-is-balance-equity-margin-and-free-margin-and-margin-call/</a></p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='MT5.ShowPositions.html'>MT5.ShowPositions()</a></code>, <code><a href='MT5.ShowOrders.html'>MT5.ShowOrders()</a></code></p></div>
+    <p>Returns <code>TRUE</code> if MT5 and R have the same version of mt5R, <code>FALSE</code> otherwise.</p>
+<p>A warning message will be displayed in case of <code>FALSE</code> return.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

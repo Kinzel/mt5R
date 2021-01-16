@@ -81,7 +81,7 @@ Some Forex brokers take 200ms to accept orders into market, so take this time on
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mt5R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@ Some Forex brokers take 200ms to accept orders into market, so take this time on
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Take note that buy orders are rejected when order's stop loss are higher than order's price, and vice-versa for sell orders. This is a sanity check made by MT5, not by mt5R. Always check MT5's "Experts" tab for more details when an order is rejected.</p>
-<p><code>df_orders {data.frame}</code> \([nx7]\) columns should be on the same order and type of <code><a href='MT5.SingleOrder.html'>MT5.SingleOrder</a></code> arguments.</p><ul>
+<p><code>df_orders {data.frame}</code> \([nx7]\) columns should be on the same order and type of <a href='MT5.SingleOrder.html'>MT5.SingleOrder</a> arguments.</p><ul>
 <li><p>sSymbol <code>{character}</code>: symbol to send the order.</p></li>
 <li><p>iCmd <code>{int}</code>:
 <ul>

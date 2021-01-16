@@ -86,7 +86,7 @@ MT5.DrawHorizontalLine("EURUSD", 1.1772, iColor = 3)
 }
 }
 \seealso{
-\code{\link{MT5.RemoveAllChartsObjects()}},
+\code{\link[=MT5.RemoveAllChartsObjects]{MT5.RemoveAllChartsObjects()}}
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}
