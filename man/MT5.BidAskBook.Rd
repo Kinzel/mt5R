@@ -19,15 +19,17 @@ MT5.BidAskBook(sSymbol, iBidAsk = 0, iBookDepth = 5)
 \item fPrice \code{{numeric}}: price
 \item Volume \code{{int}}: bid/ask grouped by price
 }
+
+(Stocks market) If its returns a line with \code{fPrices = 0} the market is in auction. Check references.
+
+(Stocks market) In auctions this function cannot reflect the book properly.
 }
 \description{
 This function is for obtaining Bid or Ask order book with specified book depth.
 }
-\details{
-(Stocks) For open and closing auctions this function cannot reflect the book properly.
-}
 \references{
 \url{https://www.investopedia.com/terms/o/order-book.asp}
+\url{https://www.investopedia.com/terms/a/auctionmarket.asp}
 }
 \seealso{
 \code{\link[=MT5.BidAskSpread]{MT5.BidAskSpread()}}

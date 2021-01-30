@@ -13,7 +13,7 @@ MT5.Quick_GetSymbol(sSymbol, iTF, iRows = 5, xts = FALSE)
 
 \item{xts}{bool; if \code{xts = TRUE} the function will return a xts instead. See details.}
 
-\item{iDepth}{int; how many rows. It's start from last. (default: \code{5})}
+\item{iRow}{int; how many rows. It's start from last. (default: \code{5})}
 }
 \value{
 Always returns \code{OHCLV} format. Date will be exhibited as it \code{xts} parameter is defined.
@@ -22,11 +22,13 @@ Always returns \code{OHCLV} format. Date will be exhibited as it \code{xts} para
 \item{\code{xts = FALSE} (default)}{Returns \eqn{[nx10]} \code{{data.frame} {Year, Month, Day, Hour, Minute, Open, High, Low, Close, Volume}}}
 \item{\code{xts = TRUE}}{Returns \eqn{[nx5]}  \code{{xts} {Open, High, Low, Close, Volume}}}
 }
+
+On failure attempts it will return a empty \code{data.frame}.
 }
 \description{
 Function to load \code{sSymbol} in \code{Data.frame} or \code{xts} if specified. All the data come from socket. It's pretty quickly function to obtain data.
 
-Data is loaded silently and will take longer as defined depth is.
+Data is loaded silently and will take longer as defined \code{iRow} is.
 }
 \details{
 It should be used only for tiny table sizes. For big size tables consider to use \code{\link[=MT5.GetSymbol]{MT5.GetSymbol()}} instead.
@@ -58,7 +60,7 @@ MT5.Quick_GetSymbol("EURUSD", 5, 3)
 ## 2 2020    12  11    1     10 1.21408 1.21419 1.21404 1.21418     56
 ## 3 2020    12  11    1     15 1.21421 1.21421 1.21405 1.21408     63
 
-MT5.Quick_GetSymbol("EURUSD", 5, 3, xts = T)
+MT5.Quick_GetSymbol("EURUSD", 5, 3, xts = TRUE)
 
 ## Returns
 ##                        Open    High     Low   Close Volume

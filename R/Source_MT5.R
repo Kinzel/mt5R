@@ -41,7 +41,7 @@
 #' \url{https://hercules.finance/faq/what-is-balance-equity-margin-and-free-margin-and-margin-call/}
 MT5.AccountInfo <- function()
 {
-  sRequest <- utils::read.table(text = MT5.Connect("O0"), sep = "!", colClasses = c("character"))
+  sRequest <- utils::read.table(text = MT5.Connect("O0"), sep = "?", colClasses = c("character"))
   if(base::length(sRequest) == 11)
   {
     colnames(sRequest) <- c("Company", "Acc_server", "Acc_number", "Balance", "Equity", "Profit",
@@ -70,15 +70,17 @@ MT5.AccountInfo <- function()
 #'   \item Volume \code{{int}}: bid/ask grouped by price
 #' }
 #'
+#' (Stocks market) If its returns a line with \code{fPrices = 0} the market is in auction. Check references.
+#'
+#' (Stocks market) In auctions this function cannot reflect the book properly.
+#'
 #' @seealso
 #' [mt5R::MT5.BidAskSpread()]
-#'
-#' @details
-#' (Stocks) For open and closing auctions this function cannot reflect the book properly.
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 #' @references
 #' \url{https://www.investopedia.com/terms/o/order-book.asp}
+#' \url{https://www.investopedia.com/terms/a/auctionmarket.asp}
 MT5.BidAskBook <- function(sSymbol, iBidAsk = 0, iBookDepth = 5)
 {
   sSymbol <- as.character(sSymbol)
@@ -95,9 +97,9 @@ MT5.BidAskBook <- function(sSymbol, iBidAsk = 0, iBookDepth = 5)
 
   sRequest <- MT5.Connect(base::paste0("O4 ", paste(
     sSymbol, iBidAsk, iBookDepth,
-    sep = "!")))
+    sep = "?")))
 
-  sRequest <- utils::read.table(text = sRequest, sep = "!")
+  sRequest <- utils::read.table(text = sRequest, sep = "?")
   if(as.character(sRequest[1][[1]]) != "O4OK")
   {
     stop("Error: book was not accessible")
@@ -110,8 +112,10 @@ MT5.BidAskBook <- function(sSymbol, iBidAsk = 0, iBookDepth = 5)
   }
 
   sRequest <- sRequest[3:(base::length((sRequest))-1)]
-  return(data.frame(fPrice = as.numeric(sRequest[seq(1,base::length(sRequest),2)]),
-                    Volume = as.integer(sRequest[seq(2,base::length(sRequest),2)])))
+  df <- data.frame(fPrice = as.numeric(sRequest[seq(1,base::length(sRequest),2)]),
+                  Volume = as.integer(sRequest[seq(2,base::length(sRequest),2)]))
+  if(any(df$fPrice == 0))warning("This symbol can be in auction. \n Check ?MT5.BidAskBook");
+  return(df)
 }
 
 #' Order book Spread
@@ -153,7 +157,7 @@ MT5.BidAskSpread <- function(sSymbol)
 
   for(i in seq_len(base::length(sRequest)))
   {
-    Vet <- utils::read.table(text = sRequest[i], sep = "!", stringsAsFactors = F)
+    Vet <- utils::read.table(text = sRequest[i], sep = "?", stringsAsFactors = F)
 
     if(is.na(Vet[3][[1]]))
     {
@@ -170,7 +174,7 @@ MT5.BidAskSpread <- function(sSymbol)
     df_final$Spread <- df_final$fAsk - df_final$fBid
   }
 
-
+  if(df_final$Spread<0)warning("This symbol can be in auction. \n Check ?MT5.BidAskBook");
   return(df_final)
 }
 
@@ -308,7 +312,7 @@ MT5.Connect <- function(sReq, iPort = 23456, bMsg = FALSE, timeout = getOption("
   if(server_resp == "") return (NULL)
 
   ## Everything is fine, continue
-  sTexto <- utils::read.table(text = server_resp, sep = "@", skipNul = T)
+  sTexto <- utils::read.table(text = server_resp, sep = "@", skipNul = TRUE, quote= "", fill = TRUE)
   sTexto <- sTexto[!is.na(sTexto)]
   return(sTexto)
 }
@@ -444,7 +448,7 @@ MT5.DrawHorizontalLine <- function(sSymbol, fPrice, iWidth = 1, iColor = 1, sNam
 
   sRequest <- utils::read.table(text = MT5.Connect(base::paste0("C1 ", paste(
     sSymbol, sName, fPrice, iWidth, iColor, iTF,
-    sep = "!"))), sep = ";")
+    sep = "?"))), sep = ";")
 
   return(as.logical(unlist(sRequest) == "C1OK"))
 }
@@ -468,9 +472,9 @@ MT5.FileWorkingFolder <- function()
 #' @description
 #' Function to load \code{sSymbol} in \code{Data.frame} or \code{xts} if specified. It uses \code{csv} created by MT5 to manipulate the data, this function was created to manage reasonable size of data, for tiny sizes of data use \code{MT5.Quick_GetSymbol()} instead.
 #'
-#' The \code{csv} created can be used by other softwares, by \emph{default} is deleted after use.
+#' The \code{csv} created can be used by other softwares, by \emph{default} is deleted after use \code{bDeletecsv = TRUE}.
 #'
-#' Data is loaded silently and will take longer as defined depth is.
+#' Data is loaded silently and will take longer as defined \code{iRows} is.
 #'
 #' @param sSymbol character; target symbol.
 #' @param iTF int; target time frame. See details.
@@ -478,6 +482,7 @@ MT5.FileWorkingFolder <- function()
 #' @param xts bool; if \code{xts = TRUE} the function will return a xts instead. See details.
 #' @param iWait int; how long to wait for \code{csv} from MT5 (default \code{Inf})
 #' @param bDeletecsv bool; delete \code{csv} after use (default \code{TRUE})
+#' @param xts_tz character; time zone specification to be used when `xts = TRUE` (default \code{""})
 #'
 #' @return
 #' Always returns \code{OHCLV} format. Date will be exhibited as it \code{xts} parameter is defined.
@@ -487,10 +492,12 @@ MT5.FileWorkingFolder <- function()
 #'   \item{\code{xts = TRUE}}{Returns \eqn{[nx5]} \code{{xts} {Open, High, Low, Close, Volume}}}
 #' }
 #'
+#' On failure attempts it will return a empty \code{data.frame}.
+#'
 #' @details
 #' It should be used only for reasonable table sizes.
 #'
-#' Even after stop this function on running or \code{iWait} ran out, mt5R running into MT5 will keep running to create the table. To a complete stop, proceed to kill both process. For very big sizes (\code{iDepth}) the user should be patient.
+#' Even after stop this function on running or \code{iWait} ran out, mt5R running in MT5 will keep running to create the table. To a complete stop, proceed to kill both process. For very big sizes (\code{iRow}) the user should be patient.
 #'
 #' [mt5R::MT5.Quick_GetSymbol()] can be used instead for smaller tables, it not uses \code{csv}. Preliminary tests indicate to up 80x speed gain.
 #'
@@ -532,7 +539,7 @@ MT5.FileWorkingFolder <- function()
 #' ## 2 2020    12  11    1     10 1.21408 1.21419 1.21404 1.21418     56
 #' ## 3 2020    12  11    1     15 1.21421 1.21421 1.21405 1.21408     63
 #'
-#' MT5.GetSymbol("EURUSD", 5, 3, xts = T)
+#' MT5.GetSymbol("EURUSD", 5, 3, xts = TRUE)
 #'
 #' ## Returns
 #' ##                        Open    High     Low   Close Volume
@@ -541,12 +548,12 @@ MT5.FileWorkingFolder <- function()
 #' ## 2020-12-11 01:15:00 1.21421 1.21421 1.21405 1.21415     82
 #'
 #' }
-MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDeletecsv = T)
+MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDeletecsv = TRUE, xts_tz = "")
 {
-  sSymbol <- as.character(sSymbol)
+  stopifnot(is.character(sSymbol))
   iTF <- as.integer(iTF)
-  iRows <- as.integer(iRows)
 
+  if(iRows==Inf)iRows <- 999999999;
   iRows <- ifelse(iRows < 1, 1, iRows)
 
   MT5.Files <- MT5.FileWorkingFolder()
@@ -559,14 +566,17 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
 
   sRequest <- utils::read.table(text = MT5.Connect(base::paste0("M1 ", paste(
     sSymbol, iTF, iRows,
-    sep = "!")), timeout = 9999999), sep = "!", stringsAsFactors = F)
+    sep = "?")), timeout = 9999999), sep = "?", stringsAsFactors = F)
 
   if(sRequest[[1]] == "M1ERROR2")
   {
-    warning("Symbol was not found?")
+    warning(base::paste0(sSymbol, ": symbol was not found? \nCheck if symbol is in MT5's marketwatch. Check ?MT5.Marketwatch, ?MT5.SymbolInMarketwatch, ?MT5.MarketwatchAdd"))
     return(data.frame())
-  }
-  if(sRequest[[1]] != "M1OK") return(NULL);
+  }else if(sRequest[[1]] == "M1ERROR3")
+  {
+    warning(base::paste0(sSymbol, ": time frame not supported: ", iTF," \nCheck supported time frames ?MT5.GetSymbol"))
+    return(data.frame())
+  }else if(sRequest[[1]] != "M1OK") return(NULL);
 
   SFileDownloading <- base::paste0(MT5.Files, "PegandoDados.txt")
 
@@ -587,9 +597,18 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
   if(xts == TRUE)
   {
     Data_string <- base::paste0(Unprocessed_Table[,1],"/", Unprocessed_Table[,2],"/",Unprocessed_Table[,3], " ", Unprocessed_Table[,4],":", Unprocessed_Table[,5])
-    # require(xts)
-    Ativo.xts <- xts::xts(Unprocessed_Table[,c(6:10)], order.by = as.POSIXct(Data_string, format = "%Y/%m/%d %H:%M"))
-    return(Ativo.xts)
+    Dates <- as.POSIXct(Data_string, format = "%Y/%m/%d %H:%M", tz = xts_tz)
+
+    iDates_AnyNA <- which(is.na(Dates))
+    if(length(iDates_AnyNA)>0)
+    {
+      warning(paste0("Some dates were not been successfully converted. The following rows have been removed: \n", paste(Data_string[iDates_AnyNA], collapse = "\n"), "\nTry another xts_tz?"))
+      Symbol_xts <- xts::xts(Unprocessed_Table[-iDates_AnyNA, c(6:10)], order.by = Dates[-iDates_AnyNA])
+    }else{
+      Symbol_xts <- xts::xts(Unprocessed_Table[,c(6:10)], order.by = Dates)
+    }
+
+    return(Symbol_xts)
   }
 
   return(Unprocessed_Table)
@@ -600,11 +619,11 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
 #' @description
 #' Function to load \code{sSymbol} in \code{Data.frame} or \code{xts} if specified. All the data come from socket. It's pretty quickly function to obtain data.
 #'
-#' Data is loaded silently and will take longer as defined depth is.
+#' Data is loaded silently and will take longer as defined \code{iRow} is.
 #'
 #' @param sSymbol character; target symbol.
 #' @param iTF int; target time frame. See details.
-#' @param iDepth int; how many rows. It's start from last. (default: \code{5})
+#' @param iRow int; how many rows. It's start from last. (default: \code{5})
 #' @param xts bool; if \code{xts = TRUE} the function will return a xts instead. See details.
 #'
 #' @return
@@ -614,6 +633,8 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
 #'   \item{\code{xts = FALSE} (default)}{Returns \eqn{[nx10]} \code{{data.frame} {Year, Month, Day, Hour, Minute, Open, High, Low, Close, Volume}}}
 #'   \item{\code{xts = TRUE}}{Returns \eqn{[nx5]}  \code{{xts} {Open, High, Low, Close, Volume}}}
 #' }
+#'
+#' On failure attempts it will return a empty \code{data.frame}.
 #'
 #' @details
 #' It should be used only for tiny table sizes. For big size tables consider to use [mt5R::MT5.GetSymbol()] instead.
@@ -655,7 +676,7 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
 #' ## 2 2020    12  11    1     10 1.21408 1.21419 1.21404 1.21418     56
 #' ## 3 2020    12  11    1     15 1.21421 1.21421 1.21405 1.21408     63
 #'
-#' MT5.Quick_GetSymbol("EURUSD", 5, 3, xts = T)
+#' MT5.Quick_GetSymbol("EURUSD", 5, 3, xts = TRUE)
 #'
 #' ## Returns
 #' ##                        Open    High     Low   Close Volume
@@ -666,9 +687,9 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
 #' }
 MT5.Quick_GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE)
 {
-  sSymbol <- as.character(sSymbol)
-  iTF <- as.integer(iTF)
-  iRows <- as.integer(iRows)
+  # stopifnot(is.character(sSymbol))
+  # stopifnot(is.integer(iTF))
+  # stopifnot(is.integer(iRows))
 
   if(base::length(sSymbol) > 1)
   {
@@ -681,15 +702,19 @@ MT5.Quick_GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE)
 
   sRequest <- MT5.Connect(base::paste0("M4 ", paste(
     sSymbol, iTF, iRows,
-    sep = "!")))
+    sep = "?")))
 
-  sStringTable <- utils::read.table(text = sRequest, sep = "!", stringsAsFactors = F)
-
-  if(sStringTable[[1]] == "M4ERROR2")
+  if(sRequest[[1]] == "M4ERROR2")
   {
-    warning("Symbol was not found?")
+    warning(base::paste0(sSymbol, ": symbol was not found? \nCheck if symbol is in MT5's marketwatch. Check ?MT5.Marketwatch, ?MT5.SymbolInMarketwatch, ?MT5.MarketwatchAdd"))
+    return(data.frame())
+  }else if(sRequest[[1]] == "M4ERROR3")
+  {
+    warning(base::paste0(sSymbol, ": time frame not supported: ", iTF," \nCheck supported time frames ?MT5.Quick_GetSymbol"))
     return(data.frame())
   }
+
+  sStringTable <- utils::read.table(text = sRequest, sep = "?", stringsAsFactors = F)
 
   Unprocessed_Table <- do.call(rbind, lapply(sStringTable, function(x){utils::read.table(text = x, sep = " ", stringsAsFactors = F)}))
   names(Unprocessed_Table) <- c("Year", "Month", "Day", "Hour", "Minute", "Open", "High", "Low", "Close", "Volume")
@@ -697,7 +722,6 @@ MT5.Quick_GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE)
   if(xts == TRUE)
   {
     Data_string <- base::paste0(Unprocessed_Table[,1],"/", Unprocessed_Table[,2],"/",Unprocessed_Table[,3], " ", Unprocessed_Table[,4],":", Unprocessed_Table[,5])
-    # require(xts)
     Ativo.xts <- xts::xts(Unprocessed_Table[,c(6:10)], order.by = as.POSIXct(Data_string, format = "%Y/%m/%d %H:%M"))
     return(Ativo.xts)
   }
@@ -764,8 +788,19 @@ MT5.QuickLastRow_GetSymbol <- function(sSymbols, iTF)
 
   sNames <- c("Year", "Month", "Day", "Hour", "Minute", "Open", "High", "Low", "Close", "Volume")
 
-  sRequest <- MT5.Connect(base::paste0("M5 ",paste(paste(sSymbols, iTF, sep = "!"), collapse = "!")))
-  sStringTable <- read.table(text = sRequest, sep = "!", stringsAsFactors = F)
+  sRequest <- MT5.Connect(base::paste0("M5 ", paste(iTF, paste(sSymbols, collapse = "?"), sep = "?")))
+
+  if(sRequest[[1]] == "M5ERROR2")
+  {
+    warning(base::paste0(sSymbol, ": symbol was not found? \nCheck if symbol is in MT5's marketwatch. Check ?MT5.Marketwatch, ?MT5.SymbolInMarketwatch, ?MT5.MarketwatchAdd"))
+    return(data.frame())
+  }else if(sRequest[[1]] == "M5ERROR3")
+  {
+    warning(base::paste0(sSymbol, ": time frame not supported: ", iTF," \nCheck supported time frames ?MT5.QuickLastRow_GetSymbol"))
+    return(data.frame())
+  }
+
+  sStringTable <- read.table(text = sRequest, sep = "?", stringsAsFactors = F)
   sStringTable[which(is.na(sStringTable))] <- paste(rep(NA, length.out = 10), collapse = " ")
 
   Unprocessed_Table <- do.call(rbind, lapply(sStringTable, function(x){utils::read.table(text = x, sep = " ", stringsAsFactors = F)}))
@@ -784,7 +819,7 @@ MT5.QuickLastRow_GetSymbol <- function(sSymbols, iTF)
 #'
 #' Only works in stock brokers.
 #'
-#' @param sUnderlyingAsset character(); target underlying asset (e.g. PETR4 = PETR; BBDC4 = BBDC).
+#' @param sUnderlyingAsset character(); target underlying asset (e.g. for "PETR4" should be used "PETR").
 #' @param bUseDescriptionStrike bool; use strike given in symbol description. Some brokers do not adjust the prices following the dividends. Totally optional (experimental). (default \code{FALSE}).
 #' @param bAutomaticHelpUnderlying bool; it will try to help the user to only send the underlying asset to mt5R. It will convert "PETR4" to "PETR" automatically (default \code{TRUE}).
 #'
@@ -802,6 +837,8 @@ MT5.QuickLastRow_GetSymbol <- function(sSymbols, iTF)
 #' [mt5R::MT5.SymbolType()]
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
+#' @author Trader_Patinhas (original MT5 block of code), [MT5 Community Bio](https://www.mql5.com/pt/users/trader_patinhas)
+#'
 #'
 #' @references
 #' \url{https://en.wikipedia.org/wiki/Option_style}
@@ -816,7 +853,7 @@ MT5.QuickLastRow_GetSymbol <- function(sSymbols, iTF)
 #' MT5.ListOptions("USIM")
 #'
 #' }
-MT5.ListOptions <- function(sUnderlyingAsset, bUseDescriptionStrike = F, bAutomaticHelpUnderlying = T)
+MT5.ListOptions <- function(sUnderlyingAsset, bUseDescriptionStrike = FALSE, bAutomaticHelpUnderlying = TRUE)
 {
   if(!is.character(sUnderlyingAsset))
   {
@@ -834,7 +871,7 @@ MT5.ListOptions <- function(sUnderlyingAsset, bUseDescriptionStrike = F, bAutoma
 
   sUnderlyingAsset <- toupper(sUnderlyingAsset)
 
-  sTabel1 <- utils::read.table(text = utils::read.table(text = MT5.Connect(base::paste0("M2 ", sUnderlyingAsset)), sep = ";", stringsAsFactors = F)[[1]], sep = "!", stringsAsFactors = F)
+  sTabel1 <- utils::read.table(text = utils::read.table(text = MT5.Connect(base::paste0("M2 ", sUnderlyingAsset)), sep = ";", stringsAsFactors = F)[[1]], sep = "?", stringsAsFactors = F)
   sTabel1 <- sTabel1[!is.na(sTabel1)]
 
   if(length(sTabel1) == 1)
@@ -899,6 +936,19 @@ MT5.ListOptions <- function(sUnderlyingAsset, bUseDescriptionStrike = F, bAutoma
 MT5.MarketIsOpen <- function()
 {
   sRequest <- utils::read.table(text = MT5.Connect("P0"), sep = ";")
+
+  if (.Platform$OS.type == "windows")
+  {
+    ipmessage <- system("ipconfig", intern = TRUE)
+  }else{
+    pmessage <- system("ifconfig", intern = TRUE)
+  }
+
+  if(!(any(grep("((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)", ipmessage))))
+  {
+    warning("Connection to internet failed?")
+  }
+
   return(as.logical(unlist(sRequest) == "P0OK"))
 }
 
@@ -916,7 +966,7 @@ MT5.MarketIsOpen <- function()
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 MT5.Marketwatch <- function()
 {
-  sRequest <- utils::read.table(text = MT5.Connect("P1"), sep = "!", colClasses = c("character"))
+  sRequest <- utils::read.table(text = MT5.Connect("P1"), sep = "?", colClasses = c("character"))
   return(as.character(sRequest))
 }
 
@@ -945,7 +995,7 @@ MT5.MarketwatchAdd <- function(sSymbols)
 {
   sSymbols <- as.character(sSymbols)
   sTextToSent <- mt5R::SUP_MT5_StackRequests(sSymbols, "P3")
-  sRequest <- utils::read.table(text = MT5.Connect(sTextToSent), sep = "!", colClasses = c("character"))
+  sRequest <- utils::read.table(text = MT5.Connect(sTextToSent), sep = "?", colClasses = c("character"))
   return(as.logical(unlist(sRequest) == "P3OK"))
 }
 
@@ -976,7 +1026,7 @@ MT5.MarketwatchRemove <- function(sSymbols)
 {
   sSymbols <- as.character(sSymbols)
   sTextToSent <- mt5R::SUP_MT5_StackRequests(sSymbols, "P2")
-  sRequest <- utils::read.table(text = MT5.Connect(sTextToSent), sep = "!", colClasses = c("character"))
+  sRequest <- utils::read.table(text = MT5.Connect(sTextToSent), sep = "?", colClasses = c("character"))
   return(as.logical(unlist(sRequest) == "P2OK"))
 }
 
@@ -998,7 +1048,7 @@ MT5.SymbolInMarketwatch <- function(sSymbol)
 {
   stopifnot(is.character(sSymbol))
   if(length(sSymbol)>1)warning("This function is only for one symbol. Using the first one!");
-  sRequest <- utils::read.table(text = MT5.Connect(base::paste0("P5 ", sSymbol[1])), sep = "!", colClasses = c("character"))
+  sRequest <- utils::read.table(text = MT5.Connect(base::paste0("P5 ", sSymbol[1])), sep = "?", colClasses = c("character"))
   return(as.logical(as.character(sRequest)=="P5OK1"))
 }
 
@@ -1086,7 +1136,7 @@ MT5.ModifyOrder <- function(iTicket = 0, fPrice = 0, fStop = 0, fGain = 0, ...)
 
     sRequest <- MT5.Connect(base::paste0("O6 ", paste(
       iTicket, fPrice, fStop, fGain,
-      sep = "!")))
+      sep = "?")))
     return(as.logical(unlist(sRequest) == "O6OK"))
   }
 
@@ -1094,9 +1144,9 @@ MT5.ModifyOrder <- function(iTicket = 0, fPrice = 0, fStop = 0, fGain = 0, ...)
   for(i in 1:base::dim(df_request)[1])
   {
 
-    sOrder <- base::paste0("O6 ", as.character(df_request$iTicket[i]), "!",
-                     ifelse(is.null(df_request[i,]$fPrice), 0, as.numeric(df_request[i,]$fPrice)), "!",
-                     ifelse(is.null(df_request[i,]$fStop), 0, as.numeric(df_request[i,]$fStop)), "!",
+    sOrder <- base::paste0("O6 ", as.character(df_request$iTicket[i]), "?",
+                     ifelse(is.null(df_request[i,]$fPrice), 0, as.numeric(df_request[i,]$fPrice)), "?",
+                     ifelse(is.null(df_request[i,]$fStop), 0, as.numeric(df_request[i,]$fStop)), "?",
                      ifelse(is.null(df_request[i,]$fGain), 0, as.numeric(df_request[i,]$fGain)))
     if(i == 1)
     {
@@ -1184,15 +1234,15 @@ MT5.ModifyPosition <- function(iTicket = 0, fStop = 0, fGain = 0, ...)
 
     sRequest <- MT5.Connect(base::paste0("O8 ", paste(
       iTicket, fStop, fGain,
-      sep = "!")))
+      sep = "?")))
     return(as.logical(unlist(sRequest) == "O8OK"))
   }
 
   sTextToSend <- as.character()
   for(i in 1:base::dim(df_request)[1])
   {
-    sOrder <- base::paste0("O8 ", as.character(df_request$iTicket[i]), "!",
-                     ifelse(is.null(df_request[i,]$fStop), 0, as.numeric(df_request[i,]$fStop)), "!",
+    sOrder <- base::paste0("O8 ", as.character(df_request$iTicket[i]), "?",
+                     ifelse(is.null(df_request[i,]$fStop), 0, as.numeric(df_request[i,]$fStop)), "?",
                      ifelse(is.null(df_request[i,]$fGain), 0, as.numeric(df_request[i,]$fGain)))
     if(i == 1)
     {
@@ -1296,9 +1346,9 @@ MT5.MultipleOrders <- function(df_orders)
     fGain <- as.numeric(df_orders[i,6])
     iFill <- ifelse(fPrice == 0, 1, as.integer(df_orders[i,7]))
 
-    sOrder <- base::paste0("O1 ", sSymbol, "!", iCmd, "!",
-                     fVol, "!", fPrice, "!",
-                     fStop, "!", fGain, "!",
+    sOrder <- base::paste0("O1 ", sSymbol, "?", iCmd, "?",
+                     fVol, "?", fPrice, "?",
+                     fStop, "?", fGain, "?",
                      ifelse(fPrice == 0, 1, iFill))
     if(i == 1)
     {
@@ -1405,7 +1455,7 @@ MT5.RemoveAllChartsObjects <- function(sSymbol = "0", iTF = 0)
 
   sRequest <- utils::read.table(text = MT5.Connect(base::paste0("C2 ", paste(
     sSymbol, iTF,
-    sep = "!"))), sep = ";")
+    sep = "?"))), sep = ";")
   return(as.logical(unlist(sRequest) == "C2OK"))
 }
 
@@ -1467,7 +1517,7 @@ MT5.ShowOrders <- function()
 
   for(i in seq_len(base::length(sRequest)))
   {
-    Linha <- utils::read.table(text = sRequest[i], sep = "!")
+    Linha <- utils::read.table(text = sRequest[i], sep = "?")
     df <- data.frame(sSymbol = as.character(Linha[2][[1]]), iType  = as.integer(Linha[3][[1]]), fVolume = as.numeric(Linha[4][[1]]),
                      fPrice = as.numeric(Linha[5][[1]]), fStop = as.numeric(Linha[6][[1]]) , fGain = as.numeric(Linha[7][[1]]),
                      iTicket = as.integer(Linha[1][[1]]))
@@ -1548,7 +1598,7 @@ MT5.ShowPositions <- function()
   }
   for(i in seq_len(base::length(sRequest)))
   {
-    Linha <- utils::read.table(text = sRequest[i], sep = "!")
+    Linha <- utils::read.table(text = sRequest[i], sep = "?")
     df <- data.frame(sSymbol = as.character(Linha[2][[1]]), iCmd = as.integer(Linha[3][[1]]), fVolume = as.numeric(Linha[4][[1]]),
                      fPrice= as.numeric(Linha[5][[1]]), fStop = as.numeric(Linha[6][[1]]), fGain = as.numeric(Linha[7][[1]]),
                      fProfit = as.numeric(Linha[8][[1]]), iTicket = as.integer(Linha[1][[1]]))
@@ -1644,7 +1694,7 @@ MT5.SingleOrder <- function(sSymbol, iCmd, fVol, fPrice = 0, fStop = 0, fGain = 
 
   sRequest <- utils::read.table(text = MT5.Connect(base::paste0("O1 ", paste(
     sSymbol, iCmd, fVol, fPrice, fStop, fGain, iFillType,
-    sep = "!"))), sep = ";")
+    sep = "?"))), sep = ";")
 
   if(as.character(sRequest[1][[1]]) == "O1ERROR")
   {
@@ -1712,7 +1762,7 @@ MT5.SymbolType <- function(sSymbol)
 
   sTextToSent <- SUP_MT5_StackRequests(sSymbol, "M3")
   sRecived <- utils::read.table(text = MT5.Connect(sTextToSent), sep = ";", colClasses = c("character"))
-  df_temp <- as.data.frame(lapply(sRecived, function(x) utils::read.table(text = x, sep = "!")), stringsAsFactors = F)
+  df_temp <- as.data.frame(lapply(sRecived, function(x) utils::read.table(text = x, sep = "?")), stringsAsFactors = F)
   names(df_temp) <- c("Name", "Type")
 
   if(length(sSymbolsNotInMW)>0)MT5.MarketwatchRemove(sSymbolsNotInMW);
@@ -1737,7 +1787,7 @@ MT5.CheckVersion <- function()
 {
   sRecived <- utils::read.table(text = MT5.Connect("S3"), sep = ";", colClasses = c("character"))
   sVersion_MT5 <- as.character(sRecived)
-  sVersion_R <- packageVersion("mt5R")
+  sVersion_R <- utils::packageVersion("mt5R")
 
   if(sVersion_MT5 == sVersion_R)
   {
@@ -1770,7 +1820,63 @@ MT5.CheckVersion <- function()
 #' }
 MT5.AllSymbols <- function()
 {
-  return(as.character(read.table(text = do.call(paste, c(as.list(MT5.Connect("P4")), sep = "")), sep ="!")))
+  sReq <- MT5.Connect("P4")
+  return(as.character(utils::read.table(text = sReq, sep = "?", skipNul = TRUE, quote="", fill = TRUE)))
+}
+
+#' Expiration symbol date
+#'
+#' @description
+#' Obtain expiration date of target \code{sSymbol}.
+#'
+#' @param sSymbol character; target symbol.
+#'
+#' @return
+#' Returns \code{Date} if symbol has date of expiration, \code{NA} otherwise.
+#'
+#' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
+MT5.SymbolExpiration <- function(sSymbol)
+{
+  stopifnot(is.character(sSymbol))
+  sRecived <- MT5.Connect(paste("M6", sSymbol))
+
+  if(sRecived[[1]] == "M6ERROR")
+  {
+    stop(base::paste0(sSymbol, ": symbol was not found? \nCheck if symbol is in MT5's marketwatch. Check ?MT5.Marketwatch, ?MT5.SymbolInMarketwatch, ?MT5.MarketwatchAdd"))
+  }
+
+  if(sRecived == "0")return(NA);
+  return(base::as.Date(sRecived, format = "%Y.%m.%d"))
+}
+
+#' MT5 server time
+#'
+#' @description
+#' Obtain MT5 server time.
+#'
+#' @return
+#' Returns \code{POSIXct} date-time of MT5 server time. It may **not** be local machine time.
+#'
+#' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
+#' @export
+#' @examples
+#' \dontrun{
+#'
+#' dtServerTime <- MT5.ServerTime()
+#'
+#' ## Extract hour
+#' strftime(dtServerTime,format="%H")
+#'
+#' ## Extract day
+#' strftime(dtServerTime,format="%d")
+#'
+#' }
+MT5.ServerTime <- function()
+{
+  sRecived <- utils::read.table(text = MT5.Connect("M7"), sep = "?")
+  return(base::ISOdatetime(sRecived[1], sRecived[2], sRecived[3], sRecived[4], sRecived[5], sRecived[6]))
+  if(sRecived == "0")return(NA);
+  return(base::as.Date(sRecived, format = "%Y.%m.%d"))
 }
 
 #' Exemple function
@@ -1778,20 +1884,20 @@ MT5.AllSymbols <- function()
 #' @description
 #' Example function to help other to create their own functions.
 #'
-#' Note that we use "!" to subdivide the request.
+#' Note that we use "?" to subdivide the request.
 #'
 #' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
 MT5.zExample <- function()
 {
   ## Which command we will send
-  sTextToSent <- "Z1 Hello!World"
+  sTextToSent <- "Z1 Hello?World"
 
   ## We will send the request above and we will recive back
   sTextRecived <- MT5.Connect(sTextToSent)
   ## [1] "Hello!To!You!Too"
 
   ## Now we can manipulate the text recived
-  sTextRecived_Transformed <- utils::read.table(text = sTextRecived, sep = "!", colClasses = c("character"))
+  sTextRecived_Transformed <- utils::read.table(text = sTextRecived, sep = "?", colClasses = c("character"))
   #      V1 V2  V3  V4
   # 1 Hello To You Too
 

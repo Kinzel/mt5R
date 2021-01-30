@@ -34,3 +34,4 @@ vignettes/*.pdf
 *.bak
 *.orig
 inst/doc
+docs

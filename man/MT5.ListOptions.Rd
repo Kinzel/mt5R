@@ -6,12 +6,12 @@
 \usage{
 MT5.ListOptions(
   sUnderlyingAsset,
-  bUseDescriptionStrike = F,
-  bAutomaticHelpUnderlying = T
+  bUseDescriptionStrike = FALSE,
+  bAutomaticHelpUnderlying = TRUE
 )
 }
 \arguments{
-\item{sUnderlyingAsset}{character(); target underlying asset (e.g. PETR4 = PETR; BBDC4 = BBDC).}
+\item{sUnderlyingAsset}{character(); target underlying asset (e.g. for "PETR4" should be used "PETR").}
 
 \item{bUseDescriptionStrike}{bool; use strike given in symbol description. Some brokers do not adjust the prices following the dividends. Totally optional (experimental). (default \code{FALSE}).}
 
@@ -52,4 +52,6 @@ MT5.ListOptions("USIM")
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}
+
+Trader_Patinhas (original MT5 block of code), \href{https://www.mql5.com/pt/users/trader_patinhas}{MT5 Community Bio}
 }

@@ -9,7 +9,7 @@ MT5.zExample()
 \description{
 Example function to help other to create their own functions.
 
-Note that we use "!" to subdivide the request.
+Note that we use "?" to subdivide the request.
 }
 \author{
 Guilherme Kinzel, \email{guikinzel@gmail.com}

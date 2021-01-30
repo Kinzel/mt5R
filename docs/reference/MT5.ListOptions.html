@@ -81,7 +81,7 @@ Only works in stock brokers." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mt5R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -142,8 +142,8 @@ Only works in stock brokers." />
 
     <pre class="usage"><span class='fu'>MT5.ListOptions</span>(
   <span class='no'>sUnderlyingAsset</span>,
-  <span class='kw'>bUseDescriptionStrike</span> <span class='kw'>=</span> <span class='no'>F</span>,
-  <span class='kw'>bAutomaticHelpUnderlying</span> <span class='kw'>=</span> <span class='no'>T</span>
+  <span class='kw'>bUseDescriptionStrike</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>bAutomaticHelpUnderlying</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -151,7 +151,7 @@ Only works in stock brokers." />
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>sUnderlyingAsset</th>
-      <td><p>character(); target underlying asset (e.g. PETR4 = PETR; BBDC4 = BBDC).</p></td>
+      <td><p>character(); target underlying asset (e.g. for "PETR4" should be used "PETR").</p></td>
     </tr>
     <tr>
       <th>bUseDescriptionStrike</th>

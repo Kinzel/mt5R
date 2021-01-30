@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">mt5R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p><a href="https://kinzel.github.io/mt5R/">mt5R</a> is an <a href="https://www.r-project.org">R</a> package that provides a framework for MT5 users that want to achieve Machine Learning analysis and trading. It provides easy integration with socket connection to reach maximum performance.</p>
-<p>Package has 31 functions (check <a href="https://kinzel.github.io/mt5R/reference/index.html"><strong>Reference</strong></a> tab):</p>
+<p>Package has 33 functions (check <a href="https://kinzel.github.io/mt5R/reference/index.html"><strong>Reference</strong></a> tab):</p>
 <table class="table">
 <thead><tr class="header">
 <th>Purpose</th>
@@ -111,7 +111,7 @@
 </tr>
 <tr class="odd">
 <td>Others</td>
-<td>11</td>
+<td>13</td>
 </tr>
 </tbody>
 </table>
@@ -122,20 +122,20 @@
 <p>This is a basic example to load <code>EURUSD</code> data, using time frame of 5 minutes <code>iTF = 5</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="reference/MT5.GetSymbol.html">MT5.GetSymbol</a></span>(<span class="st">"EURUSD"</span>, <span class="kw">iTF</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">iRows</span> <span class="kw">=</span> <span class="fl">5</span>)
 <span class="co">#&gt;   Year Month Day Hour Minute    Open    High     Low   Close Volume</span>
-<span class="co">#&gt; 1 2021     1  15   23     35 1.20754 1.20762 1.20751 1.20755     86</span>
-<span class="co">#&gt; 2 2021     1  15   23     40 1.20754 1.20768 1.20753 1.20765     71</span>
-<span class="co">#&gt; 3 2021     1  15   23     45 1.20767 1.20768 1.20741 1.20743     83</span>
-<span class="co">#&gt; 4 2021     1  15   23     50 1.20744 1.20767 1.20741 1.20763    144</span>
-<span class="co">#&gt; 5 2021     1  15   23     55 1.20763 1.20764 1.20736 1.20741    154</span>
+<span class="co">#&gt; 1 2021     1  29   23     35 1.21329 1.21330 1.21302 1.21330    161</span>
+<span class="co">#&gt; 2 2021     1  29   23     40 1.21329 1.21329 1.21300 1.21306    162</span>
+<span class="co">#&gt; 3 2021     1  29   23     45 1.21305 1.21324 1.21300 1.21322    203</span>
+<span class="co">#&gt; 4 2021     1  29   23     50 1.21322 1.21346 1.21322 1.21346    240</span>
+<span class="co">#&gt; 5 2021     1  29   23     55 1.21347 1.21371 1.21343 1.21358    288</span>
 
 <span class="co">## Using xts package</span>
 <span class="fu"><a href="reference/MT5.GetSymbol.html">MT5.GetSymbol</a></span>(<span class="st">"EURUSD"</span>, <span class="kw">iTF</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">iRows</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">xts</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="co">#&gt;                        Open    High     Low   Close Volume</span>
-<span class="co">#&gt; 2021-01-15 23:35:00 1.20754 1.20762 1.20751 1.20755     86</span>
-<span class="co">#&gt; 2021-01-15 23:40:00 1.20754 1.20768 1.20753 1.20765     71</span>
-<span class="co">#&gt; 2021-01-15 23:45:00 1.20767 1.20768 1.20741 1.20743     83</span>
-<span class="co">#&gt; 2021-01-15 23:50:00 1.20744 1.20767 1.20741 1.20763    144</span>
-<span class="co">#&gt; 2021-01-15 23:55:00 1.20763 1.20764 1.20736 1.20741    154</span></pre></div>
+<span class="co">#&gt; 2021-01-29 23:35:00 1.21329 1.21330 1.21302 1.21330    161</span>
+<span class="co">#&gt; 2021-01-29 23:40:00 1.21329 1.21329 1.21300 1.21306    162</span>
+<span class="co">#&gt; 2021-01-29 23:45:00 1.21305 1.21324 1.21300 1.21322    203</span>
+<span class="co">#&gt; 2021-01-29 23:50:00 1.21322 1.21346 1.21322 1.21346    240</span>
+<span class="co">#&gt; 2021-01-29 23:55:00 1.21347 1.21371 1.21343 1.21358    288</span></pre></div>
 <p>Plot <code>MT5.GetSymbol</code> output using <a href="https://CRAN.R-project.org/package=quantmod">quantmod</a> package:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">quantmod</span>)
 <span class="no">Table</span> <span class="kw">=</span> <span class="fu"><a href="reference/MT5.GetSymbol.html">MT5.GetSymbol</a></span>(<span class="st">"EURUSD"</span>, <span class="kw">iTF</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">xts</span> <span class="kw">=</span> <span class="no">T</span>)
@@ -148,8 +148,9 @@
 <div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="reference/MT5.SingleOrder.html">MT5.SingleOrder</a></span>(<span class="st">"EURUSD"</span>, <span class="kw">iCmd</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">fVol</span> <span class="kw">=</span> <span class="fl">0.001</span>, <span class="kw">fPrice</span> <span class="kw">=</span> <span class="fl">1.2206</span>)</pre></div>
 <p>Check open positions:</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/MT5.ShowPositions.html">MT5.ShowPositions</a></span>()
-<span class="co">#&gt;        sSymbol iCmd fVolume fPrice fStop fGain fProfit iTicket</span>
-<span class="co">#&gt; 1 Sugar - Cash    1       3 1519.8     0     0  -235.5  776012</span></pre></div>
+<span class="co">#&gt;        sSymbol iCmd fVolume  fPrice fStop fGain fProfit iTicket</span>
+<span class="co">#&gt; 1      Bitcoin    0       1 36290.3     0     0 -1661.3  784660</span>
+<span class="co">#&gt; 2 Sugar - Cash    1       3  1519.8     0     0   -33.3  776012</span></pre></div>
 <p>Looking for more examples? Good! Check <a href="https://kinzel.github.io/mt5R/articles/"><strong>Articles</strong></a> tab for more simple examples.</p>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
@@ -178,28 +179,28 @@
 <li>
 <code>.mq5</code>: for developers.</li>
 </ul>
-<p>For <em>“Plug and play”</em> version <code>.ex5</code> (<code>mt5R v0_1_2.ex5</code>)</p>
+<p>For <em>“Plug and play”</em> version <code>.ex5</code> (<code>mt5R v0_1_3.ex5</code>)</p>
 <ol>
 <li>
-<a href="https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_2.ex5">Download <code>mt5R v0_1_2.ex5</code></a>.</li>
-<li>Move <code>mt5R v0_1_2.ex5</code> to <code>...\MQL5\experts\</code> folder. To check where MT5’s folders, open MT5 and <code>Tools &gt; Options &gt; Storage</code>.</li>
+<a href="https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_3.ex5">Download <code>mt5R v0_1_3.ex5</code></a>.</li>
+<li>Move <code>mt5R v0_1_3.ex5</code> to <code>...\MQL5\experts\</code> folder. To check where MT5’s folders, open MT5 and <code>Tools &gt; Options &gt; Storage</code>.</li>
 </ol>
 <p>And you’re ready to go!</p>
 <hr>
 <p>(If you’re not a developer, go ahed to <strong>Getting Started</strong>)</p>
-<p><strong>Alternatively</strong>, for MQL developers you can also download the <code>.mq5</code> code used to generate <code>mt5R v0_1_2.ex5</code>. Both are exactly the same code, it’s the no compiled version. This is the choice recommend for who want to tailor their own solutions and functions.</p>
+<p><strong>Alternatively</strong>, for MQL developers you can also download the <code>.mq5</code> code used to generate <code>mt5R v0_1_3.ex5</code>. Both are exactly the same code, it’s the no compiled version. This is the choice recommend for who want to tailor their own solutions and functions.</p>
 <ul>
-<li>For non compiled version <code>.mq5</code> (<code>mt5R v0_1_2.mq5</code>) - The most suitable for developers.
+<li>For non compiled version <code>.mq5</code> (<code>mt5R v0_1_3.mq5</code>) - The most suitable for developers.
 <ul>
 <li>
 <a href="https://www.mql5.com/en/blogs/post/706665">Download socket library: socket-library-mt4-mt5.mqh</a> or (<a href="https://c.mql5.com/6/865/socket-library-mt4-mt5.mqh">Direct Link</a>).</li>
 <li>Move <code>socket-library-mt4-mt5.mqh</code> to <code>...\MQL5\include\</code> folder.</li>
 <li>
-<a href="https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_2.mq5">Download <code>mt5R v0_1_2.mq5</code></a>.</li>
-<li>Move <code>mt5R v0_1_2.mq5</code> code to <code>...\MQL5\experts\</code> folder.</li>
+<a href="https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_3.mq5">Download <code>mt5R v0_1_3.mq5</code></a>.</li>
+<li>Move <code>mt5R v0_1_3.mq5</code> code to <code>...\MQL5\experts\</code> folder.</li>
 <li>Open MetaEditor (F4).</li>
-<li>Compile <code>mt5R v0_1_2.mq5</code>.</li>
-<li>If everything run smooth an executable program file <code>mt5R v0_1_2.ex5</code> (or the name you chose) will be generated.</li>
+<li>Compile <code>mt5R v0_1_3.mq5</code>.</li>
+<li>If everything run smooth an executable program file <code>mt5R v0_1_3.ex5</code> (or the name you chose) will be generated.</li>
 </ul>
 </li>
 </ul>
@@ -209,7 +210,7 @@
 <div id="getting-started" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h3>
-<p>Attach <code>mt5R v0_1_2.ex5</code> to any chart opened in your MT5, like any other Expert Advisor.</p>
+<p>Attach <code>mt5R v0_1_3.ex5</code> to any chart opened in your MT5, like any other Expert Advisor.</p>
 <p><img src="reference/figures/attach.png"></p>
 <p>Check your “Expert” tab to this message:</p>
 <p><img src="reference/figures/workingmt5.png"></p>
@@ -223,7 +224,7 @@
 <div id="creating-your-own-functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#creating-your-own-functions" class="anchor"></a>Creating your own functions</h3>
-<p>The most awesome part of MT5 is make reliable to create your owns solutions and functions. The cookbook is still under construction, but you can start checking functions <code>MT5.zExample</code> in mt5R package and <code>Z1</code> order in <code>mt5R v0_1_2.mq5</code>. Its pretty easy!</p>
+<p>The most awesome part of MT5 is make reliable to create your owns solutions and functions. The cookbook is still under construction, but you can start checking functions <code>MT5.zExample</code> in mt5R package and <code>Z1</code> order in <code>mt5R v0_1_3.mq5</code>. Its pretty easy!</p>
 <div class="sourceCode" id="cb7"><pre class="r"><span class="co">## Execute the function without () to see its code</span>
 <span class="kw pkg">mt5R</span><span class="kw ns">::</span><span class="no"><a href="reference/MT5.zExample.html">MT5.zExample</a></span></pre></div>
 </div>

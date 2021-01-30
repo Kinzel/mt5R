@@ -10,7 +10,8 @@ MT5.GetSymbol(
   iRows = 5,
   xts = FALSE,
   iWait = Inf,
-  bDeletecsv = T
+  bDeletecsv = TRUE,
+  xts_tz = ""
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ MT5.GetSymbol(
 \item{iWait}{int; how long to wait for \code{csv} from MT5 (default \code{Inf})}
 
 \item{bDeletecsv}{bool; delete \code{csv} after use (default \code{TRUE})}
+
+\item{xts_tz}{character; time zone specification to be used when \code{xts = TRUE} (default \code{""})}
 }
 \value{
 Always returns \code{OHCLV} format. Date will be exhibited as it \code{xts} parameter is defined.
@@ -33,18 +36,20 @@ Always returns \code{OHCLV} format. Date will be exhibited as it \code{xts} para
 \item{\code{xts = FALSE} (default)}{Returns \eqn{[nx10]} \code{{data.frame} {Year, Month, Day, Hour, Minute, Open, High, Low, Close, Volume}}}
 \item{\code{xts = TRUE}}{Returns \eqn{[nx5]} \code{{xts} {Open, High, Low, Close, Volume}}}
 }
+
+On failure attempts it will return a empty \code{data.frame}.
 }
 \description{
 Function to load \code{sSymbol} in \code{Data.frame} or \code{xts} if specified. It uses \code{csv} created by MT5 to manipulate the data, this function was created to manage reasonable size of data, for tiny sizes of data use \code{MT5.Quick_GetSymbol()} instead.
 
-The \code{csv} created can be used by other softwares, by \emph{default} is deleted after use.
+The \code{csv} created can be used by other softwares, by \emph{default} is deleted after use \code{bDeletecsv = TRUE}.
 
-Data is loaded silently and will take longer as defined depth is.
+Data is loaded silently and will take longer as defined \code{iRows} is.
 }
 \details{
 It should be used only for reasonable table sizes.
 
-Even after stop this function on running or \code{iWait} ran out, mt5R running into MT5 will keep running to create the table. To a complete stop, proceed to kill both process. For very big sizes (\code{iDepth}) the user should be patient.
+Even after stop this function on running or \code{iWait} ran out, mt5R running in MT5 will keep running to create the table. To a complete stop, proceed to kill both process. For very big sizes (\code{iRow}) the user should be patient.
 
 \code{\link[=MT5.Quick_GetSymbol]{MT5.Quick_GetSymbol()}} can be used instead for smaller tables, it not uses \code{csv}. Preliminary tests indicate to up 80x speed gain.
 
@@ -75,7 +80,7 @@ MT5.GetSymbol("EURUSD", 5, 3)
 ## 2 2020    12  11    1     10 1.21408 1.21419 1.21404 1.21418     56
 ## 3 2020    12  11    1     15 1.21421 1.21421 1.21405 1.21408     63
 
-MT5.GetSymbol("EURUSD", 5, 3, xts = T)
+MT5.GetSymbol("EURUSD", 5, 3, xts = TRUE)
 
 ## Returns
 ##                        Open    High     Low   Close Volume
