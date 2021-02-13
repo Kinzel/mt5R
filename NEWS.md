@@ -1,7 +1,13 @@
-mt5R v0.1.3 (Release date: 2021-01-30)
+mt5R v0.1.4 (Release date: 2021-02-13)
 ==============
 
-Changes:
+* Added `MT5.GetTimesSales()`.
+* Fixed `MT5.AllSymbols()`. Some brokers was returning error message.
+* Fixed `MT5.Quick_GetSymbol()`. The function was returning error if rows requested are bigger than the table available in MT5. It was happening more frequently in very recently IPO companies.
+* Added EURUSD_Data example in **Articles** tab.
+
+mt5R v0.1.3 (Release date: 2021-01-30)
+==============
 
 * Added `MT5.SymbolExpiration()`.
 * Added `MT5.ServerTime()`.
@@ -16,8 +22,6 @@ Changes:
 
 mt5R v0.1.2 (Release date: 2021-01-16)
 ==============
-
-Changes:
 
 * Added `MT5.SymbolInMarketwatch()`.
 * Added `MT5.CheckVersion()`.
@@ -38,8 +42,6 @@ Some functions were updated to newer `unlist()` of latest versions of R. All fun
 
 mt5R v0.1.1 (Release date: 2021-01-08)
 ==============
-
-Changes:
 
 * Added `MT5.AllSymbols()`.
 

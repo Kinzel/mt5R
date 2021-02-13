@@ -242,6 +242,7 @@ MT5.ChangeDoorSocket <- function(iDoor = NULL)
 #' }
 MT5.ClosePosition <- function(iTickers)
 {
+  if(length(iTickers)<1)stop("Error: iTickers length not positive?");
   iTickers <- as.integer(iTickers)
   sTextToSend <- mt5R::SUP_MT5_StackRequests(iTickers, "O9")
   sRequest <- utils::read.table(text = MT5.Connect(sTextToSend), sep = ";", colClasses = c("character"))
@@ -531,7 +532,7 @@ MT5.FileWorkingFolder <- function()
 #' @examples
 #' \dontrun{
 #'
-#' MT5.GetSymbol("EURUSD", 5, 3)
+#' MT5.GetSymbol("EURUSD", iTF = 5, iRows = 3)
 #'
 #' ## Returns
 #' ##   Year Month Day Hour Minute    Open    High     Low   Close Volume
@@ -539,7 +540,7 @@ MT5.FileWorkingFolder <- function()
 #' ## 2 2020    12  11    1     10 1.21408 1.21419 1.21404 1.21418     56
 #' ## 3 2020    12  11    1     15 1.21421 1.21421 1.21405 1.21408     63
 #'
-#' MT5.GetSymbol("EURUSD", 5, 3, xts = TRUE)
+#' MT5.GetSymbol("EURUSD", iTF = 5, iRows = 3, xts = TRUE)
 #'
 #' ## Returns
 #' ##                        Open    High     Low   Close Volume
@@ -668,7 +669,7 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
 #' @examples
 #' \dontrun{
 #'
-#' MT5.Quick_GetSymbol("EURUSD", 5, 3)
+#' MT5.Quick_GetSymbol("EURUSD", iTF = 5, iRows = 3)
 #'
 #' ## Returns
 #' ##   Year Month Day Hour Minute    Open    High     Low   Close Volume
@@ -676,7 +677,7 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
 #' ## 2 2020    12  11    1     10 1.21408 1.21419 1.21404 1.21418     56
 #' ## 3 2020    12  11    1     15 1.21421 1.21421 1.21405 1.21408     63
 #'
-#' MT5.Quick_GetSymbol("EURUSD", 5, 3, xts = TRUE)
+#' MT5.Quick_GetSymbol("EURUSD", iTF = 5, iRows = 3, xts = TRUE)
 #'
 #' ## Returns
 #' ##                        Open    High     Low   Close Volume
@@ -722,8 +723,8 @@ MT5.Quick_GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE)
   if(xts == TRUE)
   {
     Data_string <- base::paste0(Unprocessed_Table[,1],"/", Unprocessed_Table[,2],"/",Unprocessed_Table[,3], " ", Unprocessed_Table[,4],":", Unprocessed_Table[,5])
-    Ativo.xts <- xts::xts(Unprocessed_Table[,c(6:10)], order.by = as.POSIXct(Data_string, format = "%Y/%m/%d %H:%M"))
-    return(Ativo.xts)
+    xts_return <- xts::xts(Unprocessed_Table[,c(6:10)], order.by = as.POSIXct(Data_string, format = "%Y/%m/%d %H:%M"))
+    return(xts_return)
   }
 
   return(Unprocessed_Table)
@@ -1821,7 +1822,7 @@ MT5.CheckVersion <- function()
 MT5.AllSymbols <- function()
 {
   sReq <- MT5.Connect("P4")
-  return(as.character(utils::read.table(text = sReq, sep = "?", skipNul = TRUE, quote="", fill = TRUE)))
+  return(as.character(utils::read.table(text = paste0(sReq, collapse = "?"), sep = "?", skipNul = TRUE, quote="", fill = TRUE, comment.char = "")))
 }
 
 #' Expiration symbol date
@@ -1879,6 +1880,103 @@ MT5.ServerTime <- function()
   return(base::as.Date(sRecived, format = "%Y.%m.%d"))
 }
 
+#' Load Times & Sales table
+#'
+#' @description
+#' Function to load Times & Sales table from MT5 of target symbol.
+#'
+#' Times & Sales table provides in-depth trading data, including records on time, direction, price and volume of executed trades.
+#'
+#' Undefined direction transaction appears as \code{N/A} in MT5's Times & Sales table. Those transactions are automatically removed by default (\code{bIgnoreNAs = TRUE}). See References.
+#'
+#' @param sSymbol character; target symbol.
+#' @param iRows int; how many rows. It's start from last. (default: \code{10})
+#' @param bIgnoreNAs bool; ignore \code{NA} type in Times & Series of MT5 table. See references. (default: \code{TRUE})
+#'
+#' @return
+#' Returns \emph{Data.frame} \eqn{[nx4]}, with follow informations:
+#' \itemize{
+#'   \item Datetime \code{{POSIXct}}: Datetime of trade executed.
+#'   \item Type \code{{int}}: \code{0} for Buy trade and \code{1} for Sell trade.
+#'   \item Price \code{{numeric}}: Price of trade executed.
+#'   \item Volume \code{{int}}: Volume of trade executed.
+#'   }
+#'
+#' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
+#'
+#' @references
+#' \url{https://www.metatrader5.com/en/terminal/help/trading/depth_of_market}
+MT5.GetTimesSales <- function(sSymbol, iRows = 10, bIgnoreNAs = TRUE)
+{
+  if(base::length(sSymbol) > 1)
+  {
+    warning("MT5.GetTimeSales only works with one symbol at a time!")
+    sSymbol <- sSymbol[1]
+  }
+  sSymbol <- as.character(sSymbol)
+  iRows <- as.integer(iRows)
+  iRows <- ifelse(iRows < 1, 1, iRows)
+  stopifnot(!is.na(iRows))
+
+  sRequest <- MT5.Connect(base::paste0("P6 ", paste(
+    sSymbol, iRows,
+    sep = "?")))
+
+  if(sRequest[[1]] == "P6ERROR")
+  {
+    warning(base::paste0(sSymbol, ": error! Check Expert tab in MT5 to more details!"))
+    return(data.frame())
+  }else if(sRequest[[1]] == "P6ERROR2")
+  {
+    warning(base::paste0(sSymbol, ": symbol was not found? \nCheck if symbol is in MT5's marketwatch. Check ?MT5.Marketwatch, ?MT5.SymbolInMarketwatch, ?MT5.MarketwatchAdd"))
+    return(data.frame())
+  }else if(sRequest[[1]] == "P6ERROR3")
+  {
+    warning(base::paste0(sSymbol, ": there is no Times & Sales table"))
+    return(data.frame())
+  }
+
+  sStringTable <- utils::read.table(text = sRequest, sep = "?", stringsAsFactors = F)
+  sStringTable <- lapply(sStringTable, function(x){utils::read.table(text = x, sep = " ", stringsAsFactors = F)})
+
+  ## Removing NA rows
+  NA_Rows <- as.logical(unlist(lapply(sStringTable, length)) > 5)
+
+  if(!bIgnoreNAs)
+  {
+    sStringTable[which(NA_Rows)] <- lapply(sStringTable[which(NA_Rows)], function(x){x[-c(4,5)]})
+
+    for(i in 1:length(sStringTable))
+    {
+      colnames(sStringTable[i][[1]]) <- 1:5
+    }
+
+    Unprocessed_Table <- do.call(rbind, sStringTable)
+    Unprocessed_Table[which(NA_Rows),3] <- NA
+  }else
+  {
+    if(any(NA_Rows == TRUE))
+    {
+      warning("NA rows from MT5 are been detected and have been removed.")
+    }
+
+    Unprocessed_Table <- do.call(rbind, sStringTable[!NA_Rows])
+  }
+
+  df <- data.frame(Datetime = as.POSIXct(paste(Unprocessed_Table[,1], Unprocessed_Table[,2]), format = "%Y.%m.%d %H:%M.%OS"),
+                   Type = Unprocessed_Table[,3],
+                   Price = Unprocessed_Table[,4],
+                   Volume = Unprocessed_Table[,5])
+
+  if(any(complete.cases(df))==F)
+  {
+    warning("NA dates detected and have been removed.")
+    df <- df[complete.cases(df),]
+  }
+
+  return(df)
+}
+
 #' Exemple function
 #'
 #' @description
@@ -1894,7 +1992,7 @@ MT5.zExample <- function()
 
   ## We will send the request above and we will recive back
   sTextRecived <- MT5.Connect(sTextToSent)
-  ## [1] "Hello!To!You!Too"
+  ## [1] "Hello?To?You?Too"
 
   ## Now we can manipulate the text recived
   sTextRecived_Transformed <- utils::read.table(text = sTextRecived, sep = "?", colClasses = c("character"))

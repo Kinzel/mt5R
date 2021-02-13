@@ -35,20 +35,20 @@ minutes `iTF = 5`:
 ``` r
 MT5.GetSymbol("EURUSD", iTF = 5, iRows = 5)
 #>   Year Month Day Hour Minute    Open    High     Low   Close Volume
-#> 1 2021     1  29   23     35 1.21329 1.21330 1.21302 1.21330    161
-#> 2 2021     1  29   23     40 1.21329 1.21329 1.21300 1.21306    162
-#> 3 2021     1  29   23     45 1.21305 1.21324 1.21300 1.21322    203
-#> 4 2021     1  29   23     50 1.21322 1.21346 1.21322 1.21346    240
-#> 5 2021     1  29   23     55 1.21347 1.21371 1.21343 1.21358    288
+#> 1 2021     2   1   17     50 1.20852 1.20879 1.20790 1.20795    480
+#> 2 2021     2   1   17     55 1.20794 1.20839 1.20788 1.20835    430
+#> 3 2021     2   1   18      0 1.20838 1.20838 1.20790 1.20798    438
+#> 4 2021     2   1   18      5 1.20798 1.20828 1.20780 1.20811    313
+#> 5 2021     2   1   18     10 1.20812 1.20815 1.20785 1.20787    118
 
 ## Using xts package
 MT5.GetSymbol("EURUSD", iTF = 5, iRows = 5, xts = TRUE)
 #>                        Open    High     Low   Close Volume
-#> 2021-01-29 23:35:00 1.21329 1.21330 1.21302 1.21330    161
-#> 2021-01-29 23:40:00 1.21329 1.21329 1.21300 1.21306    162
-#> 2021-01-29 23:45:00 1.21305 1.21324 1.21300 1.21322    203
-#> 2021-01-29 23:50:00 1.21322 1.21346 1.21322 1.21346    240
-#> 2021-01-29 23:55:00 1.21347 1.21371 1.21343 1.21358    288
+#> 2021-02-01 17:50:00 1.20852 1.20879 1.20790 1.20795    480
+#> 2021-02-01 17:55:00 1.20794 1.20839 1.20788 1.20835    430
+#> 2021-02-01 18:00:00 1.20838 1.20838 1.20790 1.20798    438
+#> 2021-02-01 18:05:00 1.20798 1.20828 1.20780 1.20811    313
+#> 2021-02-01 18:10:00 1.20812 1.20815 1.20785 1.20787    118
 ```
 
 Plot `MT5.GetSymbol` output using
@@ -56,7 +56,7 @@ Plot `MT5.GetSymbol` output using
 
 ``` r
 library(quantmod)
-Table = MT5.GetSymbol("EURUSD", iTF = 5, xts = T) 
+Table = MT5.GetSymbol("EURUSD", iTF = 1440, iRows = 30, xts = T) 
 quantmod::chartSeries(Table, theme = "white")
 ```
 
@@ -64,7 +64,7 @@ quantmod::chartSeries(Table, theme = "white")
 
 <center>
 
-<img src='man/figures/chartseries.png' align="center" height="300" />
+<img src='man/figures/chartseries.png' align="center" height="350" />
 
 </center>
 
@@ -79,8 +79,8 @@ Check open positions:
 ``` r
 MT5.ShowPositions()
 #>        sSymbol iCmd fVolume  fPrice fStop fGain fProfit iTicket
-#> 1      Bitcoin    0       1 36290.3     0     0 -1661.3  784660
-#> 2 Sugar - Cash    1       3  1519.8     0     0   -33.3  776012
+#> 1      Bitcoin    0       1 36290.3     0     0 -3048.1  784660
+#> 2 Sugar - Cash    1       3  1519.8     0     0  -117.9  776012
 ```
 
 Looking for more examples? Good\! Check

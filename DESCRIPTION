@@ -1,6 +1,6 @@
 Package: mt5R
 Title: R and MT5 integration by socket connection
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(person(given = "Guilherme",
            family = "Kinzel",
            role = c("aut", "cre"),

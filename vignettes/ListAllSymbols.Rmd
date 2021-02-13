@@ -57,5 +57,3 @@ for(i in seq_len(dim(df_symbols)[1]))
 ```{r}
 print(df_symbols)
 ```
-
-

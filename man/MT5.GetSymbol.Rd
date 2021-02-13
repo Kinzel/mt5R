@@ -72,7 +72,7 @@ Supported time frames (\code{iTF}). See references for even more details.
 \examples{
 \dontrun{
 
-MT5.GetSymbol("EURUSD", 5, 3)
+MT5.GetSymbol("EURUSD", iTF = 5, iRows = 3)
 
 ## Returns
 ##   Year Month Day Hour Minute    Open    High     Low   Close Volume
@@ -80,7 +80,7 @@ MT5.GetSymbol("EURUSD", 5, 3)
 ## 2 2020    12  11    1     10 1.21408 1.21419 1.21404 1.21418     56
 ## 3 2020    12  11    1     15 1.21421 1.21421 1.21405 1.21408     63
 
-MT5.GetSymbol("EURUSD", 5, 3, xts = TRUE)
+MT5.GetSymbol("EURUSD", iTF = 5, iRows = 3, xts = TRUE)
 
 ## Returns
 ##                        Open    High     Low   Close Volume
