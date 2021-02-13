@@ -14,11 +14,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Daily EURUSD data
+# Daily EURUSD data 
 
 Simple example to have access of daily `EURUSD` dataset of MT5 server broker. 
-
-**Using demo account from [forex.com](https://www.forex.com/).**
 
 ## Content:
 * Usage of function `MT5.GetSymbol()`.
@@ -116,10 +114,10 @@ It will left a `.csv` table downloaded that was used. The table can be found in 
 MT5.FileWorkingFolder()
 ```
 
-### Looking at MT5's folder:
+#### Looking at MT5's folder:
 
 <img src='filefolder.png' align="center" height="170" />
 
-### How `csv` is structured:
+#### How `csv` is structured:
 
 <img src='tablecsv.png' align="center" height="320" />
