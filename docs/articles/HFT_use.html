@@ -61,6 +61,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/EURUSD.html">EURUSD</a>
+    </li>
+    <li>
       <a href="../articles/HFT_use.html">HFT_use</a>
     </li>
     <li>
@@ -133,16 +136,16 @@
 <span class="no">Secs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/strptime.html">strftime</a></span>(<span class="no">Dates</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"%S"</span>)) <span class="co">##Interested only on seconds</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">Secs</span>)
 <span class="co">#&gt; Secs</span>
-<span class="co">#&gt; 52 53 54 55 </span>
-<span class="co">#&gt;  7 38 47  8</span></pre></body></html></div>
+<span class="co">#&gt;  5  6  7 </span>
+<span class="co">#&gt; 17 53 30</span></pre></body></html></div>
 <p>Only one second interval was fully used - the middle one.</p>
 <p>Answering the first question, how many times inside of 1 second the function <code><a href="../reference/MT5.Quick_GetSymbol.html">MT5.Quick_GetSymbol()</a></code> was used?</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">InterestedNumber</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">Secs</span>)[<span class="fl">2</span>]
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">InterestedNumber</span><span class="kw">[[</span><span class="fl">1</span>]]) <span class="co">##only the number</span>
-<span class="co">#&gt; [1] 38</span></pre></body></html></div>
+<span class="co">#&gt; [1] 53</span></pre></body></html></div>
 <p>How long, in average, <code><a href="../reference/MT5.Quick_GetSymbol.html">MT5.Quick_GetSymbol()</a></code> takes in <strong>milliseconds</strong> every run?</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fl">1000</span>/<span class="no">InterestedNumber</span><span class="kw">[[</span><span class="fl">1</span>]]
-<span class="co">#&gt; [1] 26.31579</span></pre></body></html></div>
+<span class="co">#&gt; [1] 18.86792</span></pre></body></html></div>
 <p>The result is relative for every spec and parameters.</p>
 <p>This was a naive example, focused in fetch data. Expert Advisors use a lot of computation, functions and every kind of models. The result demonstrate how powerful its the socket connection, try yourself.</p>
 </div>

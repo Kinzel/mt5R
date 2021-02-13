@@ -2,7 +2,8 @@ pandoc: 2.7.3
 pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
+  EURUSD: EURUSD.html
   HFT_use: HFT_use.html
   ListAllSymbols: ListAllSymbols.html
-last_built: 2021-02-13T19:40Z
+last_built: 2021-02-13T19:51Z
 
