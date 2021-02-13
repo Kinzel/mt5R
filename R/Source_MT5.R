@@ -1902,10 +1902,11 @@ MT5.ServerTime <- function()
 #'   \item Volume \code{{int}}: Volume of trade executed.
 #'   }
 #'
-#' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
-#'
 #' @references
 #' \url{https://www.metatrader5.com/en/terminal/help/trading/depth_of_market}
+#'
+#' @author Guilherme Kinzel, \email{guikinzel@@gmail.com}
+#' @export
 MT5.GetTimesSales <- function(sSymbol, iRows = 10, bIgnoreNAs = TRUE)
 {
   if(base::length(sSymbol) > 1)

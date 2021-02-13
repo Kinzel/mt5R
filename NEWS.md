@@ -4,7 +4,7 @@ mt5R v0.1.4 (Release date: 2021-02-13)
 * Added `MT5.GetTimesSales()`.
 * Fixed `MT5.AllSymbols()`. Some brokers was returning error message.
 * Fixed `MT5.Quick_GetSymbol()`. The function was returning error if rows requested are bigger than the table available in MT5. It was happening more frequently in very recently IPO companies.
-* Added EURUSD_Data example in **Articles** tab.
+* Added EURUSD example in **Articles** tab.
 
 mt5R v0.1.3 (Release date: 2021-01-30)
 ==============

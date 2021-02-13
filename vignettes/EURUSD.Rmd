@@ -1,8 +1,8 @@
 ---
-title: "EURUSD_Data"
+title: "EURUSD"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{EURUSD_Data}
+  %\VignetteIndexEntry{EURUSD}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
