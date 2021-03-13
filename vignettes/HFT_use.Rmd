@@ -73,4 +73,4 @@ How long, in average, `MT5.Quick_GetSymbol()` takes in **milliseconds** every ru
 
 The result is relative for every spec and parameters.
 
-This was a naive example, focused in fetch data. Expert Advisors use a lot of computation, functions and every kind of models. The result demonstrate how powerful its the socket connection, try yourself.
+This was a naive example, focused in fetch data. Expert Advisors use a lot of computation, functions and every kind of models. The result demonstrate how powerful its the socket connection.

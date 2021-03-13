@@ -119,13 +119,12 @@
 <span class="co">#&gt; [1] TRUE</span></pre></body></html></div>
 <p>Everything is fine! Let’s continue.</p>
 <p>To reasonable size of data the best practice is to use the function <code><a href="../reference/MT5.GetSymbol.html">MT5.GetSymbol()</a></code>. To small chunks try <code><a href="../reference/MT5.Quick_GetSymbol.html">MT5.Quick_GetSymbol()</a></code> instead.</p>
-<p>To obtain all the available data use <code>iRows = Inf</code> (<code>mt5R</code> 0.1.3 or newer versions), <code>iTF = 1440</code> is to obtain daily data, check <code><a href="../reference/MT5.GetSymbol.html">?MT5.GetSymbol</a></code>.</p>
+<p>To obtain all the available data use <code>iRows = Inf</code> (<code>mt5R</code> 0.1.3 or newer versions), <code>iTF = 1440</code> is to obtain daily data, check <code><a href="../reference/MT5.GetSymbol.html">?MT5.GetSymbol</a></code> for other availables timeframes.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">TimeStart</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>() <span class="co">## Lets check how long it takes. Starting the chronometer!</span>
 <span class="no">EURUSD</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/MT5.GetSymbol.html">MT5.GetSymbol</a></span>(<span class="st">"EURUSD"</span>, <span class="kw">iTF</span> <span class="kw">=</span> <span class="fl">1440</span>, <span class="kw">iRows</span> <span class="kw">=</span> <span class="fl">Inf</span>, <span class="kw">xts</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="no">TimeEnd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>() <span class="co">## Saving the time when it ended</span></pre></body></html></div>
 <p><strong>Finally!</strong></p>
-<p>It’s a huge dataset. Lets get a closer look?</p>
-<p>How long it took to download all the data?</p>
+<p>It’s a huge dataset. Lets get a closer look - how long it took to download all the data?</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">TimeEnd</span>-<span class="no">TimeStart</span>)
 <span class="co">#&gt; Time difference of 10.06714 mins</span></pre></body></html></div>
 <p>The time requirement scales linearly, it will takes considerable amount of time for very huge datasets - since a <code>.csv</code> is created and the data is stored. To quickier load of data use <code><a href="../reference/MT5.Quick_GetSymbol.html">MT5.Quick_GetSymbol()</a></code> instead.</p>
@@ -151,16 +150,16 @@
 <span class="co">#&gt; 2021-02-10 1.21190 1.21432 1.21078 1.21180  60820</span>
 <span class="co">#&gt; 2021-02-11 1.21181 1.21485 1.21126 1.21303  48820</span>
 <span class="co">#&gt; 2021-02-12 1.21305 1.21339 1.20805 1.21187  53686</span></pre></body></html></div>
-<p>You can plot the <code>EURUSD</code> using <a href="https://cran.r-project.org/web/packages/quantmod/quantmod.pdf">quantmod</a>.</p>
+<p>You can plot the <code>EURUSD</code> using <a href="https://cran.r-project.org/web/packages/quantmod/quantmod.pdf">quantmod</a> package.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">quantmod</span>)
 <span class="kw pkg">quantmod</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/chartSeries.html">chartSeries</a></span>(<span class="no">EURUSD</span>)</pre></body></html></div>
 <!-- For some reason, the plot created in the chunk appears in .md but not in the site. Now using an image previously created -->
 <center>
 <img src="eurusd.png" align="center" height="350">
 </center>
-<p>To make <code>EURUSD</code> obtained available to other softwares (Python and etc), you can also use <code><a href="../reference/MT5.GetSymbol.html">MT5.GetSymbol()</a></code> using the argument <code>bDeletecsv = FALSE</code>.</p>
+<p>To make <code>EURUSD</code> obtained available to other softwares (Python and etc), use argument <code>bDeletecsv = FALSE</code> in function <code><a href="../reference/MT5.GetSymbol.html">MT5.GetSymbol()</a></code>. See example below.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">EURUSD</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/MT5.GetSymbol.html">MT5.GetSymbol</a></span>(<span class="st">"EURUSD"</span>, <span class="kw">iTF</span> <span class="kw">=</span> <span class="fl">1440</span>, <span class="kw">iRows</span> <span class="kw">=</span> <span class="fl">Inf</span>, <span class="kw">bDeletecsv</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<p>It will left a <code>.csv</code> table downloaded that was used. The table can be found in <code>Files</code> of MT5’s folder. To find out specifically where it is located you can use the function <code><a href="../reference/MT5.FileWorkingFolder.html">MT5.FileWorkingFolder()</a></code>.</p>
+<p>The <code>.csv</code> table downloaded will be stored in <code>Files</code> MT5’s folder. To find out specifically where it is located use the function <code><a href="../reference/MT5.FileWorkingFolder.html">MT5.FileWorkingFolder()</a></code>.</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="../reference/MT5.FileWorkingFolder.html">MT5.FileWorkingFolder</a></span>()
 <span class="co">#&gt; [1] "C:\\Users\\GKIN\\AppData\\Roaming\\MetaQuotes\\Terminal\\FB9A56D617EDDDFE29EE54EBEFFE96C1\\MQL5\\Files\\"</span></pre></body></html></div>
 <div id="looking-at-mt5s-folder" class="section level4">

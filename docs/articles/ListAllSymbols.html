@@ -107,10 +107,10 @@
 <p>Use <code><a href="../reference/MT5.Marketwatch.html">MT5.Marketwatch()</a></code> to obtain all marketwatch symbols.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">AllSymbols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/MT5.Marketwatch.html">MT5.Marketwatch</a></span>()
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">AllSymbols</span>)
-<span class="co">#&gt;  [1] "Cotton - Cash"       "Heating Oil"         "Sugar - Cash"       </span>
-<span class="co">#&gt;  [4] "US Oil"              "Bitcoin"             "Ethereum"           </span>
-<span class="co">#&gt;  [7] "Ripple"              "EURUSD"              "UK Oil"             </span>
-<span class="co">#&gt; [10] "GBPUSD"              "Activision Blizzard"</span></pre></body></html></div>
+<span class="co">#&gt;  [1] "Coffee C CFD (M5)" "Cotton - Cash"     "Heating Oil"      </span>
+<span class="co">#&gt;  [4] "Sugar - Cash"      "UK Oil"            "UK Oil - Cash"    </span>
+<span class="co">#&gt;  [7] "US Oil"            "US Oil - Cash"     "Bitcoin"          </span>
+<span class="co">#&gt; [10] "Ethereum"          "EURUSD"</span></pre></body></html></div>
 <p>Create a data.frame to summary all the data.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">df_symbols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">Symbol</span> <span class="kw">=</span> <span class="no">AllSymbols</span>, <span class="kw">Type</span> <span class="kw">=</span> <span class="fl">NA</span>)</pre></body></html></div>
 <p>Use <code><a href="../reference/MT5.SymbolType.html">MT5.SymbolType()</a></code> to obtain the type of every symbol using loop.</p>
@@ -137,18 +137,18 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">df_symbols</span>)
-<span class="co">#&gt;                 Symbol Type</span>
-<span class="co">#&gt; 1        Cotton - Cash    4</span>
-<span class="co">#&gt; 2          Heating Oil    4</span>
-<span class="co">#&gt; 3         Sugar - Cash    4</span>
-<span class="co">#&gt; 4               US Oil    4</span>
-<span class="co">#&gt; 5              Bitcoin    4</span>
-<span class="co">#&gt; 6             Ethereum    4</span>
-<span class="co">#&gt; 7               Ripple    4</span>
-<span class="co">#&gt; 8               EURUSD    3</span>
-<span class="co">#&gt; 9               UK Oil    4</span>
-<span class="co">#&gt; 10              GBPUSD    3</span>
-<span class="co">#&gt; 11 Activision Blizzard    4</span></pre></body></html></div>
+<span class="co">#&gt;               Symbol Type</span>
+<span class="co">#&gt; 1  Coffee C CFD (M5)    4</span>
+<span class="co">#&gt; 2      Cotton - Cash    4</span>
+<span class="co">#&gt; 3        Heating Oil    4</span>
+<span class="co">#&gt; 4       Sugar - Cash    4</span>
+<span class="co">#&gt; 5             UK Oil    4</span>
+<span class="co">#&gt; 6      UK Oil - Cash    4</span>
+<span class="co">#&gt; 7             US Oil    4</span>
+<span class="co">#&gt; 8      US Oil - Cash    4</span>
+<span class="co">#&gt; 9            Bitcoin    4</span>
+<span class="co">#&gt; 10          Ethereum    4</span>
+<span class="co">#&gt; 11            EURUSD    3</span></pre></body></html></div>
 </div>
   </div>
 

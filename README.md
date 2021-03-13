@@ -5,8 +5,9 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://www.tidyverse.org/lifecycle/#stable)
+![](https://img.shields.io/github/r-package/v/Kinzel/mt5R)
+![](https://img.shields.io/github/license/Kinzel/mt5R)
 <!-- badges: end -->
 
 ## Overview
@@ -35,20 +36,20 @@ minutes `iTF = 5`:
 ``` r
 MT5.GetSymbol("EURUSD", iTF = 5, iRows = 5)
 #>   Year Month Day Hour Minute    Open    High     Low   Close Volume
-#> 1 2021     2  12   23     35 1.21194 1.21204 1.21191 1.21202     73
-#> 2 2021     2  12   23     40 1.21203 1.21203 1.21180 1.21185    118
-#> 3 2021     2  12   23     45 1.21185 1.21190 1.21177 1.21186     99
-#> 4 2021     2  12   23     50 1.21187 1.21191 1.21180 1.21184     83
-#> 5 2021     2  12   23     55 1.21184 1.21191 1.21173 1.21187    136
+#> 1 2021     3  12   23     35 1.19519 1.19520 1.19503 1.19520     57
+#> 2 2021     3  12   23     40 1.19523 1.19523 1.19500 1.19503     51
+#> 3 2021     3  12   23     45 1.19503 1.19514 1.19500 1.19509     71
+#> 4 2021     3  12   23     50 1.19512 1.19514 1.19503 1.19512     73
+#> 5 2021     3  12   23     55 1.19513 1.19533 1.19486 1.19498    163
 
 ## Using xts package
 MT5.GetSymbol("EURUSD", iTF = 5, iRows = 5, xts = TRUE)
 #>                        Open    High     Low   Close Volume
-#> 2021-02-12 23:35:00 1.21194 1.21204 1.21191 1.21202     73
-#> 2021-02-12 23:40:00 1.21203 1.21203 1.21180 1.21185    118
-#> 2021-02-12 23:45:00 1.21185 1.21190 1.21177 1.21186     99
-#> 2021-02-12 23:50:00 1.21187 1.21191 1.21180 1.21184     83
-#> 2021-02-12 23:55:00 1.21184 1.21191 1.21173 1.21187    136
+#> 2021-03-12 23:35:00 1.19519 1.19520 1.19503 1.19520     57
+#> 2021-03-12 23:40:00 1.19523 1.19523 1.19500 1.19503     51
+#> 2021-03-12 23:45:00 1.19503 1.19514 1.19500 1.19509     71
+#> 2021-03-12 23:50:00 1.19512 1.19514 1.19503 1.19512     73
+#> 2021-03-12 23:55:00 1.19513 1.19533 1.19486 1.19498    163
 ```
 
 Plot `MT5.GetSymbol` output using
@@ -57,14 +58,14 @@ Plot `MT5.GetSymbol` output using
 ``` r
 library(quantmod)
 Table = MT5.GetSymbol("EURUSD", iTF = 1440, iRows = 30, xts = T) 
-quantmod::chartSeries(Table, theme = "white")
+quantmod::chartSeries(Table, theme = "white", name = "EURUSD")
 ```
 
 <!-- For some reason, the plot created in the chunk appears in .md but not in the site. Now using an image previously created -->
 
 <center>
 
-<img src='man/figures/chartseries.png' align="center" height="350" />
+<img src='man/figures/chartseries.png' align="center" height="325" />
 
 </center>
 
@@ -78,10 +79,8 @@ Check open positions:
 
 ``` r
 MT5.ShowPositions()
-#>        sSymbol iCmd fVolume  fPrice fStop fGain fProfit iTicket
-#> 1      Bitcoin    0     0.5 47644.7     0     0   124.9  891144
-#> 2      Bitcoin    0     1.0 36290.3     0     0 11604.2  784660
-#> 3 Sugar - Cash    1     3.0  1519.8     0     0  -158.1  776012
+#> [1] sSymbol iCmd    fVolume fPrice  fStop   fGain   fProfit iTicket
+#> <0 rows> (or 0-length row.names)
 ```
 
 Looking for more examples? Good\! Check
@@ -105,7 +104,7 @@ Install the development version from GitHub with:
 
 ``` r
 #install.packages("devtools")
-devtools::install_github("Kinzel/mt5R@main") 
+devtools::install_github("Kinzel/mt5R") 
 ```
 
 #### Instructions: Installing mt5R in MT5

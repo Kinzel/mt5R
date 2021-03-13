@@ -8,16 +8,19 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  out.width = "50%"
+  out.width = "75%"
 )
 library(mt5R)
 library(quantmod)
+library(badger)
 ```
 
 # mt5R <img src='man/figures/logo.png' align="right" height="200" />
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+`r badge_lifecycle("stable", "blue")`
+![](https://img.shields.io/github/r-package/v/Kinzel/mt5R)
+![](https://img.shields.io/github/license/Kinzel/mt5R)
 <!-- badges: end -->
 
 ## Overview
@@ -48,12 +51,12 @@ Plot `MT5.GetSymbol` output using [quantmod](https://CRAN.R-project.org/package=
 ```{r plot, fig.align= "center", eval=F}
 library(quantmod)
 Table = MT5.GetSymbol("EURUSD", iTF = 1440, iRows = 30, xts = T) 
-quantmod::chartSeries(Table, theme = "white")
+quantmod::chartSeries(Table, theme = "white", name = "EURUSD")
 ```
 
 <!-- For some reason, the plot created in the chunk appears in .md but not in the site. Now using an image previously created -->
 
-<center><img src='man/figures/chartseries.png' align="center" height="350" /></center>
+<center><img src='man/figures/chartseries.png' align="center" height="325" /></center>
 
 
 
@@ -88,7 +91,7 @@ Install the development version from GitHub with:
 
 ```{r, eval = FALSE}
 #install.packages("devtools")
-devtools::install_github("Kinzel/mt5R@main") 
+devtools::install_github("Kinzel/mt5R") 
 ```
 
 #### Instructions: Installing mt5R in MT5
