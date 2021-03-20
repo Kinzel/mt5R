@@ -590,7 +590,11 @@ MT5.GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE, iWait = Inf, bDe
     if(!file.exists(SFileDownloading))break;
   }
 
-  if(!file.exists(sFile)) return(NULL);
+  if(!file.exists(sFile))
+  {
+    warning(base::paste0(sSymbol, ": not available data?"))
+    return(data.frame())
+  }
 
   Unprocessed_Table <- utils::read.table(sFile, sep = ';', col.names = c("Year", "Month", "Day", "Hour", "Minute", "Open", "High", "Low", "Close", "Volume"))
   if(bDeletecsv) file.remove(sFile);
@@ -700,10 +704,9 @@ MT5.Quick_GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE)
 
   iRows <- ifelse(iRows < 1, 1, iRows)
 
-
-  sRequest <- MT5.Connect(base::paste0("M4 ", paste(
-    sSymbol, iTF, iRows,
-    sep = "?")))
+  sRequest <- utils::read.table(text = MT5.Connect(
+                                base::paste0("M4 ", paste(sSymbol, iTF, iRows, sep = "?"))),
+                                sep = "?", stringsAsFactors = F)
 
   if(sRequest[[1]] == "M4ERROR2")
   {
@@ -713,11 +716,13 @@ MT5.Quick_GetSymbol <- function(sSymbol, iTF, iRows = 5, xts = FALSE)
   {
     warning(base::paste0(sSymbol, ": time frame not supported: ", iTF," \nCheck supported time frames ?MT5.Quick_GetSymbol"))
     return(data.frame())
+  }else if(sRequest[[1]] == "M4ERROR4")
+  {
+    warning(base::paste0(sSymbol, ": not available data?"))
+    return(data.frame())
   }
 
-  sStringTable <- utils::read.table(text = sRequest, sep = "?", stringsAsFactors = F)
-
-  Unprocessed_Table <- do.call(rbind, lapply(sStringTable, function(x){utils::read.table(text = x, sep = " ", stringsAsFactors = F)}))
+  Unprocessed_Table <- do.call(rbind, lapply(sRequest, function(x){utils::read.table(text = x, sep = " ", stringsAsFactors = F)}))
   names(Unprocessed_Table) <- c("Year", "Month", "Day", "Hour", "Minute", "Open", "High", "Low", "Close", "Volume")
   row.names(Unprocessed_Table) <- NULL
   if(xts == TRUE)

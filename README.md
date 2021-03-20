@@ -36,20 +36,20 @@ minutes `iTF = 5`:
 ``` r
 MT5.GetSymbol("EURUSD", iTF = 5, iRows = 5)
 #>   Year Month Day Hour Minute    Open    High     Low   Close Volume
-#> 1 2021     3  12   23     35 1.19519 1.19520 1.19503 1.19520     57
-#> 2 2021     3  12   23     40 1.19523 1.19523 1.19500 1.19503     51
-#> 3 2021     3  12   23     45 1.19503 1.19514 1.19500 1.19509     71
-#> 4 2021     3  12   23     50 1.19512 1.19514 1.19503 1.19512     73
-#> 5 2021     3  12   23     55 1.19513 1.19533 1.19486 1.19498    163
+#> 1 2021     3  19   23     35 1.19025 1.19028 1.19012 1.19024     43
+#> 2 2021     3  19   23     40 1.19027 1.19027 1.19019 1.19025     47
+#> 3 2021     3  19   23     45 1.19025 1.19026 1.19012 1.19015     55
+#> 4 2021     3  19   23     50 1.19015 1.19048 1.19012 1.19033    135
+#> 5 2021     3  19   23     55 1.19035 1.19055 1.19022 1.19024    223
 
 ## Using xts package
 MT5.GetSymbol("EURUSD", iTF = 5, iRows = 5, xts = TRUE)
 #>                        Open    High     Low   Close Volume
-#> 2021-03-12 23:35:00 1.19519 1.19520 1.19503 1.19520     57
-#> 2021-03-12 23:40:00 1.19523 1.19523 1.19500 1.19503     51
-#> 2021-03-12 23:45:00 1.19503 1.19514 1.19500 1.19509     71
-#> 2021-03-12 23:50:00 1.19512 1.19514 1.19503 1.19512     73
-#> 2021-03-12 23:55:00 1.19513 1.19533 1.19486 1.19498    163
+#> 2021-03-19 23:35:00 1.19025 1.19028 1.19012 1.19024     43
+#> 2021-03-19 23:40:00 1.19027 1.19027 1.19019 1.19025     47
+#> 2021-03-19 23:45:00 1.19025 1.19026 1.19012 1.19015     55
+#> 2021-03-19 23:50:00 1.19015 1.19048 1.19012 1.19033    135
+#> 2021-03-19 23:55:00 1.19035 1.19055 1.19022 1.19024    223
 ```
 
 Plot `MT5.GetSymbol` output using
@@ -118,11 +118,11 @@ There are two installation options for mt5R in MT5:
     most.
   - `.mq5`: for developers.
 
-For *“Plug and play”* version `.ex5` (`mt5R v0_1_4.ex5`)
+For *“Plug and play”* version `.ex5` (`mt5R v0_1_5.ex5`)
 
 1.  [Download `mt5R
-    v0_1_4.ex5`](https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_4.ex5).
-2.  Move `mt5R v0_1_4.ex5` to `...\MQL5\experts\` folder. To check where
+    v0_1_5.ex5`](https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_5.ex5).
+2.  Move `mt5R v0_1_5.ex5` to `...\MQL5\experts\` folder. To check where
     MT5’s folders, open MT5 and `Tools > Options > Storage`.
 
 And you’re ready to go\!
@@ -132,11 +132,11 @@ And you’re ready to go\!
 (If you’re not a developer, go ahed to **Getting Started**)
 
 **Alternatively**, for MQL developers you can also download the `.mq5`
-code used to generate `mt5R v0_1_4.ex5`. Both are exactly the same code,
+code used to generate `mt5R v0_1_5.ex5`. Both are exactly the same code,
 it’s the no compiled version. This is the choice recommend for who want
 to tailor their own solutions and functions.
 
-  - For non compiled version `.mq5` (`mt5R v0_1_4.mq5`) - The most
+  - For non compiled version `.mq5` (`mt5R v0_1_5.mq5`) - The most
     suitable for developers.
       - [Download socket library:
         socket-library-mt4-mt5.mqh](https://www.mql5.com/en/blogs/post/706665)
@@ -144,18 +144,18 @@ to tailor their own solutions and functions.
         Link](https://c.mql5.com/6/865/socket-library-mt4-mt5.mqh)).
       - Move `socket-library-mt4-mt5.mqh` to `...\MQL5\include\` folder.
       - [Download `mt5R
-        v0_1_4.mq5`](https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_4.mq5).
-      - Move `mt5R v0_1_4.mq5` code to `...\MQL5\experts\` folder.
+        v0_1_5.mq5`](https://github.com/Kinzel/mt5R/raw/main/MT5%20files/mt5R%20v0_1_5.mq5).
+      - Move `mt5R v0_1_5.mq5` code to `...\MQL5\experts\` folder.
       - Open MetaEditor (F4).
-      - Compile `mt5R v0_1_4.mq5`.
+      - Compile `mt5R v0_1_5.mq5`.
       - If everything run smooth an executable program file `mt5R
-        v0_1_4.ex5` (or the name you chose) will be generated.
+        v0_1_5.ex5` (or the name you chose) will be generated.
 
 -----
 
 ### Getting Started
 
-Attach `mt5R v0_1_4.ex5` to any chart opened in your MT5, like any other
+Attach `mt5R v0_1_5.ex5` to any chart opened in your MT5, like any other
 Expert Advisor.
 
 <img src='man/figures/attach.png'/>
@@ -181,7 +181,7 @@ you’re ready to use mt5R\! Yay\!
 The most awesome part of MT5 is make reliable to create your owns
 solutions and functions. The cookbook is still under construction, but
 you can start checking functions `MT5.zExample` in mt5R package and `Z1`
-order in `mt5R v0_1_4.mq5`. Its pretty easy\!
+order in `mt5R v0_1_5.mq5`. Its pretty easy\!
 
 ``` r
 ## Execute the function without () to see its code

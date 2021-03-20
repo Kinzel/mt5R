@@ -1,3 +1,8 @@
+mt5R v0.1.5 (Release date: 2021-03-20)
+==============
+
+* Fixed `MT5.GetSymbol()` and `MT5.Quick_GetSymbol()` when the symbol is listed in MT5 but doesn't have data. These are very exceptional cases, though they exists.
+
 mt5R v0.1.4 (Release date: 2021-02-13)
 ==============
 

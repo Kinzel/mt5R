@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mt5R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -121,31 +121,31 @@
 <p>What is inside of <code>TableEx</code>?</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">TableEx</span>)
 <span class="co">#&gt;    Year Month Day Hour Minute    Open    High     Low   Close Volume</span>
-<span class="co">#&gt; 1  2021     3  12   23     50 1.19512 1.19514 1.19503 1.19506     36</span>
-<span class="co">#&gt; 2  2021     3  12   23     51 1.19506 1.19507 1.19503 1.19503      6</span>
-<span class="co">#&gt; 3  2021     3  12   23     52 1.19503 1.19509 1.19503 1.19509      6</span>
-<span class="co">#&gt; 4  2021     3  12   23     53 1.19510 1.19513 1.19507 1.19507     13</span>
-<span class="co">#&gt; 5  2021     3  12   23     54 1.19510 1.19512 1.19503 1.19512     12</span>
-<span class="co">#&gt; 6  2021     3  12   23     55 1.19513 1.19513 1.19502 1.19503     27</span>
-<span class="co">#&gt; 7  2021     3  12   23     56 1.19504 1.19507 1.19502 1.19507     18</span>
-<span class="co">#&gt; 8  2021     3  12   23     57 1.19509 1.19517 1.19503 1.19517     23</span>
-<span class="co">#&gt; 9  2021     3  12   23     58 1.19522 1.19531 1.19510 1.19510     60</span>
-<span class="co">#&gt; 10 2021     3  12   23     59 1.19510 1.19533 1.19486 1.19498     35</span></pre></body></html></div>
+<span class="co">#&gt; 1  2021     3  19   23     50 1.19015 1.19021 1.19014 1.19016     15</span>
+<span class="co">#&gt; 2  2021     3  19   23     51 1.19015 1.19019 1.19012 1.19017     16</span>
+<span class="co">#&gt; 3  2021     3  19   23     52 1.19019 1.19019 1.19012 1.19012     31</span>
+<span class="co">#&gt; 4  2021     3  19   23     53 1.19012 1.19028 1.19012 1.19026     31</span>
+<span class="co">#&gt; 5  2021     3  19   23     54 1.19028 1.19048 1.19028 1.19033     42</span>
+<span class="co">#&gt; 6  2021     3  19   23     55 1.19035 1.19055 1.19031 1.19036     47</span>
+<span class="co">#&gt; 7  2021     3  19   23     56 1.19036 1.19051 1.19036 1.19046     21</span>
+<span class="co">#&gt; 8  2021     3  19   23     57 1.19048 1.19049 1.19036 1.19042     68</span>
+<span class="co">#&gt; 9  2021     3  19   23     58 1.19033 1.19035 1.19028 1.19032     38</span>
+<span class="co">#&gt; 10 2021     3  19   23     59 1.19032 1.19036 1.19022 1.19024     49</span></pre></body></html></div>
 <p>Now we will check the results.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">Dates</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span>(<span class="no">dtVec</span>, <span class="kw">origin</span> <span class="kw">=</span> <span class="st">"1970-01-01"</span>)
 <span class="no">Secs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/strptime.html">strftime</a></span>(<span class="no">Dates</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"%S"</span>)) <span class="co">##Interested only on seconds</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">Secs</span>)
 <span class="co">#&gt; Secs</span>
-<span class="co">#&gt; 11 12 13 14 </span>
-<span class="co">#&gt; 16 39 41  4</span></pre></body></html></div>
+<span class="co">#&gt; 46 47 48 </span>
+<span class="co">#&gt; 11 47 42</span></pre></body></html></div>
 <p>Only one second interval was fully used - the middle one.</p>
 <p>Answering the first question, how many times inside of 1 second the function <code><a href="../reference/MT5.Quick_GetSymbol.html">MT5.Quick_GetSymbol()</a></code> was used?</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">InterestedNumber</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">Secs</span>)[<span class="fl">2</span>]
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">InterestedNumber</span><span class="kw">[[</span><span class="fl">1</span>]]) <span class="co">##only the number</span>
-<span class="co">#&gt; [1] 39</span></pre></body></html></div>
+<span class="co">#&gt; [1] 47</span></pre></body></html></div>
 <p>How long, in average, <code><a href="../reference/MT5.Quick_GetSymbol.html">MT5.Quick_GetSymbol()</a></code> takes in <strong>milliseconds</strong> every run?</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fl">1000</span>/<span class="no">InterestedNumber</span><span class="kw">[[</span><span class="fl">1</span>]]
-<span class="co">#&gt; [1] 25.64103</span></pre></body></html></div>
+<span class="co">#&gt; [1] 21.2766</span></pre></body></html></div>
 <p>The result is relative for every spec and parameters.</p>
 <p>This was a naive example, focused in fetch data. Expert Advisors use a lot of computation, functions and every kind of models. The result demonstrate how powerful its the socket connection.</p>
 </div>
