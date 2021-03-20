@@ -144,7 +144,7 @@ to tailor their own solutions and functions.
         Link](https://c.mql5.com/6/865/socket-library-mt4-mt5.mqh)).
       - Move `socket-library-mt4-mt5.mqh` to `...\MQL5\include\` folder.
       - [Download `mt5R
-        v0_1_5.mq5`](https://github.com/Kinzel/mt5R/blob/master/MT5%20files/mt5R%20v0_1_5.mq5).
+        v0_1_5.mq5`](https://raw.githubusercontent.com/Kinzel/mt5R/master/MT5%20files/mt5R%20v0_1_5.mq5).
       - Move `mt5R v0_1_5.mq5` code to `...\MQL5\experts\` folder.
       - Open MetaEditor (F4).
       - Compile `mt5R v0_1_5.mq5`.
