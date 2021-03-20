@@ -105,7 +105,7 @@ There are two installation options for mt5R in MT5:
 
 For _"Plug and play"_ version `.ex5` (`mt5R v0_1_5.ex5`)
 
-1. [Download `mt5R v0_1_5.ex5`](https://github.com/Kinzel/mt5R/blob/master/MT5%20files/mt5R%20v0_1_5.ex5).
+1. [Download `mt5R v0_1_5.ex5`](https://github.com/Kinzel/mt5R/raw/master/MT5%20files/mt5R%20v0_1_5.ex5).
 2. Move `mt5R v0_1_5.ex5` to `...\MQL5\experts\` folder. To check where MT5's folders, open MT5 and `Tools > Options > Storage`.
   
 And you're ready to go!
