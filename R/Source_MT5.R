@@ -62,8 +62,8 @@ MT5.AccountInfo <- function()
 #' @export
 #'
 #' @examples
-#' MT5GetClosedEntries ()
-MT5GetClosedEntries <- function()
+#' MT5.GetClosedEntries ()
+MT5.GetClosedEntries <- function()
 {
   sRequest <- MT5.Connect("H0")
   df_final <- data.frame(sSymbol = character(),
