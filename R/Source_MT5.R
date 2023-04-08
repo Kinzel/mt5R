@@ -54,6 +54,46 @@ MT5.AccountInfo <- function()
   return(sRequest)
 }
 
+
+#' MT5GetClosedEntries
+#' @description get the list of closed entries from the MT5 History tab
+#' @details The Package MT5R does not include the functionality to extract the history data from Metatrader5. this function provides so.
+#'
+#' @export
+#'
+#' @examples
+#' MT5.GetClosedEntries ()
+MT5.GetClosedEntries <- function()
+{
+  sRequest <- MT5.Connect("H0")
+  df_final <- data.frame(sSymbol = character(),
+                         PositionID = integer(),
+                         iCmd = integer(),
+                         fVolume = numeric(),
+                         fProfit = numeric(),
+                         Ticket = integer(),
+                         Date = character())
+  if (is.null(sRequest)) {
+    return(df_final)
+  }
+  for (i in seq_len(base::length(sRequest))) {
+    Linha <- utils::read.table(text = sRequest[i], sep = "?")
+    df <- data.frame(sSymbol = as.character(Linha[1][[1]]),
+                     PositionID = as.integer(Linha[2][[1]]),
+                     iCmd = as.integer(Linha[3][[1]]),
+                     fVolume = as.numeric(Linha[4][[1]]),
+                     fProfit = as.numeric(Linha[5][[1]]),
+                     Ticket  = as.numeric(Linha[6][[1]]),
+                     Date = as.character(Linha[7][[1]]))
+    df_final <- rbind(df_final, df)
+  }
+  if (base::dim(df_final)[1] > 0) {
+    df_final$sSymbol <- as.character(df_final$sSymbol)
+  }
+  return(df_final)
+}
+
+
 #' Order book
 #'
 #' @description
